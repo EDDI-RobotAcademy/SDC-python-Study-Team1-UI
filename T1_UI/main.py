@@ -1,5 +1,8 @@
 from client_socket.repository.ClientSocketRepositoryImpl import ClientSocketRepositoryImpl
 from client_socket.service.ClientSocketServiceImpl import ClientSocketServiceImpl
+from console_ui.repository.ConsoleUiRepositoryImpl import ConsoleUiRepositoryImpl
+from console_ui.service.ConsoleUiServiceImpl import ConsoleUiServiceImpl
+
 from task_manage.repository.TaskManageRepositoryImpl import TaskManageRepositoryImpl
 from task_manage.service.TaskManageServiceImpl import TaskManageServiceImpl
 
@@ -14,9 +17,15 @@ def initTaskManageDomain():
     taskManageService = TaskManageServiceImpl(taskManageRepository)
 
 
+def initConsoleUiDomain():
+    consoleUiRepository = ConsoleUiRepositoryImpl()
+    consoleUiService = ConsoleUiServiceImpl(consoleUiRepository)
+
+
 def initEachDomain():
     initClientSocketDomain()
     initTaskManageDomain()
+    initConsoleUiDomain()
 
 
 if __name__ == '__main__':
