@@ -1,3 +1,4 @@
+from account_form.repository.AccountFormRepositoryImpl import AccountFormRepositoryImpl
 from client_socket.repository.ClientSocketRepositoryImpl import ClientSocketRepositoryImpl
 from client_socket.service.ClientSocketServiceImpl import ClientSocketServiceImpl
 from console_ui.repository.ConsoleUiRepositoryImpl import ConsoleUiRepositoryImpl
@@ -31,3 +32,8 @@ def initEachDomain():
 if __name__ == '__main__':
     print(f"Hello World!")
     initEachDomain()
+
+    # 당연히 동작하는 것이라 Test 큰 의미 없음
+    # accountFormRepository = AccountFormRepositoryImpl()
+    # accountFormRepository.createAccountSigninForm()
+    # accountFormRepository.createAccountRegisterForm()
