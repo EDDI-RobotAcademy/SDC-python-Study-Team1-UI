@@ -1,4 +1,10 @@
 import abc
 
 class CustomProtocolRepository(abc.ABC):
-    pass
+    @abc.abstractmethod
+    def register(self, protocolNumber, poiterOfFuction):
+        pass
+
+    @abc.abstractmethod
+    def execute(self, protocolNumber, *arguments, **mapArguments):
+        pass
