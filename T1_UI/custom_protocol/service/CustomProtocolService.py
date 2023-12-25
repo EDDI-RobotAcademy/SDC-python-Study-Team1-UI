@@ -1,4 +1,6 @@
 import abc
 
 class CustomProtocolService(abc.ABC):
-    pass
+    @abc.abstractmethod
+    def registerCustomProtocol(self, protocolNumber, poiterOfFuction):
+        pass
