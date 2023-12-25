@@ -13,6 +13,13 @@ class TestConsoleUi(unittest.TestCase):
         consoleUiService = ConsoleUiServiceImpl(consoleUiRepository)
         self.assertIsNotNone(consoleUiRepository)
 
+    def testProcessingUserInput(self):
+        print("Processing 잘 되니?")
+
+        consoleUiRepository = ConsoleUiRepositoryImpl()
+        consoleUiService = ConsoleUiServiceImpl(consoleUiRepository)
+        consoleUiService.processUserInput()
+
 
 if __name__ == '__main__':
     unittest.main()
