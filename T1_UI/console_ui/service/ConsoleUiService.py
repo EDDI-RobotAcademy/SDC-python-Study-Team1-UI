@@ -1,4 +1,6 @@
 import abc
 
 class ConsoleUiService(abc.ABC):
-    pass
+    @abc.abstractmethod
+    def processUserInput(self):
+        pass
