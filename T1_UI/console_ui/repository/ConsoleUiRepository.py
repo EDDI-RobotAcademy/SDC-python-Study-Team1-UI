@@ -1,4 +1,4 @@
 import abc
 
-class ConsoleUiRepository():
+class ConsoleUiRepository(abc.ABC):
     pass
