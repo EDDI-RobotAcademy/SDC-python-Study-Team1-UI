@@ -50,3 +50,10 @@ class ClientSocketRepositoryImpl(ClientSocketRepository):
 
         except Exception as exception:
             print(f"연결 중 에러 발생: {str(exception)}")
+
+    def setBlockingOperation(self):
+        socketObject = self.__clientSocket.getSocket()
+        socketObject.setblocking(False)
+
+    def getClientSocket(self):
+        return self.__clientSocket
