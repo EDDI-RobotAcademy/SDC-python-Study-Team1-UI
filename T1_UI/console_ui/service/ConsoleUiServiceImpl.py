@@ -29,3 +29,5 @@ class ConsoleUiServiceImpl(ConsoleUiService):
 
         userInput = KeyboardInput.getKeyboardIntegerInput()
         self.__repository.saveCurrentRoutingState(userInput)
+
+        return userInput
