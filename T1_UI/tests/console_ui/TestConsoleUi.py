@@ -36,7 +36,8 @@ class TestConsoleUi(unittest.TestCase):
 
         customProtocolRepostiory = CustomProtocolRepositoryImpl.getInstance()
         accountFormRepository = AccountFormRepositoryImpl.getInstance()
-        customProtocolRepostiory.register(CustomProtocol.ACCOUNT_LOGIN.value, accountFormRepository.createAccountSigninForm)
+        customProtocolRepostiory.register(CustomProtocol.ACCOUNT_LOGIN.value,
+                                          accountFormRepository.createAccountSigninForm)
 
         consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
         consoleUiRepository.saveAccountState(initialState)
