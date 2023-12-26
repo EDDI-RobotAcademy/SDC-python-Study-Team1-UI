@@ -26,3 +26,6 @@ class ClientSocketServiceImpl(ClientSocketService):
 
     def connectToTargetHost(self):
         return self.__clientSocketRepository.connectionToTargetHost()
+
+    def setBlockingOperation(self):
+        self.__clientSocketRepository.setBlockingOperation()
