@@ -11,7 +11,7 @@ class TestConsoleUi(unittest.TestCase):
 
         consoleUiRepository = ConsoleUiRepositoryImpl()
         consoleUiService = ConsoleUiServiceImpl(consoleUiRepository)
-        self.assertIsNotNone(consoleUiRepository)
+        self.assertIsNotNone(consoleUiService)
 
     def testProcessingUserInput(self):
         print("Processing 잘 되니?")
@@ -19,6 +19,13 @@ class TestConsoleUi(unittest.TestCase):
         consoleUiRepository = ConsoleUiRepositoryImpl()
         consoleUiService = ConsoleUiServiceImpl(consoleUiRepository)
         consoleUiService.processUserInput()
+
+    def testSettingAccountState(self):
+        print("SessionId 를 AccountUid 로 대체하기")
+        receivedUid = 1
+        consoleUiRepository = ConsoleUiRepositoryImpl()
+        consoleUiRepository.saveAccountState(receivedUid)
+        self.assertIs(consoleUiRepository.acquireAccountState(), receivedUid)
 
 
 if __name__ == '__main__':

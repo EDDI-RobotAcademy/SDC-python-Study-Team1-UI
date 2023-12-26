@@ -28,3 +28,4 @@ class ConsoleUiServiceImpl(ConsoleUiService):
         print(f'3. 종료')
 
         userInput = KeyboardInput.getKeyboardIntegerInput()
+        self.__repository.saveCurrentRoutingState(userInput)
