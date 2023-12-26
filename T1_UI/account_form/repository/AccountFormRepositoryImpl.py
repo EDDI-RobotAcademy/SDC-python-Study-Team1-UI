@@ -24,6 +24,7 @@ class AccountFormRepositoryImpl(AccountFormRepository):
         userInputPassword = KeyboardInput.getKeyboardInputWithOutputMessage("비밀번호:")
         return userInputId, userInputPassword
 
+
     def createAccountRegisterForm(self):
         userInputId = KeyboardInput.getKeyboardInputWithOutputMessage("신규 아이디:")
         userInputPassword = KeyboardInput.getKeyboardInputWithOutputMessage("신규 비밀번호:")
