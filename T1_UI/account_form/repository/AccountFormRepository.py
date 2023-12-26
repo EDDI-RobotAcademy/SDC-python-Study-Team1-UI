@@ -6,5 +6,5 @@ class AccountFormRepository(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def createAccountRegistrationForm(self):
+    def createAccountRegisterForm(self):
         pass
