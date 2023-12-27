@@ -1,4 +1,5 @@
 import unittest
+from unittest import mock
 
 from account_form.repository.AccountFormRepositoryImpl import AccountFormRepositoryImpl
 from console_ui.repository.ConsoleUiRepositoryImpl import ConsoleUiRepositoryImpl
@@ -43,17 +44,19 @@ class TestConsoleUi(unittest.TestCase):
         consoleUiRepository.saveAccountState(initialState)
         consoleUiService = ConsoleUiServiceImpl(consoleUiRepository)
 
+        transmitQueue = mock
+
         if consoleUiRepository.acquireAccountState() == initialState:
-            customProtocolRepostiory.execute(consoleUiService.processUserInput())
+            customProtocolRepostiory.execute(consoleUiService.processUserInput(transmitQueue))
             consoleUiRepository.saveAccountState(receivedUid)
 
-        if consoleUiRepository.acquireAccountState() == receivedUid:
-            print("로그인이 됐으면 다음과 같은 UI 가 나와야 해")
-            print('0. 로그아웃')
-            print('1. 상품 리스트 조회')
-            print('2. 내 주문 내역 확인')
-            print('3. 회원탈퇴')
-            print('4. 종료')
+        # if consoleUiRepository.acquireAccountState() == receivedUid:
+        #     print("로그인이 됐으면 다음과 같은 UI 가 나와야 해")
+        #     print('0. 로그아웃')
+        #     print('1. 상품 리스트 조회')
+        #     print('2. 내 주문 내역 확인')
+        #     print('3. 회원탈퇴')
+        #     print('4. 종료')
 
 
 if __name__ == '__main__':
