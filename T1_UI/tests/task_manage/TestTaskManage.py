@@ -29,7 +29,5 @@ class TestTaskManage(unittest.TestCase):
         print("Arguments:", task_entity_instance.getArgs())
 
 
-
-
 if __name__ == '__main__':
     unittest.main()

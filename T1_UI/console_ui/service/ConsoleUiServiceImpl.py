@@ -24,7 +24,9 @@ class ConsoleUiServiceImpl(ConsoleUiService):
         return cls.__instance
 
     def processUserInput(self, transmitQueue):
-        sessionId = -1
+        # 지금은 sessionId = None 인 상태임
+        # -1 로 만들어줘야 함
+        sessionId = self.__repository.acquireAccountState()
         userCommandNumber = KeyboardInput.getKeyboardIntegerInput()
         convertedCommandNumber = self.determineUserCommand(sessionId, userCommandNumber)
         transmitQueue.put(convertedCommandNumber)
