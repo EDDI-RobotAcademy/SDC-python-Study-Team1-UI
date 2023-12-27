@@ -22,11 +22,11 @@ class AccountFormRepositoryImpl(AccountFormRepository):
     def createAccountSigninForm(self):
         userInputId = KeyboardInput.getKeyboardInputWithOutputMessage("아이디:")
         userInputPassword = KeyboardInput.getKeyboardInputWithOutputMessage("비밀번호:")
-        # accountData = {
-        #     "accountId": userInputId,
-        #     "password": userInputPassword
-        # }
-        return userInputId, userInputPassword
+        accountData = {
+            "accountId": userInputId,
+            "password": userInputPassword
+        }
+        return accountData
 
     def createAccountRegisterForm(self):
         userInputId = KeyboardInput.getKeyboardInputWithOutputMessage("신규 아이디:")

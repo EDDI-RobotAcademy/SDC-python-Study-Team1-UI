@@ -30,6 +30,8 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
         consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
         consoleUiService = ConsoleUiServiceImpl.getInstance()
 
+        # default 로 sessionId 가 -1 로 세팅되어야 하는게 맞음
+        # 일단 그냥 이렇게 함 돌려보기 위해서
         if receiveQueue.empty():
             self.consoleUiIntroduce(-1)
             consoleUiService.processUserInput(transmitQueue)
