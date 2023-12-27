@@ -1,3 +1,6 @@
+import multiprocessing
+
+from task_manage.entity.TaskEntity import TaskEntity
 from task_manage.repository.TaskManageReposiotry import TaskManageRepository
 
 
@@ -21,3 +24,13 @@ class TaskManageRepositoryImpl(TaskManageRepository):
         if cls.__instance is None:
             cls.__instance = cls()
         return cls.__instance
+
+    def createTask(self, target, args):
+        print(f"createTask: args={args}")
+        # Task가 실행할 함수 -> target
+        # target이 사용할 인자 -> args
+        newTask = multiprocessing.Process(target=target, args=args)
+        newTask.start()
+
+        taskEntity = TaskEntity(newTask.pid, target, args)
+        self.__taskEntityList.append(taskEntity)

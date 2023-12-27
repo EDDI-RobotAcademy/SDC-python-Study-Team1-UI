@@ -1,4 +1,6 @@
 import abc
 
 class TaskManageRepository(abc.ABC):
-    pass
+    @abc.abstractmethod
+    def createTask(self, target, args):
+        pass
