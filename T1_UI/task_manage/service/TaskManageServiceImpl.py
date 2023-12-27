@@ -1,6 +1,6 @@
 from client_socket.repository.ClientSocketRepositoryImpl import ClientSocketRepositoryImpl
 from console_printer.repository.ConsolePrinterRepositoryImpl import ConsolePrinterRepositoryImpl
-from receiver.repository import ReceiverRepositoryImpl
+from receiver.repository.ReceiverRepositoryImpl import ReceiverRepositoryImpl
 from task_manage.repository.TaskManageRepositoryImpl import TaskManageRepositoryImpl
 from task_manage.service.TaskManageService import TaskManageService
 from transmitter.repository.TransmitterRepositoryImpl import TransmitterRepositoryImpl

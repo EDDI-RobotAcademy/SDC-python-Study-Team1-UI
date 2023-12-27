@@ -5,7 +5,7 @@ from time import sleep
 from receiver.repository.ReceiverRepository import ReceiverRepository
 
 
-class ReceiberRepositoryImpl(ReceiverRepository):
+class ReceiverRepositoryImpl(ReceiverRepository):
     __instance = None
 
     def __new__(cls):
@@ -29,16 +29,17 @@ class ReceiberRepositoryImpl(ReceiverRepository):
 
         while True:
             try:
-                # 소켓으로 전송된 데이터 수신
                 data = clientSocket.recv(1024)
 
                 if not data:
                     clientSocket.closeSocket()
                     break
 
-                print(f'수신된 정보: {data.decode()}')
+                decodedData = data.decode()
+                print(f'수신된 정보: {decodedData}')
+                responseObject = eval(decodedData)
 
-                receiveQueue.put(data.decode())
+                receiveQueue.put(responseObject)
 
             except socket.error as exception:
                 if exception.errno == errno.EWOULDBLOCK:

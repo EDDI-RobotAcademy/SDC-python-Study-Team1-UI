@@ -1,3 +1,7 @@
+import multiprocessing
+import socket
+from time import sleep
+
 from decouple import config
 
 from account_form.repository.AccountFormRepositoryImpl import AccountFormRepositoryImpl
@@ -53,11 +57,30 @@ def initConnection():
     clientSocketService.connectToTargetHost()
 
 
+def createAllTasks():
+    taskManageService = TaskManageServiceImpl.getInstance()
+
+    lock = multiprocessing.Lock()
+    transmitQueue = multiprocessing.Queue()
+    receiveQueue = multiprocessing.Queue()
+
+    taskManageService.createTransmitTask(lock, transmitQueue)
+    taskManageService.createReceiveTask(lock, receiveQueue)
+    taskManageService.createPrinterTask(transmitQueue, receiveQueue)
+
+
 if __name__ == '__main__':
-    print(f"Hello World!")
     initEachDomain()
     registerProtocol()
     initConnection()
+    createAllTasks()
+
+    while True:
+        try:
+            sleep(5.0)
+
+        except socket.error:
+            sleep(0.5)
 
     # 당연히 동작하는 것이라 Test 큰 의미 없음
     # accountFormRepository = AccountFormRepositoryImpl()
