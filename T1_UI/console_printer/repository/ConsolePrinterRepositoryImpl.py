@@ -38,7 +38,8 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
             if not receiveQueue.empty():
                 response = receiveQueue.get()
                 print(f"Received response: {response}")
-                sessionId = consoleUiRepository.saveAccountState(response)
+                consoleUiRepository.saveAccountState(response)
+                sessionId = consoleUiRepository.acquireAccountState()
                 self.consoleUiIntroduce(sessionId)
                 consoleUiService.processUserInput(transmitQueue)
             else:
