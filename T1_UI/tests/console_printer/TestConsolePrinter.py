@@ -11,6 +11,10 @@ from custom_protocol.repository.CustomProtocolRepositoryImpl import CustomProtoc
 
 
 class TestConsolePrinter(unittest.TestCase):
+
+    def fuck(self):
+        print('fuck!')
+
     def testPrinterOperationWithConsoleUiDomain(self):
         print('session = -1 인 경우 0번 명령이 잘 convert가 되는가 ?')
         initialSessionState = -1
@@ -20,6 +24,10 @@ class TestConsolePrinter(unittest.TestCase):
         accountFormRepository = AccountFormRepositoryImpl.getInstance()
         customProtocolRepostiory.register(CustomProtocol.ACCOUNT_LOGIN.value,
                                           accountFormRepository.createAccountSigninForm)
+        customProtocolRepostiory.register(CustomProtocol.ACCOUNT_REGISTER.value,
+                                          accountFormRepository.createAccountRegisterForm)
+        customProtocolRepostiory.register(CustomProtocol.ACCOUNT_LOGOUT.value,
+                                          self.fuck)
 
         consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
         consoleUiRepository.saveAccountState(initialSessionState)
@@ -30,6 +38,7 @@ class TestConsolePrinter(unittest.TestCase):
         receiveQueue.put(initialSessionState)
 
         consolePrinterRepo.printConsoleUi(transmitQueue, receiveQueue)
+
         # 이 다음 명령의 실행은 transmitter에서 하는거임
 
 

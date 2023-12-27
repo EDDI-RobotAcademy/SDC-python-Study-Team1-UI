@@ -1,6 +1,7 @@
 from time import sleep
 
 from console_printer.repository.ConsolePrinterRepository import ConsolePrinterRepository
+from console_ui.repository.ConsoleUiRepositoryImpl import ConsoleUiRepositoryImpl
 from console_ui.service.ConsoleUiServiceImpl import ConsoleUiServiceImpl
 
 
@@ -22,22 +23,26 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
         return cls.__instance
 
     def printConsoleUi(self, transmitQueue, receiveQueue):
-        while True:
-            if not receiveQueue.empty():
-                responsedUserId = receiveQueue.get()
-
-                consoleUiService = ConsoleUiServiceImpl.getInstance()
-                self.consoleUiIntroduce(responsedUserId)
-                consoleUiService.processUserInput(transmitQueue)
-
         # while True:
         #     if not receiveQueue.empty():
-        #         response = receiveQueue.get()
-        #         print(f"Received response: {response}")
-        #
-        #         consoleUiService.processUserInput(transmitQueue)
-        #     else:
-        #         sleep(0.5)
+        #         responsedUserId = receiveQueue.get()
+
+        consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
+        consoleUiService = ConsoleUiServiceImpl.getInstance()
+
+        if receiveQueue.empty():
+            self.consoleUiIntroduce(-1)
+            consoleUiService.processUserInput(transmitQueue)
+
+        while True:
+            if not receiveQueue.empty():
+                response = receiveQueue.get()
+                print(f"Received response: {response}")
+                sessionId = consoleUiRepository.saveAccountState(response)
+                self.consoleUiIntroduce(sessionId)
+                consoleUiService.processUserInput(transmitQueue)
+            else:
+                sleep(0.5)
 
     def consoleUiIntroduce(self, sessionId):
         if sessionId == -1:

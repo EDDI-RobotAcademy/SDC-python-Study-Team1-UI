@@ -1,5 +1,7 @@
 from console_ui.service.ConsoleUiService import ConsoleUiService
 from custom_protocol.entity.CustomProtocol import CustomProtocol
+from custom_protocol.repository.CustomProtocolRepository import CustomProtocolRepository
+from custom_protocol.repository.CustomProtocolRepositoryImpl import CustomProtocolRepositoryImpl
 from utility.keyboard.KeyboardInput import KeyboardInput
 
 
@@ -22,15 +24,18 @@ class ConsoleUiServiceImpl(ConsoleUiService):
         return cls.__instance
 
     def processUserInput(self, transmitQueue):
-        sessionId = self.__repository.acquireAccountState()
+        sessionId = -1
         userCommandNumber = KeyboardInput.getKeyboardIntegerInput()
         convertedCommandNumber = self.determineUserCommand(sessionId, userCommandNumber)
+        transmitQueue.put(convertedCommandNumber)
+        # customProtocolRepository = CustomProtocolRepositoryImpl.getInstance()
+        # request = customProtocolRepository.execute(convertedCommandNumber)
 
-        self.__repository.saveCurrentRoutingState(convertedCommandNumber)
+        # self.__repository.saveCurrentRoutingState(convertedCommandNumber)
 
         # transmitQueue.put(sessionId, convertedCommandNumber)
-
-        return sessionId, convertedCommandNumber
+        # print(f'transmitQueue 에 담길 정보 = {sessionId}, {convertedCommandNumber}, {request}')
+        # return sessionId, convertedCommandNumber
 
     def determineUserCommand(self, sessionId, userCommandNumber):
         # if sessionId == -1:
