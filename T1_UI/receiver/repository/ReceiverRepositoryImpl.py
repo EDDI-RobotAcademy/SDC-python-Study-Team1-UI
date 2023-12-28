@@ -3,6 +3,8 @@ import socket
 from time import sleep
 
 from receiver.repository.ReceiverRepository import ReceiverRepository
+from account.service.response.AccountRegisterResponse import AccountRegisterResponse
+from account.service.response.AccountLoginResponse import AccountLoginResponse
 
 
 class ReceiverRepositoryImpl(ReceiverRepository):

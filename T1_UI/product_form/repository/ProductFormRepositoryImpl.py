@@ -35,4 +35,4 @@ class ProductFormRepositoryImpl(ProductFormRepository):
         userInputProductContent = KeyboardInput.getKeyboardInputWithOutputMessage("상품게시글 내용 작성 :")
         userInputProductPrice = KeyboardInput.getKeyboardInputWithOutputMessage("상품가격 작성 :")
 
-        return return userInputProductTitle, userInputProductContent, userInputProductPrice
+        return userInputProductTitle, userInputProductContent, userInputProductPrice
