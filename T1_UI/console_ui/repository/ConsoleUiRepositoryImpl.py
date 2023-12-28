@@ -73,7 +73,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
     def menuPrinter(self):
         currentRoutingState = self.__consoleUiState.getCurrentRoutingState()
         menu = self.__menuTable[currentRoutingState]
-        print(f'menu type: {type(menu)}')
+        # print(f'menu type: {type(menu)}')
         menu()
 
     def commandConverter(self, userCommand):

@@ -81,8 +81,3 @@ if __name__ == '__main__':
 
         except socket.error:
             sleep(0.5)
-
-    # 당연히 동작하는 것이라 Test 큰 의미 없음
-    # accountFormRepository = AccountFormRepositoryImpl()
-    # accountFormRepository.createAccountSigninForm()
-    # accountFormRepository.createAccountRegisterForm()

@@ -13,7 +13,6 @@ class CustomProtocolServiceImpl(CustomProtocolService):
 
     def __init__(self, repository):
         print("CustomProtocolServiceImpl 생성자 호출")
-        # registerCustomProtocol 하기 위해서 아래와 같이 private 으로 생
         self.__customProtocolRepository = CustomProtocolRepositoryImpl()
 
     @classmethod
