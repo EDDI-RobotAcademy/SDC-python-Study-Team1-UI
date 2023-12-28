@@ -26,12 +26,8 @@ class TestConsolePrinter(unittest.TestCase):
                                           accountFormRepository.createAccountSigninForm)
         customProtocolRepostiory.register(CustomProtocol.ACCOUNT_REGISTER.value,
                                           accountFormRepository.createAccountRegisterForm)
-        customProtocolRepostiory.register(CustomProtocol.ACCOUNT_LOGOUT.value,
-                                          self.fuck)
 
-        consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
-        consoleUiRepository.saveAccountState(initialSessionState)
-        consoleUiService = ConsoleUiServiceImpl(consoleUiRepository)
+
 
         transmitQueue = mock
         receiveQueue = multiprocessing.Queue()

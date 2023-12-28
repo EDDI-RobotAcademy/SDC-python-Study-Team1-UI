@@ -30,7 +30,6 @@ class TransmitterRepositoryImpl(TransmitterRepository):
         clientSocket = clientSocketObject.getSocket()
         customProtocolRepository = CustomProtocolRepositoryImpl.getInstance()
         requestGeneratorService = RequestGeneratorServiceImpl.getInstance()
-        # ConsoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
 
         while True:
             with lock:

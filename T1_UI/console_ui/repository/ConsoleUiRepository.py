@@ -1,5 +1,6 @@
 import abc
 
+
 class ConsoleUiRepository(abc.ABC):
     @abc.abstractmethod
     def saveCurrentRoutingState(self, currentState):
@@ -10,9 +11,13 @@ class ConsoleUiRepository(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def saveAccountState(self, userId):
+    def menuPrinter(self):
         pass
 
     @abc.abstractmethod
-    def acquireAccountState(self):
+    def commandConverter(self, userCommand):
+        pass
+
+    @abc.abstractmethod
+    def routingStateConverter(self, convertedUserChoice):
         pass

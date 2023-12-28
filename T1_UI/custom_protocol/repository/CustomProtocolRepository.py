@@ -1,5 +1,6 @@
 import abc
 
+
 class CustomProtocolRepository(abc.ABC):
     @abc.abstractmethod
     def register(self, protocolNumber, poiterOfFuction):
