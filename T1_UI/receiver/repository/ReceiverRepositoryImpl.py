@@ -37,6 +37,7 @@ class ReceiverRepositoryImpl(ReceiverRepository):
 
                 decodedData = data.decode()
                 print(f'수신된 정보: {decodedData}')
+
                 responseObject = eval(decodedData)
 
                 receiveQueue.put(responseObject)

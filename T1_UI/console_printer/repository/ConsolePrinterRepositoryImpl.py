@@ -1,7 +1,6 @@
 from time import sleep
 
 from console_printer.repository.ConsolePrinterRepository import ConsolePrinterRepository
-from console_ui.repository.ConsoleUiRepositoryImpl import ConsoleUiRepositoryImpl
 from console_ui.service.ConsoleUiServiceImpl import ConsoleUiServiceImpl
 
 
@@ -23,41 +22,18 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
         return cls.__instance
 
     def printConsoleUi(self, transmitQueue, receiveQueue):
-        # while True:
-        #     if not receiveQueue.empty():
-        #         responsedUserId = receiveQueue.get()
 
-        consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
         consoleUiService = ConsoleUiServiceImpl.getInstance()
-
-        # default 로 sessionId 가 -1 로 세팅되어야 하는게 맞음
-        # 일단 그냥 이렇게 함 돌려보기 위해서
-        if receiveQueue.empty():
-            self.consoleUiIntroduce(-1)
-            consoleUiService.processUserInput(transmitQueue)
+        consoleUiService.printMenu()
+        consoleUiService.processUserInput(transmitQueue)
 
         while True:
             if not receiveQueue.empty():
                 response = receiveQueue.get()
                 print(f"Received response: {response}")
-                consoleUiRepository.saveAccountState(response)
-                sessionId = consoleUiRepository.acquireAccountState()
-                self.consoleUiIntroduce(sessionId)
+                # 뭔가 있어야 되는데 없는 상태
+                # responseGenerator(response) -> session 갱신
+                consoleUiService.printMenu()
                 consoleUiService.processUserInput(transmitQueue)
             else:
                 sleep(0.5)
-
-    def consoleUiIntroduce(self, sessionId):
-        if sessionId == -1:
-            print('최초 구동 화면')
-            print('0. 로그인')
-            print('1. 회원가입')
-            print('2. 상품 리스트 조회')
-            print('3. 종료')
-        else:
-            print('로그인 후 구동 화면')
-            print('0. 로그아웃')
-            print('1. 상품 리스트 조회')
-            print('2. 내 주문 내역 확인')
-            print('3. 회원탈퇴')
-            print('4. 종료')
