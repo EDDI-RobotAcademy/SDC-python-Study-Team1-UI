@@ -1,5 +1,5 @@
 import errno
-from socket import socket
+import socket
 from time import sleep
 
 from receiver.repository.ReceiverRepository import ReceiverRepository
