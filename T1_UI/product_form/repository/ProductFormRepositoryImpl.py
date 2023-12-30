@@ -11,7 +11,7 @@ class ProductFormRepositoryImpl(ProductFormRepository):
         return cls.__instance
 
     def __init__(self):
-        print("AccountFormRepositoryImpl 초기화 동작")
+        print("ProductFormRepositoryImpl 초기화 동작")
 
     @classmethod
     def getInstance(cls):
@@ -19,20 +19,24 @@ class ProductFormRepositoryImpl(ProductFormRepository):
             cls.__instance = cls()
         return cls.__instance
 
-
-
     def createProductWriteForm(self):
-        print("상품게시글작성")
-        userInputProductTitle = KeyboardInput.getKeyboardInputWithOutputMessage("상품게시글 제목 작성 :")
-        userInputProductContent = KeyboardInput.getKeyboardInputWithOutputMessage("상품게시글 내용 작성 :")
-        userInputProductPrice = KeyboardInput.getKeyboardInputWithOutputMessage("상품가격 작성 :")
+        print("상품 등록을 위한 정보를 입력하세요.")
+        userInputProductTitle = KeyboardInput.getKeyboardInputWithOutputMessage("상품 제목:")
+        userInputProductContent = KeyboardInput.getKeyboardInputWithOutputMessage("상품 내용 작성:")
+        userInputProductPrice = KeyboardInput.getKeyboardInputWithOutputMessage("상품 가격:")
 
         return userInputProductTitle, userInputProductContent, userInputProductPrice
 
+    def createProductReadForm(self):
+        print("조회할 상품 번호를 입력하세요.")
+        userInputProductNumber = KeyboardInput.getKeyboardIntegerInput()
+
+        return userInputProductNumber
+
     def createProductModifyForm(self):
-        print("상품게시글 수정")
-        userInputProductTitle = KeyboardInput.getKeyboardInputWithOutputMessage("상품게시글 제목 작성 :")
-        userInputProductContent = KeyboardInput.getKeyboardInputWithOutputMessage("상품게시글 내용 작성 :")
-        userInputProductPrice = KeyboardInput.getKeyboardInputWithOutputMessage("상품가격 작성 :")
+        print("상품 수정을 위한 정보를 입력하세요.")
+        userInputProductTitle = KeyboardInput.getKeyboardInputWithOutputMessage("상품 제목:")
+        userInputProductContent = KeyboardInput.getKeyboardInputWithOutputMessage("상품 내용 작성:")
+        userInputProductPrice = KeyboardInput.getKeyboardInputWithOutputMessage("상품 가격:")
 
         return userInputProductTitle, userInputProductContent, userInputProductPrice
