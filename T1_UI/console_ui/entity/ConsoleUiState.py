@@ -1,4 +1,4 @@
-class ConsoleUiState():
+class ConsoleUiState:
 
     def __init__(self):
         self.__currentRoutingState = 0

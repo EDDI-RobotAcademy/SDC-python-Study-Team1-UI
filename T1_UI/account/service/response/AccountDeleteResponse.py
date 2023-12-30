@@ -1,4 +1,4 @@
-class AccountDeleteResponse():
+class AccountDeleteResponse:
     def __init__(self, __isSuccess):
         self.__isSuccess = __isSuccess
 

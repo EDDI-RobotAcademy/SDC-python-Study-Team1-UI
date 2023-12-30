@@ -1,4 +1,4 @@
-class AccountLogoutResponse():
+class AccountLogoutResponse:
     def __init__(self, __isSuccess):
         self.__isSuccess = __isSuccess
 

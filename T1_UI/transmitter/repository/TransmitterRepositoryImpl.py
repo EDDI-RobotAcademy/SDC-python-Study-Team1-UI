@@ -3,7 +3,6 @@ import socket
 from datetime import datetime
 from time import sleep
 
-from console_ui.repository.ConsoleUiRepositoryImpl import ConsoleUiRepositoryImpl
 from custom_protocol.repository.CustomProtocolRepositoryImpl import CustomProtocolRepositoryImpl
 from request_generator.service.RequestGeneratorServiceImpl import RequestGeneratorServiceImpl
 from transmitter.repository.TransmitterRepository import TransmitterRepository
@@ -42,9 +41,6 @@ class TransmitterRepositoryImpl(TransmitterRepository):
                     print(f"Transmitter sessionId = {sessionId}")
                     request = customProtocolRepository.execute(sendProtocol)
                     print(f"Transmitter Request from repository: {request}")
-
-                    # sessionId = ConsoleUiRepository.acquireAccountSessionId()
-                    # print(f"Transmitter sessionId: {sessionId}")
 
                     requestGenerator = requestGeneratorService.findRequestGenerator(sendProtocol)
                     print(f"Transmitter Request Generator: {requestGenerator}")
