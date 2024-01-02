@@ -19,11 +19,26 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
                 CustomProtocol.ACCOUNT_LOGIN.value] = cls.__instance.generateAccountLoginRequest
             cls.__requestFormGenerationTable[
                 CustomProtocol.ACCOUNT_LOGOUT.value] = cls.__instance.generateAccountLogoutRequest
-            # cls.__requestFormGenerationTable[
-            #     CustomProtocol.ACCOUNT_DELETE.value] = cls.__instance.generateAccountDeleteRequest
+            cls.__requestFormGenerationTable[
+                CustomProtocol.ACCOUNT_DELETE.value] = cls.__instance.generateAccountDeleteRequest
+            cls.__requestFormGenerationTable[
+                CustomProtocol.PRODUCT_LIST.value] = cls.__instance.generateProductListRequest
+            cls.__requestFormGenerationTable[
+                CustomProtocol.PRODUCT_REGISTER.value] = cls.__instance.generateProductRegisterRequest
+            cls.__requestFormGenerationTable[
+                CustomProtocol.PRODUCT_READ.value] = cls.__instance.generateProductReadRequest
+            cls.__requestFormGenerationTable[
+                CustomProtocol.PRODUCT_MODIFY.value] = cls.__instance.generateProductModifyRequest
+            cls.__requestFormGenerationTable[
+                CustomProtocol.PRODUCT_PURCHASE.value] = cls.__instance.generateProductPurchaseRequest
+            cls.__requestFormGenerationTable[
+                CustomProtocol.PRODUCT_REMOVE.value] = cls.__instance.generateProductRemoveRequest
+            cls.__requestFormGenerationTable[
+                CustomProtocol.ORDER_LIST.value] = cls.__instance.generateOrderListRequest
+            cls.__requestFormGenerationTable[
+                CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateOrderRemoveRequest
 
-            # cls.__requestFormGenerationTable[
-            #     CustomProtocol.PRODUCT_LIST.value] = cls.__instance.generateAccountDeleteRequest
+
 
         return cls.__instance
 
@@ -95,12 +110,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
     def generateProductListRequest(self, arguments):
         print("RequestGeneratorService: List ")
-        productRequestData= {
-            '__productNumber': arguments[0],
-            '__productTitle': arguments[1].decode().strip(),
-
-        }
-        return productRequestData
+        return None
 
     def generateProductRegisterRequest(self, arguments):
         print("RequestGeneratorService : Register ")
@@ -120,7 +130,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         return productRequestData
 
     def generateProductModifyRequest(self, arguments):
-        print("RequestGeneratorService - generateProductListRequest()")
+        print("RequestGeneratorService Modify")
         productRequestData = {
             '__productNumber': arguments[0],
             '__productTitle': arguments[1].decode().strip(),
@@ -130,20 +140,20 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         return productRequestData
 
     def generateProductPurchaseRequest(self, arguments):
-        print("RequestGeneratorService - generateProductListRequest()")
+        print("RequestGeneratorService Purchase")
         productRequestData = {
             '__productNumber': arguments,
         }
         return productRequestData
     def generateProductRemoveRequest(self, arguments):
-        print("RequestGeneratorService - generateProductListRequest()")
+        print("RequestGeneratorService Remove")
         productRequestData = {
             '__productNumber': arguments,
         }
         return productRequestData
 
     def generateProductOrderListRequest(self, arguments):
-        print("RequestGeneratorService - generateProductListRequest()")
+        print("RequestGeneratorService OrderList")
         productRequestData = {
 
             '__productOrderNumber': arguments,
@@ -152,7 +162,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         return productRequestData
 
     def generateProductOrderRemoveRequest(self, arguments):
-        print("RequestGeneratorService - generateProductListRequest()")
+        print("RequestGeneratorService - OrderRemove")
         productRequestData = {
 
             '__productOrderNumber': arguments,
