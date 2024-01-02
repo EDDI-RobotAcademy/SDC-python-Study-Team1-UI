@@ -20,7 +20,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
             cls.__requestFormGenerationTable[
                 CustomProtocol.ACCOUNT_LOGOUT.value] = cls.__instance.generateAccountLogoutRequest
             cls.__requestFormGenerationTable[
-                CustomProtocol.ACCOUNT_DELETE.value] = cls.__instance.generateAccountDeleteRequest
+                CustomProtocol.ACCOUNT_REMOVE.value] = cls.__instance.generateAccountDeleteRequest
             cls.__requestFormGenerationTable[
                 CustomProtocol.PRODUCT_LIST.value] = cls.__instance.generateProductListRequest
             cls.__requestFormGenerationTable[
@@ -108,10 +108,6 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         return accountRequestData
 
-    def generateProductListRequest(self, arguments):
-        print("RequestGeneratorService: List ")
-        return None
-
     def generateProductRegisterRequest(self, arguments):
         print("RequestGeneratorService : Register ")
         productRequestData = {
@@ -145,6 +141,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
             '__productNumber': arguments,
         }
         return productRequestData
+
     def generateProductRemoveRequest(self, arguments):
         print("RequestGeneratorService Remove")
         productRequestData = {
