@@ -137,7 +137,6 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         else:
             print("잘못된 입력입니다! 다시 입력해주세요.")
 
-
     def menuPrinter(self):
         currentRoutingState = self.__consoleUiState.getCurrentRoutingState()
         menu = self.__menuTable[currentRoutingState]
@@ -150,43 +149,43 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
 
     def routingStateConverter(self, convertedUserChoice):
         if convertedUserChoice == CustomProtocol.ACCOUNT_REGISTER.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
 
         elif convertedUserChoice == CustomProtocol.ACCOUNT_LOGIN.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
 
         elif convertedUserChoice == CustomProtocol.ACCOUNT_LOGOUT.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
 
         elif convertedUserChoice == CustomProtocol.ACCOUNT_REMOVE.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
 
         elif convertedUserChoice == CustomProtocol.PRODUCT_LIST.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST.value)
 
         elif convertedUserChoice == CustomProtocol.PRODUCT_READ.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST.value)
 
         elif convertedUserChoice == CustomProtocol.PRODUCT_REGISTER.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST.value)
 
         elif convertedUserChoice == CustomProtocol.PRODUCT_MODIFY.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
 
         elif convertedUserChoice == CustomProtocol.PRODUCT_REMOVE.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
 
         elif convertedUserChoice == CustomProtocol.PRODUCT_PURCHASE.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
 
         elif convertedUserChoice == CustomProtocol.ORDER_LIST.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
 
         elif convertedUserChoice == CustomProtocol.ORDER_REMOVE.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_LIST)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_LIST.value)
 
         elif convertedUserChoice == CustomProtocol.EXIT.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
 
 
 

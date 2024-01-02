@@ -20,7 +20,7 @@ class TestReceiver(unittest.TestCase):
         # responseData = receivedMapDataStr["data"]
         # response = responseGenerator.findgeneratorbyprotocol(protonum) # login 객체 형성
         # response(responseData) # id 값 넣어서 객체 완성
-        receivedMapDataStr = {"protocol": 1, "data": False}
+        receivedMapDataStr = {"protocol": 3, "data": True}
         responseGenerator = responseGeneratorService.findResponseGenerator(receivedMapDataStr["protocol"])
         responseObj = responseGenerator(receivedMapDataStr["data"])
 
@@ -34,10 +34,10 @@ class TestReceiver(unittest.TestCase):
         className = responseObj.__class__.__name__
 
         if className == "AccountRegisterResponse":
-            if responseObj.getIsSuccess() == True:
+            if responseObj.getIsSuccess():
                 print('회원 가입이 완료되었습니다.')
 
-            if responseObj.getIsSuccess() == False:
+            if not responseObj.getIsSuccess():
                 print('회원 가입에 실패했습니다. 아이디 중복')
 
         if className == "AccountLoginResponse":
@@ -48,6 +48,13 @@ class TestReceiver(unittest.TestCase):
             if responseObj.getAccountSessionId() is None:
                 print('로그인에 실패했습니다. 다시 입력하세요!')
                 return
+
+        if className == "AccountLogoutResponse":
+            if responseObj.getIsSuccess():
+                print('로그아웃이 완료되었습니다.')
+
+            if not responseObj.getIsSuccess():
+                print('이런 상황이 있을까?')
 
     def testEvalClassGeneration(self):
         class TestAccountRegisterResponse:
