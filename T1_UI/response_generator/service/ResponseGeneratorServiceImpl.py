@@ -1,6 +1,5 @@
-import ast
-
 from account.service.response.AccountLoginResponse import AccountLoginResponse
+from account.service.response.AccountLogoutResponse import AccountLogoutResponse
 from account.service.response.AccountRegisterResponse import AccountRegisterResponse
 from custom_protocol.entity.CustomProtocol import CustomProtocol
 from response_generator.service.ResponseGeneratorService import ResponseGeneratorService
@@ -17,7 +16,9 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
             cls.__responseFormGenerationTable[
                 CustomProtocol.ACCOUNT_REGISTER.value] = cls.__instance.generateAccountRegisterResponse
             cls.__responseFormGenerationTable[
-                CustomProtocol.ACCOUNT_LOGIN.value] = cls.__instance.generateAccountRegisterResponse
+                CustomProtocol.ACCOUNT_LOGIN.value] = cls.__instance.generateAccountLoginResponse
+            cls.__responseFormGenerationTable[
+                CustomProtocol.ACCOUNT_LOGOUT.value] = cls.__instance.generateAccountLogoutResponse
 
         return cls.__instance
 
@@ -39,9 +40,11 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
             print(f"이 프로토콜 번호({protocolNumber}) 를 처리 할 수 있는 함수가 없습니다.")
 
     def generateAccountRegisterResponse(self, arguments):
-        print("AccountRegisterResponse 생성")
         return AccountRegisterResponse(arguments)
 
     def generateAccountLoginResponse(self, arguments):
         return AccountLoginResponse(arguments)
+
+    def generateAccountLogoutResponse(self, arguments):
+        return AccountLogoutResponse(arguments)
 

@@ -5,6 +5,7 @@ from time import sleep
 from receiver.repository.ReceiverRepository import ReceiverRepository
 from account.service.response.AccountRegisterResponse import AccountRegisterResponse
 from account.service.response.AccountLoginResponse import AccountLoginResponse
+from response_generator.service.ResponseGeneratorServiceImpl import ResponseGeneratorServiceImpl
 
 
 class ReceiverRepositoryImpl(ReceiverRepository):
@@ -28,6 +29,7 @@ class ReceiverRepositoryImpl(ReceiverRepository):
     def receiveCommand(self, clientSocketObject, lock, receiveQueue):
         clientSocket = clientSocketObject.getSocket()
         print(f"receiver: is it exist -> {clientSocket}")
+        responseGeneratorService = ResponseGeneratorServiceImpl.getInstance()
 
         while True:
             try:
@@ -40,7 +42,16 @@ class ReceiverRepositoryImpl(ReceiverRepository):
                 decodedData = data.decode()
                 print(f'수신된 정보: {decodedData}')
 
-                responseObject = eval(decodedData)
+                receivedProtocolNumber = decodedData["protocol"]
+                print(f'Received Protocol number: {receivedProtocolNumber}')
+                receivedData = decodedData["data"]
+                print(f'Received Data: {receivedData}')
+
+                responseGenerator = responseGeneratorService.findResponseGenerator(receivedProtocolNumber)
+                responseObject = responseGenerator(receivedData)
+
+                # 도대체가 eval 은 뭐 같아서 못 써먹겠음
+                # evlauatedResponseObject = eval(responseObject)
 
                 receiveQueue.put(responseObject)
 
