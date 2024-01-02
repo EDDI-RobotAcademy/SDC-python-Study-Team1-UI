@@ -1,6 +1,6 @@
 class AccountLoginResponse:
-    def __init__(self, __accountId):
-        self.__accountId = __accountId
+    def __init__(self, __accountSessionId):
+        self.__accountSessionId = __accountSessionId
 
     def getAccountSessionId(self):
-        return self.__accountId
+        return self.__accountSessionId
