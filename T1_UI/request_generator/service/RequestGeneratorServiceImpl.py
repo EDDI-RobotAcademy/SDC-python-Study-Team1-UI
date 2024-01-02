@@ -94,5 +94,69 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         return accountRequestData
 
     def generateProductListRequest(self, arguments):
+        print("RequestGeneratorService: List ")
+        productRequestData= {
+            '__productNumber': arguments[0],
+            '__productTitle': arguments[1].decode().strip(),
+
+        }
+        return productRequestData
+
+    def generateProductRegisterRequest(self, arguments):
+        print("RequestGeneratorService : Register ")
+        productRequestData = {
+            '__productTitle': arguments[0].decode().strip(),
+            '__productContent': arguments[1].decode().strip(),
+            '__productPrice': arguments[2],
+        }
+        return productRequestData
+
+    def generateProductReadRequest(self, arguments):
+        print("RequestGeneratorService : Read")
+        productRequestData = {
+            '__productNumber': arguments,
+
+        }
+        return productRequestData
+
+    def generateProductModifyRequest(self, arguments):
         print("RequestGeneratorService - generateProductListRequest()")
-        return
+        productRequestData = {
+            '__productNumber': arguments[0],
+            '__productTitle': arguments[1].decode().strip(),
+            '__productContent': arguments[2].decode().strip(),
+            '__productPrice': arguments[3],
+        }
+        return productRequestData
+
+    def generateProductPurchaseRequest(self, arguments):
+        print("RequestGeneratorService - generateProductListRequest()")
+        productRequestData = {
+            '__productNumber': arguments,
+        }
+        return productRequestData
+    def generateProductRemoveRequest(self, arguments):
+        print("RequestGeneratorService - generateProductListRequest()")
+        productRequestData = {
+            '__productNumber': arguments,
+        }
+        return productRequestData
+
+    def generateProductOrderListRequest(self, arguments):
+        print("RequestGeneratorService - generateProductListRequest()")
+        productRequestData = {
+
+            '__productOrderNumber': arguments,
+
+        }
+        return productRequestData
+
+    def generateProductOrderRemoveRequest(self, arguments):
+        print("RequestGeneratorService - generateProductListRequest()")
+        productRequestData = {
+
+            '__productOrderNumber': arguments,
+        }
+        return productRequestData
+
+
