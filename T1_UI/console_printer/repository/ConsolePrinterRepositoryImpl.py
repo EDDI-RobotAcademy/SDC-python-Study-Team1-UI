@@ -45,18 +45,51 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
         className = response.__class__.__name__
 
         if className == "AccountRegisterResponse":
-            if response.getIsSuccess == True:
+            if response.getIsSuccess():
                 print('회원 가입이 완료되었습니다.')
-                return
-            if response.getIsSuccess == False:
+
+            if not response.getIsSuccess():
                 print('회원 가입에 실패했습니다. 아이디 중복')
-                return
 
         if className == "AccountLoginResponse":
-            if response.getAccountSessionId is not None:
+            if response.getAccountSessionId() is not None:
                 consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
-                consoleUiRepository.setSessionIdByUserId(response.getAccountSessionId)
-                print(f'로그인이 완료되었습니다. 사용자 아이디: {response.getAccountSessionId}')
-            if response.getAccountSessionId is None:
+                consoleUiRepository.setSessionIdByUserId(response.getAccountSessionId())
+                print(f'로그인이 완료되었습니다. 사용자 아이디: {response.getAccountSessionId()}')
+            if response.getAccountSessionId() is None:
                 print('로그인에 실패했습니다. 다시 입력하세요!')
-                return
+
+        if className == "AccountLogoutResponse":
+            if response.getIsSuccess():
+                print('로그아웃이 완료되었습니다.')
+
+            if not response.getIsSuccess():
+                print('이런 상황이 있을까?')
+
+        if className == "AccountDeleteResponse":
+            if response.getIsSuccess():
+                print('계정 삭제가 완료되었습니다.')
+
+            if not response.getIsSuccess():
+                print('이런 상황이 있을까?')
+
+        if className == "ProductUpdateResponse":
+            if response.getIsSuccess():
+                print('상품 수정이 완료되었습니다.')
+
+            if not response.getIsSuccess():
+                print('이런 상황이 있을까?')
+
+        if className == "ProductDeleteResponse":
+            if response.getIsSuccess():
+                print('상품 수정이 완료되었습니다.')
+
+            if not response.getIsSuccess():
+                print('이런 상황이 있을까?')
+
+        if className == "ProductDeleteResponse":
+            if response.getIsSuccess():
+                print('상품 수정이 완료되었습니다.')
+
+            if not response.getIsSuccess():
+                print('이런 상황이 있을까?')
