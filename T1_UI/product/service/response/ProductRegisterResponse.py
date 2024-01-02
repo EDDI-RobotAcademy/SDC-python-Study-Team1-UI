@@ -1,4 +1,4 @@
-class ProductUpdateResponse:
+class ProductRegisterResponse:
     def __init__(self, __id, __name, __price, __details, __accountId):
         self.__id = __id
         self.__name = __name
