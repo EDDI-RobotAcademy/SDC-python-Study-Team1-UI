@@ -19,24 +19,24 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
                 CustomProtocol.ACCOUNT_LOGIN.value] = cls.__instance.generateAccountLoginRequest
             cls.__requestFormGenerationTable[
                 CustomProtocol.ACCOUNT_LOGOUT.value] = cls.__instance.generateAccountLogoutRequest
-            cls.__requestFormGenerationTable[
-                CustomProtocol.ACCOUNT_REMOVE.value] = cls.__instance.generateAccountDeleteRequest
-            cls.__requestFormGenerationTable[
-                CustomProtocol.PRODUCT_LIST.value] = cls.__instance.generateProductListRequest
-            cls.__requestFormGenerationTable[
-                CustomProtocol.PRODUCT_REGISTER.value] = cls.__instance.generateProductRegisterRequest
-            cls.__requestFormGenerationTable[
-                CustomProtocol.PRODUCT_READ.value] = cls.__instance.generateProductReadRequest
-            cls.__requestFormGenerationTable[
-                CustomProtocol.PRODUCT_MODIFY.value] = cls.__instance.generateProductModifyRequest
-            cls.__requestFormGenerationTable[
-                CustomProtocol.PRODUCT_PURCHASE.value] = cls.__instance.generateProductPurchaseRequest
-            cls.__requestFormGenerationTable[
-                CustomProtocol.PRODUCT_REMOVE.value] = cls.__instance.generateProductRemoveRequest
-            cls.__requestFormGenerationTable[
-                CustomProtocol.ORDER_LIST.value] = cls.__instance.generateOrderListRequest
-            cls.__requestFormGenerationTable[
-                CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateOrderRemoveRequest
+            # cls.__requestFormGenerationTable[
+            #     CustomProtocol.ACCOUNT_REMOVE.value] = cls.__instance.generateAccountDeleteRequest
+            # cls.__requestFormGenerationTable[
+            #     CustomProtocol.PRODUCT_LIST.value] = cls.__instance.generateProductListRequest
+            # cls.__requestFormGenerationTable[
+            #     CustomProtocol.PRODUCT_REGISTER.value] = cls.__instance.generateProductRegisterRequest
+            # cls.__requestFormGenerationTable[
+            #     CustomProtocol.PRODUCT_READ.value] = cls.__instance.generateProductReadRequest
+            # cls.__requestFormGenerationTable[
+            #     CustomProtocol.PRODUCT_MODIFY.value] = cls.__instance.generateProductModifyRequest
+            # cls.__requestFormGenerationTable[
+            #     CustomProtocol.PRODUCT_PURCHASE.value] = cls.__instance.generateProductPurchaseRequest
+            # cls.__requestFormGenerationTable[
+            #     CustomProtocol.PRODUCT_REMOVE.value] = cls.__instance.generateProductRemoveRequest
+            # cls.__requestFormGenerationTable[
+            #     CustomProtocol.ORDER_LIST.value] = cls.__instance.generateOrderListRequest
+            # cls.__requestFormGenerationTable[
+            #     CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateOrderRemoveRequest
 
 
 
@@ -107,6 +107,9 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         }
 
         return accountRequestData
+
+    def generateProductListRequest(self, arguments):
+        return None
 
     def generateProductRegisterRequest(self, arguments):
         print("RequestGeneratorService : Register ")

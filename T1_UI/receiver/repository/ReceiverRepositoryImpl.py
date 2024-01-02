@@ -1,4 +1,5 @@
 import errno
+import json
 import socket
 from time import sleep
 
@@ -39,10 +40,11 @@ class ReceiverRepositoryImpl(ReceiverRepository):
                     clientSocket.closeSocket()
                     break
 
-                decodedData = data.decode()
+                # decodedData = data.decode()
+                decodedData = json.loads(data)
                 print(f'수신된 정보: {decodedData}')
 
-                receivedProtocolNumber = decodedData["protocol"]
+                receivedProtocolNumber = int(decodedData["protocol"])
                 print(f'Received Protocol number: {receivedProtocolNumber}')
                 receivedData = decodedData["data"]
                 print(f'Received Data: {receivedData}')
