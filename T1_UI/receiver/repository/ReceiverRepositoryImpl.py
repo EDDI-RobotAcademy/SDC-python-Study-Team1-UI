@@ -26,7 +26,6 @@ class ReceiverRepositoryImpl(ReceiverRepository):
             cls.__instance = cls()
         return cls.__instance
 
-    #클라이언트 소켓에 수신받기
     def receiveCommand(self, clientSocketObject, lock, receiveQueue):
         clientSocket = clientSocketObject.getSocket()
         print(f"receiver: is it exist -> {clientSocket}")

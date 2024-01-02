@@ -32,8 +32,6 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
             if not receiveQueue.empty():
                 response = receiveQueue.get()
                 print(f"Received response: {response}")
-                # 뭔가 있어야 되는데 없는 상태
-                # responseGenerator(response) -> session 갱신
                 self.__processResponse(response)
                 consoleUiService.printMenu()
                 consoleUiService.processUserInput(transmitQueue)
@@ -73,16 +71,23 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
             if not response.getIsSuccess():
                 print('이런 상황이 있을까?')
 
-        if className == "ProductUpdateResponse":
+        if className == "ProductRegisterResponse":
             if response.getIsSuccess():
                 print('상품 수정이 완료되었습니다.')
 
             if not response.getIsSuccess():
                 print('이런 상황이 있을까?')
 
-        if className == "ProductDeleteResponse":
+        if className == "ProductModifyResponse":
             if response.getIsSuccess():
                 print('상품 수정이 완료되었습니다.')
+
+            if not response.getIsSuccess():
+                print('이런 상황이 있을까?')
+
+        if className == "ProductPurchaseResponse":
+            if response.getIsSuccess():
+                print('상품 구매가 완료되었습니다.')
 
             if not response.getIsSuccess():
                 print('이런 상황이 있을까?')

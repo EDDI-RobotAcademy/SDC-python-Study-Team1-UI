@@ -19,8 +19,8 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
                 CustomProtocol.ACCOUNT_LOGIN.value] = cls.__instance.generateAccountLoginRequest
             cls.__requestFormGenerationTable[
                 CustomProtocol.ACCOUNT_LOGOUT.value] = cls.__instance.generateAccountLogoutRequest
-            # cls.__requestFormGenerationTable[
-            #     CustomProtocol.ACCOUNT_REMOVE.value] = cls.__instance.generateAccountDeleteRequest
+            cls.__requestFormGenerationTable[
+                CustomProtocol.ACCOUNT_REMOVE.value] = cls.__instance.generateAccountDeleteRequest
             # cls.__requestFormGenerationTable[
             #     CustomProtocol.PRODUCT_LIST.value] = cls.__instance.generateProductListRequest
             # cls.__requestFormGenerationTable[
@@ -38,8 +38,6 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
             # cls.__requestFormGenerationTable[
             #     CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateOrderRemoveRequest
 
-
-
         return cls.__instance
 
     def __init__(self):
@@ -51,9 +49,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
             cls.__instance = cls()
         return cls.__instance
 
-    # 사실 이 부분은 python Dictionary를 사용하여 개선하는 것이 더 좋음
     def findRequestGenerator(self, protocolNumber):
-        print("RequestGeneratorService: request generator를 찾아옵니다")
         if self.__requestFormGenerationTable[protocolNumber] is not None:
             return self.__requestFormGenerationTable[protocolNumber]
 
@@ -61,14 +57,9 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
             print(f"이 프로토콜 번호({protocolNumber}) 를 처리 할 수 있는 함수가 없습니다.")
 
     def generateAccountRegisterRequest(self, arguments):
-        print("RequestGeneratorService: register form")
-        print(f"arguments의 타입: {type(arguments)}")
-        print(f"지금부터 request를 생성합니다: {arguments}")
-
+        print("RequestGeneratorService: 회원 가입 dict data 형성")
         if not isinstance(arguments, tuple) or len(arguments) != 2:
             raise ValueError("Invalid request format")
-
-        print("make account request dictionary")
 
         accountRequestData = {
             '__accountId': arguments[0].decode().strip(),
@@ -78,7 +69,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         return accountRequestData
 
     def generateAccountLoginRequest(self, arguments):
-        print("RequestGeneratorService: login form")
+        print("RequestGeneratorService: 로그인 dict data 형성")
 
         if not isinstance(arguments, tuple) or len(arguments) != 2:
             raise ValueError("Invalid request format")
@@ -91,7 +82,8 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         return accountRequestData
 
     def generateAccountLogoutRequest(self, arguments):
-        print(f"RequestGeneratorService: logout form sessionId: {arguments}")
+        print("RequestGeneratorService: 로그아웃 dict data 형성")
+        print(f"현재 가지고 있는 session ID : {arguments} 를 삭제합니다.")
 
         accountRequestData = {
             '__accountSessionId': arguments,
@@ -100,7 +92,8 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         return accountRequestData
 
     def generateAccountDeleteRequest(self, arguments):
-        print("RequestGeneratorService: delete form")
+        print("RequestGeneratorService: 회원 탈퇴 dict data 형성")
+        print(f"현재 가지고 있는 session ID : {arguments} 로 회원 정보를 삭제합니다.")
 
         accountRequestData = {
             '__accountSessionId': arguments,
@@ -155,16 +148,13 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
     def generateProductOrderListRequest(self, arguments):
         print("RequestGeneratorService OrderList")
         productRequestData = {
-
             '__productOrderNumber': arguments,
-
         }
         return productRequestData
 
     def generateProductOrderRemoveRequest(self, arguments):
         print("RequestGeneratorService - OrderRemove")
         productRequestData = {
-
             '__productOrderNumber': arguments,
         }
         return productRequestData

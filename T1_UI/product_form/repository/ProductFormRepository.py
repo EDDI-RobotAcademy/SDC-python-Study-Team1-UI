@@ -1,9 +1,14 @@
 import abc
 
+
 class ProductFormRepository(abc.ABC):
 
     @abc.abstractmethod
-    def createProductWriteForm(self):
+    def createProductRegisterForm(self):
+        pass
+
+    @abc.abstractmethod
+    def createProductReadForm(self):
         pass
 
     @abc.abstractmethod

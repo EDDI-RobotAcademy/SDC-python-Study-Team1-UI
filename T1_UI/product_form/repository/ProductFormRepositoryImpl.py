@@ -19,7 +19,7 @@ class ProductFormRepositoryImpl(ProductFormRepository):
             cls.__instance = cls()
         return cls.__instance
 
-    def createProductWriteForm(self):
+    def createProductRegisterForm(self):
         print("상품 등록을 위한 정보를 입력하세요.")
         userInputProductTitle = KeyboardInput.getKeyboardInputWithOutputMessage("상품 제목:")
         userInputProductContent = KeyboardInput.getKeyboardInputWithOutputMessage("상품 내용 작성:")
