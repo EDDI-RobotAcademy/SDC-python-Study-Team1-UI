@@ -61,7 +61,6 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
         return cls.__instance
 
     def findResponseGenerator(self, protocolNumber):
-        print("Response generator를 찾아옵니다")
         if self.__responseFormGenerationTable[protocolNumber] is not None:
             return self.__responseFormGenerationTable[protocolNumber]
 
@@ -84,11 +83,7 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
         return AccountLoginResponse(arguments)
 
     def generateProductRegisterResponse(self, arguments):
-        return ProductRegisterResponse(arguments[0],
-                                       arguments[1].decode().strip(),
-                                       arguments[2],
-                                       arguments[3].decode().strip(),
-                                       arguments[4])
+        return ProductRegisterResponse(arguments)
 
     def generateProductReadResponse(self, arguments):
         return ProductReadResponse(arguments[0],

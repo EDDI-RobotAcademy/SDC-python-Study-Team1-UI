@@ -187,8 +187,6 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         elif convertedUserChoice == CustomProtocol.EXIT.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
 
-
-
     def saveCurrentRoutingState(self, currentState):
         self.__consoleUiState.setCurrentRoutingState(currentState)
 
