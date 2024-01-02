@@ -25,6 +25,21 @@ class TestReceiver(unittest.TestCase):
         consoleUiRepository.setSessionIdByUserId(this)
         sessionId = consoleUiRepository.getSessionId()
 
+    def testEvalClassGeneration(self):
+        class TestAccountRegisterResponse:
+            def __init__(self, __isSuccess):
+                self.__isSuccess = __isSuccess
+
+            def getIsSuccess(self):
+                return self.__isSuccess
+
+        # protocol number 받지 않는게 좋겠다.
+        data = "TestAccountRegisterResponse(_TestAccountRegisterResponse__isSuccess=True)"
+        responseBbject = eval(data)
+
+        isSuccessValue = responseBbject.getIsSuccess()
+
+        print(f'Extracted __isSuccess value: {isSuccessValue}')
 
 if __name__ == '__main__':
     unittest.main()
