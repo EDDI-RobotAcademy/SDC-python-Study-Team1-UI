@@ -43,7 +43,7 @@ class TransmitterRepositoryImpl(TransmitterRepository):
                     print(f"Transmitter Request from repository: {request}")
 
                     requestGenerator = requestGeneratorService.findRequestGenerator(sendProtocol)
-                    print(f"Transmitter Request Generator: {requestGenerator}")
+                    # print(f"Transmitter Request Generator: {requestGenerator}")
 
                     if sendProtocol == 5:
                         sendingRequest = requestGenerator(None)

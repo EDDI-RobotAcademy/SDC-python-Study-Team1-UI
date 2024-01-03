@@ -1,8 +1,4 @@
-from console_ui.entity.ConsoleUiRoutingState import ConsoleUiRoutingState
 from console_ui.service.ConsoleUiService import ConsoleUiService
-from custom_protocol.entity.CustomProtocol import CustomProtocol
-from custom_protocol.repository.CustomProtocolRepository import CustomProtocolRepository
-from custom_protocol.repository.CustomProtocolRepositoryImpl import CustomProtocolRepositoryImpl
 from utility.keyboard.KeyboardInput import KeyboardInput
 
 
@@ -34,7 +30,8 @@ class ConsoleUiServiceImpl(ConsoleUiService):
         sessionId = self.__repository.getSessionId()
         userCommandNumber = KeyboardInput.getKeyboardIntegerInput()
         convertedUserCommandNumber = self.__repository.commandConverter(userCommandNumber)
-        transmitData = {'protocolNumber': convertedUserCommandNumber, 'sessionId': sessionId}
+        transmitData = {'protocolNumber': convertedUserCommandNumber,
+                        'sessionId': int(sessionId.get("__accountSessionId"))}
         self.__repository.routingStateConverter(convertedUserCommandNumber)
 
         transmitQueue.put(transmitData)

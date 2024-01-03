@@ -1,8 +1,8 @@
 class MyOrderListResponse:
-    __myorderlist = []
+    __myOrderList = []
 
-    def __init__(self, myorderlist):
-        self.__myorderlist = myorderlist
+    def __init__(self, __myOrderList):
+        self.__myOrderList = __myOrderList
 
-    def getmyorderlist(self):
-        return self.__myorderlist
+    def getMyOrderList(self):
+        return self.__myOrderList

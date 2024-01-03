@@ -6,3 +6,4 @@ class ConsoleUiRoutingState(Enum):
     PRODUCT_LIST = 1
     PRODUCT_DETAILS = 2
     ORDER_LIST = 3
+    ORDER_DETAILS = 4

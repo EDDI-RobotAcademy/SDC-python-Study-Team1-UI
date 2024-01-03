@@ -39,22 +39,22 @@ class ReceiverRepositoryImpl(ReceiverRepository):
                     clientSocket.closeSocket()
                     break
 
-                # decodedData = data.decode()
-                decodedData = json.loads(data)
+                decodedData = data.decode()
+                # decodedData = json.loads(data)
                 print(f'수신된 정보: {decodedData}')
+                evalData = eval(decodedData)
 
-                receivedProtocolNumber = int(decodedData["protocol"])
+                receivedProtocolNumber = int(evalData["protocol"])
                 print(f'Received Protocol number: {receivedProtocolNumber}')
-                receivedData = decodedData["data"]
+                receivedData = evalData["data"]
                 print(f'Received Data: {receivedData}')
 
                 responseGenerator = responseGeneratorService.findResponseGenerator(receivedProtocolNumber)
-                responseObject = responseGenerator(receivedData)
+                print(f'Response Generator: {responseGenerator}')
+                responseDictObject = responseGenerator(receivedData)
+                print(f'Response Object: {responseDictObject}')
 
-                # 도대체가 eval 은 뭐 같아서 못 써먹겠음
-                # evlauatedResponseObject = eval(responseObject)
-
-                receiveQueue.put(responseObject)
+                receiveQueue.put(responseDictObject)
 
             except socket.error as exception:
                 if exception.errno == errno.EWOULDBLOCK:
