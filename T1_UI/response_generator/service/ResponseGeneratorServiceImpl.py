@@ -32,22 +32,22 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
                 CustomProtocol.ACCOUNT_LOGOUT.value] = cls.__instance.generateAccountLogoutResponse
             cls.__responseFormGenerationTable[
                 CustomProtocol.ACCOUNT_REMOVE.value] = cls.__instance.generateAccountRemoveResponse
+            cls.__responseFormGenerationTable[
+                CustomProtocol.PRODUCT_LIST.value] = cls.__instance.generateProductListResponse
+            cls.__responseFormGenerationTable[
+                CustomProtocol.PRODUCT_REGISTER.value] = cls.__instance.generateProductRegisterResponse
+            cls.__responseFormGenerationTable[
+                CustomProtocol.PRODUCT_READ.value] = cls.__instance.generateProductReadResponse
+            cls.__responseFormGenerationTable[
+                CustomProtocol.PRODUCT_MODIFY.value] = cls.__instance.generateProductModifyResponse
+            cls.__responseFormGenerationTable[
+                CustomProtocol.PRODUCT_PURCHASE.value] = cls.__instance.generateProductPurchaseResponse
+            cls.__responseFormGenerationTable[
+                CustomProtocol.PRODUCT_REMOVE.value] = cls.__instance.generateProductRemoveResponse
             # cls.__responseFormGenerationTable[
-            #     CustomProtocol.PRODUCT_LIST.value] = cls.__instance.generateAccountRegisterResponse
+            #     CustomProtocol.ORDER_LIST.value] = cls.__instance.generateOrderListResponse
             # cls.__responseFormGenerationTable[
-            #     CustomProtocol.PRODUCT_REGISTER.value] = cls.__instance.generateAccountRegisterResponse
-            # cls.__responseFormGenerationTable[
-            #     CustomProtocol.PRODUCT_READ.value] = cls.__instance.generateAccountRegisterResponse
-            # cls.__responseFormGenerationTable[
-            #     CustomProtocol.PRODUCT_MODIFY.value] = cls.__instance.generateAccountRegisterResponse
-            # cls.__responseFormGenerationTable[
-            #     CustomProtocol.PRODUCT_PURCHASE.value] = cls.__instance.generateAccountRegisterResponse
-            # cls.__responseFormGenerationTable[
-            #     CustomProtocol.PRODUCT_REMOVE.value] = cls.__instance.generateAccountRegisterResponse
-            # cls.__responseFormGenerationTable[
-            #     CustomProtocol.ORDER_LIST.value] = cls.__instance.generateAccountRegisterResponse
-            # cls.__responseFormGenerationTable[
-            #     CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateAccountRegisterResponse
+            #     CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateOrderRemoveResponse
 
         return cls.__instance
 
@@ -69,18 +69,18 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
 
     def generateAccountRegisterResponse(self, arguments):
         return AccountRegisterResponse(arguments)
-    
+
     def generateAccountLoginResponse(self, arguments):
         return AccountLoginResponse(arguments)
 
     def generateAccountLogoutResponse(self, arguments):
-        return AccountLoginResponse(arguments)
+        return AccountLogoutResponse(arguments)
 
     def generateAccountRemoveResponse(self, arguments):
-        return AccountLoginResponse(arguments)
+        return AccountDeleteResponse(arguments)
 
     def generateProductListResponse(self, arguments):
-        return AccountLoginResponse(arguments)
+        return ProductListResponse(arguments)
 
     def generateProductRegisterResponse(self, arguments):
         return ProductRegisterResponse(arguments)
