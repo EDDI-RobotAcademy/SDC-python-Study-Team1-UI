@@ -51,10 +51,13 @@ class ResponseGeneratorService(abc.ABC):
         pass
 
     # @abc.abstractmethod
-    # def generateOrderListResponse(self, arguments):
+    # def generateMyOrderListResponse(self, arguments):
     #     pass
     # @abc.abstractmethod
-    # def generateOrderRemoveResponse(self, arguments):
+    # def generateMyOrderReadResponse(self, arguments):
+    #     pass
+    # @abc.abstractmethod
+    # def generateMyOrderRemoveResponse(self, arguments):
     #     pass
 
 

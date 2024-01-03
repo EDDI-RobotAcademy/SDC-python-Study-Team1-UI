@@ -45,9 +45,11 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
             cls.__responseFormGenerationTable[
                 CustomProtocol.PRODUCT_REMOVE.value] = cls.__instance.generateProductRemoveResponse
             # cls.__responseFormGenerationTable[
-            #     CustomProtocol.ORDER_LIST.value] = cls.__instance.generateOrderListResponse
+            #     CustomProtocol.ORDER_LIST.value] = cls.__instance.generateMyOrderListResponse
             # cls.__responseFormGenerationTable[
-            #     CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateOrderRemoveResponse
+            #     CustomProtocol.ORDER_READ.value] = cls.__instance.generateMyOrderReadResponse
+            # cls.__responseFormGenerationTable[
+            #     CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateMyOrderRemoveResponse
 
         return cls.__instance
 
@@ -101,9 +103,12 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
     def generateProductRemoveResponse(self, arguments):
         return ProductDeleteResponse(arguments)
 
-    # def generateOrderListResponse(self, arguments):
-    #     return OrderListResponse(arguments)
-    # def generateOrderRemoveResponse(self, arguments):
-    #     return OrderRemoveResponse(arguments)
+    # def generateMyOrderListResponse(self, arguments):
+    #     return MyOrderListResponse(arguments)
+    # def generateMyOrderReadResponse(self, arguments):
+    #     return MyOrderReadResponse(arguments)
+    # def generateMyOrderRemoveResponse(self, arguments):
+    #     return MyOrderRemoveResponse(arguments)
+
 
 
