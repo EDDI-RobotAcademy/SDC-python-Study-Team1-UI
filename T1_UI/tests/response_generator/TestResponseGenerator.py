@@ -42,18 +42,44 @@ class TestResponseGenerator(unittest.TestCase):
         print(int(sessionId.get('__accountSessionId')))
 
         # 7, 12
-        sampleResponse = {"protocolNumber": 7, "data": {1, "Sibal", 20000, "Dog Sibal", "m,e"}}
+        sampleResponse = {"protocolNumber": 7, "data": {'__productId': 1, '__productName': "Sibal",
+                                                        "__productPrice": 20000, "__productDetails": "Dog Sibal",
+                                                        '__seller': "me"}}
         receivedProtocolNumber = sampleResponse['protocolNumber']
         receivedData = sampleResponse['data']
         responseGeneratorService = ResponseGeneratorServiceImpl.getInstance()
         responseGenerator = responseGeneratorService.findResponseGenerator(receivedProtocolNumber)
         response = responseGenerator(receivedData)
         print(response.getId())
-        # print(response[1])
+        print(response.getName())
+        print(response.getPrice())
+        print(response.getDetails())
+        print(response.getAccountId())
 
     def testListResponse(self):
         # 5, 11
-        sampleResponse = {"protocolNumber": 7, "data": {1, "Sibal", 20000, "Dog Sibal", "m,e"}}
+        sampleResponse = {"protocolNumber": 5, "data": [{'__productId': 1, '__productName': "Sibal",
+                                                         "__productPrice": 20000},
+                                                        {'__productId': 2, '__productName': "Sibal",
+                                                         "__productPrice": 30000},
+                                                        {'__productId': 3, '__productName': "Sibal",
+                                                         "__productPrice": 1818}]}
+        receivedProtocolNumber = sampleResponse['protocolNumber']
+        receivedData = sampleResponse['data']
+        responseGeneratorService = ResponseGeneratorServiceImpl.getInstance()
+        responseGenerator = responseGeneratorService.findResponseGenerator(receivedProtocolNumber)
+        response = responseGenerator(receivedData)
+        # myOrderList = response.getMyOrderList()
+        # myOrderListLength = len(myOrderList)
+        # print(myOrderListLength)
+        # for i in range(myOrderListLength):
+        #     print(myOrderList[i])
+
+        productList = response.getProductList()
+        productListLength = len(productList)
+        print(productListLength)
+        for i in range(productListLength):
+            print(productList[i])
 
 
 if __name__ == '__main__':
