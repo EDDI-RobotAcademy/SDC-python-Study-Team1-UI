@@ -51,10 +51,11 @@ class ReceiverRepositoryImpl(ReceiverRepository):
 
                 responseGenerator = responseGeneratorService.findResponseGenerator(receivedProtocolNumber)
                 print(f'Response Generator: {responseGenerator}')
-                responseDictObject = responseGenerator(receivedData)
-                print(f'Response Object: {responseDictObject}')
+                responseObject = responseGenerator(receivedData)
+                print(f'Response Object: {responseObject}')
+                print(f'Response Object type: {type(responseObject)}')
 
-                receiveQueue.put(responseDictObject)
+                receiveQueue.put(responseObject)
 
             except socket.error as exception:
                 if exception.errno == errno.EWOULDBLOCK:

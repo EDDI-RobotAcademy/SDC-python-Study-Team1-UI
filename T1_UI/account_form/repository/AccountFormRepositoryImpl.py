@@ -30,3 +30,7 @@ class AccountFormRepositoryImpl(AccountFormRepository):
         userInputPassword = KeyboardInput.getKeyboardInputWithOutputMessage("신규 비밀번호:")
 
         return userInputId, userInputPassword
+
+    def accountNothing(self):
+        print(f'accountNothing: 암것도 없음')
+        pass

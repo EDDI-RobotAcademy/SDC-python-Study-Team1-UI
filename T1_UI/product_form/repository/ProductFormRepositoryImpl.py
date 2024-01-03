@@ -40,3 +40,7 @@ class ProductFormRepositoryImpl(ProductFormRepository):
         userInputProductPrice = KeyboardInput.getKeyboardInputWithOutputMessage("상품 가격:")
 
         return userInputProductTitle, userInputProductContent, userInputProductPrice
+
+    def productNothing(self):
+        print(f'productNothing: 암것도 없음')
+        pass
