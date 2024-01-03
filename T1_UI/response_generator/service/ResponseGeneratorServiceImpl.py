@@ -1,4 +1,3 @@
-
 from account.service.response.AccountRegisterResponse import AccountRegisterResponse
 from account.service.response.AccountLoginResponse import AccountLoginResponse
 from account.service.response.AccountLogoutResponse import AccountLogoutResponse
@@ -74,7 +73,7 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
         return AccountRegisterResponse(arguments)
 
     def generateAccountLoginResponse(self, arguments):
-        return AccountLoginResponse(arguments)
+        return AccountLoginResponse(**arguments)
 
     def generateAccountLogoutResponse(self, arguments):
         return AccountLogoutResponse(arguments)
