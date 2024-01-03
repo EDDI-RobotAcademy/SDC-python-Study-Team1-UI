@@ -79,8 +79,12 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
             if response.getProductList() is not None:
                 productList = response.getProductList()
                 productListLength = len(productList)
+                print("번호", "       ", "상품명", "       ", "가격(원)")
+                print("============================================")
                 for i in range(productListLength):
-                    print(productList[i])
+                    print(productList[i]["__productId"], "       ",
+                          productList[i]["__productName"], "       ",
+                          productList[i]["__productPrice"])
 
             else:
                 print('오류 발생: 상품 목록 불러오기 실패')
@@ -133,8 +137,11 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
             if response.getMyOrderList() is not None:
                 myOrderList = response.getMyOrderList()
                 myOrderListLength = len(myOrderList)
+                print("번호", "       ", "상품명")
+                print("=======================")
                 for i in range(myOrderListLength):
-                    print(myOrderList[i])
+                    print(myOrderList[i]["__productId"], "       ",
+                          myOrderList[i]["__productName"])
 
             if not response.getIsSuccess():
                 print('오류 발생: 주문 내역 불러오기 실패')
