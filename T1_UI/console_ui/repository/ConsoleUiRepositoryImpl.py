@@ -14,11 +14,16 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         if cls.__instance is None:
             cls.__instance = super().__new__(cls)
 
-            cls.__instance.__menuTable[ConsoleUiRoutingState.INITIALIZED.value] = cls.__instance.__initialMenu
+            cls.__instance.__menuTable[
+                ConsoleUiRoutingState.INITIALIZED.value] = cls.__instance.__initialMenu
             cls.__instance.__menuTable[
                 ConsoleUiRoutingState.PRODUCT_LIST.value] = cls.__instance.__productListMenu
             cls.__instance.__menuTable[
                 ConsoleUiRoutingState.PRODUCT_DETAILS.value] = cls.__instance.__productReadMenu
+            cls.__instance.__menuTable[
+                ConsoleUiRoutingState.ORDER_LIST.value] = cls.__instance.__myOrderListMenu
+            cls.__instance.__menuTable[
+                ConsoleUiRoutingState.ORDER_DETAILS.value] = cls.__instance.__myOrderReadMenu
 
             cls.__instance.__convertCommandTable[
                 ConsoleUiRoutingState.INITIALIZED.value] = cls.__instance.__initialStateCommandConverter
@@ -26,6 +31,10 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
                 ConsoleUiRoutingState.PRODUCT_LIST.value] = cls.__instance.__productListCommandConverter
             cls.__instance.__convertCommandTable[
                 ConsoleUiRoutingState.PRODUCT_DETAILS.value] = cls.__instance.__productReadCommandConverter
+            cls.__instance.__convertCommandTable[
+                ConsoleUiRoutingState.ORDER_LIST.value] = cls.__instance.__myOrderCommandConverter
+            cls.__instance.__convertCommandTable[
+                ConsoleUiRoutingState.ORDER_DETAILS.value] = cls.__instance.__myOrderReadCommandConverter
 
         return cls.__instance
 
@@ -47,7 +56,6 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             print('2. 로그인')
             print('3. 상품 리스트 조회')
             print('4. 종료')
-            return
 
         print('1. 로그아웃')
         print('2. 상품 리스트 조회')
@@ -74,6 +82,14 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         print('2. 상품 삭제')
         print('3. 상품 주문')
         print('4. 뒤로 가기')
+
+    def __myOrderListMenu(self):
+        print('1. 주문 상세 보기')
+        print('2. 뒤로 가기')
+
+    def __myOrderReadMenu(self):
+        print('1. 내 주문 삭제')
+        print('2. 뒤로 가기')
 
     def __initialStateCommandConverter(self, userCommand):
 
@@ -137,6 +153,22 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         else:
             print("잘못된 입력입니다! 다시 입력해주세요.")
 
+    def __myOrderCommandConverter(self, userCommand):
+        if userCommand == 1:
+            return CustomProtocol.ORDER_READ.value
+        if userCommand == 2:
+            return
+        else:
+            print("잘못된 입력입니다! 다시 입력해주세요.")
+
+    def __myOrderReadCommandConverter(self, userCommand):
+        if userCommand == 1:
+            return CustomProtocol.ORDER_REMOVE.value
+        if userCommand == 2:
+            return
+        else:
+            print("잘못된 입력입니다! 다시 입력해주세요.")
+
     def menuPrinter(self):
         currentRoutingState = self.__consoleUiState.getCurrentRoutingState()
         menu = self.__menuTable[currentRoutingState]
@@ -163,29 +195,32 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         elif convertedUserChoice == CustomProtocol.PRODUCT_LIST.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST.value)
 
-        elif convertedUserChoice == CustomProtocol.PRODUCT_READ.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST.value)
-
         elif convertedUserChoice == CustomProtocol.PRODUCT_REGISTER.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST.value)
 
-        elif convertedUserChoice == CustomProtocol.PRODUCT_MODIFY.value:
+        elif convertedUserChoice == CustomProtocol.PRODUCT_READ.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
 
-        elif convertedUserChoice == CustomProtocol.PRODUCT_REMOVE.value:
+        elif convertedUserChoice == CustomProtocol.PRODUCT_MODIFY.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
 
         elif convertedUserChoice == CustomProtocol.PRODUCT_PURCHASE.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
 
-        elif convertedUserChoice == CustomProtocol.ORDER_LIST.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
+        elif convertedUserChoice == CustomProtocol.PRODUCT_REMOVE.value:
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
 
-        elif convertedUserChoice == CustomProtocol.ORDER_REMOVE.value:
+        elif convertedUserChoice == CustomProtocol.ORDER_LIST.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_LIST.value)
 
+        elif convertedUserChoice == CustomProtocol.ORDER_READ.value:
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_DETAILS.value)
+
+        elif convertedUserChoice == CustomProtocol.ORDER_REMOVE.value:
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_DETAILS.value)
+
         elif convertedUserChoice == CustomProtocol.EXIT.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
+            pass
 
     def saveCurrentRoutingState(self, currentState):
         self.__consoleUiState.setCurrentRoutingState(currentState)
@@ -201,3 +236,12 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
 
     def resetSessionId(self):
         self.__session.setSessionId(None)
+
+    def setProductNumber(self, productNumber):
+        self.__consoleUiState.setCurrentReadNumber(productNumber)
+
+    def getProductNumber(self):
+        return self.__consoleUiState.getCurrentReadNumber()
+
+    def resetProductNumber(self):
+        self.__consoleUiState.setCurrentReadNumber(None)

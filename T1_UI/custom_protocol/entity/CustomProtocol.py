@@ -13,5 +13,6 @@ class CustomProtocol(Enum):
     PRODUCT_PURCHASE = 9
     PRODUCT_REMOVE = 10
     ORDER_LIST = 11
-    ORDER_REMOVE = 12
-    EXIT = 13
+    ORDER_READ = 12
+    ORDER_REMOVE = 13
+    EXIT = 14
