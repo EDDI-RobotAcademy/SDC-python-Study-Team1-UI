@@ -75,6 +75,16 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
             if not response.getIsSuccess():
                 print('오류 발생: 계정 삭제 실패')
 
+        if className == "ProductListResponse":
+            if response.getProductList() is not None:
+                productList = response.getProductList()
+                productListLength = len(productList)
+                for i in range(productListLength):
+                    print(productList[i])
+
+            else:
+                print('오류 발생: 상품 목록 불러오기 실패')
+
         if className == "ProductReadResponse":
             if response.getId() is not None:
                 consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
@@ -84,6 +94,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print(f'상품 제목 : {response.getName()}')
                 print(f'상품 가격 : {response.getPrice()}')
                 print(f'상품 세부 정보 : {response.getDetails()}')
+                print(f'상품 판매자 : {response.getAccountId()}')
 
             if response.getId() is None:
                 print('오류 발생: 상품 조회 실패')
