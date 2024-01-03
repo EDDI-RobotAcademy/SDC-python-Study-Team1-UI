@@ -114,9 +114,8 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         productRegisterRequestData = {
             '__productTitle': arguments[0].decode().strip(),
-            '__productContent': arguments[1].decode().strip(),
+            '__productDetails': arguments[1].decode().strip(),
             '__productPrice': arguments[2],
-            '__productDetails': arguments[3].decode().strip()
         }
 
         return productRegisterRequestData
@@ -142,9 +141,8 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         productModifyRequestData = {
             '__productNumber': currentReadProductNumber,
             '__productTitle': arguments[0].decode().strip(),
-            '__productContent': arguments[1].decode().strip(),
+            '__productDetails': arguments[1].decode().strip(),
             '__productPrice': arguments[2],
-            '__productDetails': arguments[3].decode().strip()
         }
 
         return productModifyRequestData

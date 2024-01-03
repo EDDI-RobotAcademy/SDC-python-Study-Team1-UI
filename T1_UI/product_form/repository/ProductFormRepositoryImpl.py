@@ -23,13 +23,12 @@ class ProductFormRepositoryImpl(ProductFormRepository):
         print("상품 등록을 위한 정보를 입력하세요.")
         userInputProductTitle = KeyboardInput.getKeyboardInputWithOutputMessage("상품 제목:")
         userInputProductContent = KeyboardInput.getKeyboardInputWithOutputMessage("상품 내용 작성:")
-        userInputProductPrice = KeyboardInput.getKeyboardInputWithOutputMessage("상품 가격:")
+        userInputProductPrice = KeyboardInput.getKeyboardInputWithOutputMessage("상품 가격(원):")
 
-        return userInputProductTitle, userInputProductContent, userInputProductPrice
+        return userInputProductTitle, userInputProductContent, int(userInputProductPrice.decode().strip())
 
     def createProductReadForm(self):
-        print("조회할 상품 번호를 입력하세요.")
-        userInputProductNumber = KeyboardInput.getKeyboardIntegerInput()
+        userInputProductNumber = KeyboardInput.getKeyboardIntegerInputToReadProduct()
 
         return userInputProductNumber
 
@@ -37,9 +36,9 @@ class ProductFormRepositoryImpl(ProductFormRepository):
         print("상품 수정을 위한 정보를 입력하세요.")
         userInputProductTitle = KeyboardInput.getKeyboardInputWithOutputMessage("상품 제목:")
         userInputProductContent = KeyboardInput.getKeyboardInputWithOutputMessage("상품 내용 작성:")
-        userInputProductPrice = KeyboardInput.getKeyboardInputWithOutputMessage("상품 가격:")
+        userInputProductPrice = KeyboardInput.getKeyboardInputWithOutputMessage("상품 가격(원):")
 
-        return userInputProductTitle, userInputProductContent, userInputProductPrice
+        return userInputProductTitle, userInputProductContent, int(userInputProductPrice.decode().strip())
 
     def productNothing(self):
         print(f'productNothing: 암것도 없음')
