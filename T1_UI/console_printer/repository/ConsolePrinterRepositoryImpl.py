@@ -129,16 +129,29 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
             if not response.getIsSuccess():
                 print('오류 발생: 상품 삭제 실패')
 
-        # if className == "OrderReadResponse":
-        #     if response.getId():
-        #         print('주문 삭제가 완료되었습니다.')
-        #
-        #     if not response.getIsSuccess():
-        #         print('주문하지 않은 상품 번호입니다. 다시 입력하세요!')
-        #
-        # if className == "OrderRemoveResponse":
-        #     if response.getIsSuccess():
-        #         print('주문 삭제가 완료되었습니다.')
-        #
-        #     if not response.getIsSuccess():
-        #         print('주문하지 않은 상품 번호입니다. 다시 입력하세요!')
+        if className == "MyOrderListResponse":
+            if response.getMyOrderList() is not None:
+                myOrderList = response.getMyOrderList()
+                myOrderListLength = len(myOrderList)
+                for i in range(myOrderListLength):
+                    print(myOrderList[i])
+
+            if not response.getIsSuccess():
+                print('오류 발생: 주문 내역 불러오기 실패')
+
+        if className == "MyOrderReadResponse":
+            if response.getId() is not None:
+                consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
+                consoleUiRepository.setProductNumber(response.getId())
+                print('주문된 상품 정보는 아래와 같습니다.')
+                print(f'상품 번호 : {response.getId()}')
+                print(f'상품 제목 : {response.getName()}')
+                print(f'상품 가격 : {response.getPrice()}')
+                print(f'상품 세부 정보 : {response.getDetails()}')
+
+        if className == "MyOrderRemoveResponse":
+            if response.getIsSuccess():
+                print('주문 삭제가 완료되었습니다.')
+
+            if not response.getIsSuccess():
+                print('오류 발생: 주문 취소 실패 (잘못된 입력)')
