@@ -34,9 +34,9 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
             # cls.__requestFormGenerationTable[
             #     CustomProtocol.PRODUCT_REMOVE.value] = cls.__instance.generateProductRemoveRequest
             # cls.__requestFormGenerationTable[
-            #     CustomProtocol.ORDER_LIST.value] = cls.__instance.generateOrderListRequest
+            #     CustomProtocol.ORDER_LIST.value] = cls.__instance.generateMyOrderListRequest
             # cls.__requestFormGenerationTable[
-            #     CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateOrderRemoveRequest
+            #     CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateMyOrderRemoveRequest
 
         return cls.__instance
 
@@ -145,18 +145,18 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         }
         return productRequestData
 
-    def generateProductOrderListRequest(self, arguments):
-        print("RequestGeneratorService OrderList")
-        productRequestData = {
+    def generateMyOrderListRequest(self, arguments):
+        print("RequestGeneratorService MyOrderList")
+        myOrderData = {
             '__productOrderNumber': arguments,
         }
-        return productRequestData
+        return myOrderData
 
-    def generateProductOrderRemoveRequest(self, arguments):
-        print("RequestGeneratorService - OrderRemove")
-        productRequestData = {
+    def generateMyOrderRemoveRequest(self, arguments):
+        print("RequestGeneratorService - MyOrderRemove")
+        myOrderData = {
             '__productOrderNumber': arguments,
         }
-        return productRequestData
+        return myOrderData
 
 
