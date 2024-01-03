@@ -17,10 +17,6 @@ from task_manage.repository.TaskManageRepositoryImpl import TaskManageRepository
 from task_manage.service.TaskManageServiceImpl import TaskManageServiceImpl
 
 
-def nothing():
-    return None
-
-
 def initClientSocketDomain():
     clientSocketRepository = ClientSocketRepositoryImpl()
     clientSocketService = ClientSocketServiceImpl(clientSocketRepository)
@@ -57,15 +53,15 @@ def registerProtocol():
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ACCOUNT_LOGOUT.value,
-        nothing()
+        accountFormRepository.accountNothing
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ACCOUNT_REMOVE.value,
-        nothing()
+        accountFormRepository.accountNothing
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.PRODUCT_LIST.value,
-        nothing()
+        productFormRepository.productNothing
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.PRODUCT_REGISTER.value,
@@ -81,23 +77,23 @@ def registerProtocol():
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.PRODUCT_PURCHASE.value,
-        nothing()
+        productFormRepository.productNothing
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.PRODUCT_REMOVE.value,
-        nothing()
+        productFormRepository.productNothing
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ORDER_LIST.value,
-        nothing()
+        productFormRepository.productNothing
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ORDER_READ.value,
-        productFormRepository.createProductReadForm
+        productFormRepository.productNothing
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ORDER_REMOVE.value,
-        nothing()
+        productFormRepository.productNothing
     )
 
 
