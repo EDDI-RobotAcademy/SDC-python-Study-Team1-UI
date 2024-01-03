@@ -9,8 +9,9 @@ from product.service.response.ProductReadResponse import ProductReadResponse
 from product.service.response.ProductModifyResponse import ProductModifyResponse
 from product.service.response.ProductPurchaseResponse import ProductPurchaseResponse
 from product.service.response.ProductDeleteResponse import ProductDeleteResponse
-# from order.service.response.OrderListResponse import OrderListResponse
-# from order.service.response.OrderDeleteResponse import OrderDeleteResponse
+from my_order.service.response.MyOrderListResponse import MyOrderListResponse
+from my_order.service.response.MyOrderReadResponse import MyOrderReadResponse
+from my_order.service.response.MyOrderRemoveResponse import MyOrderRemoveResponse
 
 from custom_protocol.entity.CustomProtocol import CustomProtocol
 from response_generator.service.ResponseGeneratorService import ResponseGeneratorService
@@ -44,12 +45,12 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
                 CustomProtocol.PRODUCT_PURCHASE.value] = cls.__instance.generateProductPurchaseResponse
             cls.__responseFormGenerationTable[
                 CustomProtocol.PRODUCT_REMOVE.value] = cls.__instance.generateProductRemoveResponse
-            # cls.__responseFormGenerationTable[
-            #     CustomProtocol.ORDER_LIST.value] = cls.__instance.generateMyOrderListResponse
-            # cls.__responseFormGenerationTable[
-            #     CustomProtocol.ORDER_READ.value] = cls.__instance.generateMyOrderReadResponse
-            # cls.__responseFormGenerationTable[
-            #     CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateMyOrderRemoveResponse
+            cls.__responseFormGenerationTable[
+                CustomProtocol.ORDER_LIST.value] = cls.__instance.generateMyOrderListResponse
+            cls.__responseFormGenerationTable[
+                CustomProtocol.ORDER_READ.value] = cls.__instance.generateMyOrderReadResponse
+            cls.__responseFormGenerationTable[
+                CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateMyOrderRemoveResponse
 
         return cls.__instance
 
@@ -103,12 +104,17 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
     def generateProductRemoveResponse(self, arguments):
         return ProductDeleteResponse(arguments)
 
-    # def generateMyOrderListResponse(self, arguments):
-    #     return MyOrderListResponse(arguments)
-    # def generateMyOrderReadResponse(self, arguments):
-    #     return MyOrderReadResponse(arguments)
-    # def generateMyOrderRemoveResponse(self, arguments):
-    #     return MyOrderRemoveResponse(arguments)
+    def generateMyOrderListResponse(self, arguments):
+        return MyOrderListResponse(arguments)
+
+    def generateMyOrderReadResponse(self, arguments):
+        return MyOrderReadResponse(arguments[0],
+                                   arguments[1].decode().strip(),
+                                   arguments[2],
+                                   arguments[3].decode().strip())
+
+    def generateMyOrderRemoveResponse(self, arguments):
+        return MyOrderRemoveResponse(arguments)
 
 
 

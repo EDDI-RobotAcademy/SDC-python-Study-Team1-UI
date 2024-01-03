@@ -50,14 +50,16 @@ class ResponseGeneratorService(abc.ABC):
     def generateProductRemoveResponse(self, arguments):
         pass
 
-    # @abc.abstractmethod
-    # def generateMyOrderListResponse(self, arguments):
-    #     pass
-    # @abc.abstractmethod
-    # def generateMyOrderReadResponse(self, arguments):
-    #     pass
-    # @abc.abstractmethod
-    # def generateMyOrderRemoveResponse(self, arguments):
-    #     pass
+    @abc.abstractmethod
+    def generateMyOrderListResponse(self, arguments):
+        pass
+
+    @abc.abstractmethod
+    def generateMyOrderReadResponse(self, arguments):
+        pass
+
+    @abc.abstractmethod
+    def generateMyOrderRemoveResponse(self, arguments):
+        pass
 
 
