@@ -48,9 +48,9 @@ class RequestGeneratorService(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def generateProductOrderListRequest(self, arguments):
+    def generateMyOrderListRequest(self, arguments):
         pass
 
     @abc.abstractmethod
-    def generateProductOrderRemoveRequest(self, arguments):
+    def generateMyOrderRemoveRequest(self, arguments):
         pass
