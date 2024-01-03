@@ -89,11 +89,7 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
         return ProductRegisterResponse(arguments)
 
     def generateProductReadResponse(self, arguments):
-        return ProductReadResponse(arguments[0],
-                                   arguments[1].decode().strip(),
-                                   arguments[2],
-                                   arguments[3].decode().strip(),
-                                   arguments[4])
+        return ProductReadResponse(**arguments)
 
     def generateProductModifyResponse(self, arguments):
         return ProductModifyResponse(arguments)
@@ -108,10 +104,7 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
         return MyOrderListResponse(arguments)
 
     def generateMyOrderReadResponse(self, arguments):
-        return MyOrderReadResponse(arguments[0],
-                                   arguments[1].decode().strip(),
-                                   arguments[2],
-                                   arguments[3].decode().strip())
+        return MyOrderReadResponse(**arguments)
 
     def generateMyOrderRemoveResponse(self, arguments):
         return MyOrderRemoveResponse(arguments)

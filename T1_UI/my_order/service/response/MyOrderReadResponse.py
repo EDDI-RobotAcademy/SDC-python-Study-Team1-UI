@@ -1,12 +1,12 @@
 class MyOrderReadResponse:
-    def __init__(self, __id, __name, __price, __details):
-        self.__id = __id
-        self.__name = __name
-        self.__price = __price
-        self.__details = __details
+    def __init__(self, **kwargs):
+        self.__productId = kwargs["__productId"]
+        self.__name = kwargs["__productName"]
+        self.__price = kwargs["__productPrice"]
+        self.__details = kwargs["__productDetails"]
 
     def getId(self):
-        return self.__id
+        return self.__productId
 
     def getName(self):
         return self.__name
@@ -16,5 +16,3 @@ class MyOrderReadResponse:
 
     def getDetails(self):
         return self.__details
-
-
