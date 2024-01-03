@@ -44,7 +44,7 @@ class TestResponseGenerator(unittest.TestCase):
         # 7, 12
         sampleResponse = {"protocolNumber": 7, "data": {'__productId': 1, '__productName': "Sibal",
                                                         "__productPrice": 20000, "__productDetails": "Dog Sibal",
-                                                        '__seller': "me"}}
+                                                        '__seller': "m.e"}}
         receivedProtocolNumber = sampleResponse['protocolNumber']
         receivedData = sampleResponse['data']
         responseGeneratorService = ResponseGeneratorServiceImpl.getInstance()

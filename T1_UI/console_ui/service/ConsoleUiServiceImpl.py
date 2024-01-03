@@ -31,7 +31,7 @@ class ConsoleUiServiceImpl(ConsoleUiService):
         userCommandNumber = KeyboardInput.getKeyboardIntegerInput()
         convertedUserCommandNumber = self.__repository.commandConverter(userCommandNumber)
         transmitData = {'protocolNumber': convertedUserCommandNumber,
-                        'sessionId': int(sessionId.get("__accountSessionId"))}
+                        'sessionId': sessionId}
         self.__repository.routingStateConverter(convertedUserCommandNumber)
 
         transmitQueue.put(transmitData)

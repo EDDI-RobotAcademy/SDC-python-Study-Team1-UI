@@ -56,6 +56,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             print('2. 로그인')
             print('3. 상품 리스트 조회')
             print('4. 종료')
+            return
 
         print('1. 로그아웃')
         print('2. 상품 리스트 조회')
@@ -68,6 +69,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         if self.getSessionId() is None:
             print('1. 상품 조회')
             print('2. 뒤로 가기')
+            return
 
         print('1. 상품 조회')
         print('2. 상품 등록')
@@ -77,6 +79,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
 
         if self.getSessionId() is None:
             print('1. 뒤로 가기')
+            return
 
         print('1. 상품 수정')
         print('2. 상품 삭제')

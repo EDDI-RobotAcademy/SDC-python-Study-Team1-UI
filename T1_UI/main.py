@@ -11,9 +11,14 @@ from console_ui.repository.ConsoleUiRepositoryImpl import ConsoleUiRepositoryImp
 from console_ui.service.ConsoleUiServiceImpl import ConsoleUiServiceImpl
 from custom_protocol.entity.CustomProtocol import CustomProtocol
 from custom_protocol.service.CustomProtocolServiceImpl import CustomProtocolServiceImpl
+from product_form.repository.ProductFormRepositoryImpl import ProductFormRepositoryImpl
 
 from task_manage.repository.TaskManageRepositoryImpl import TaskManageRepositoryImpl
 from task_manage.service.TaskManageServiceImpl import TaskManageServiceImpl
+
+
+def nothing():
+    return None
 
 
 def initClientSocketDomain():
@@ -40,6 +45,7 @@ def initEachDomain():
 def registerProtocol():
     customProtocolService = CustomProtocolServiceImpl.getInstance()
     accountFormRepository = AccountFormRepositoryImpl.getInstance()
+    productFormRepository = ProductFormRepositoryImpl.getInstance()
 
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ACCOUNT_LOGIN.value,
@@ -48,6 +54,50 @@ def registerProtocol():
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ACCOUNT_REGISTER.value,
         accountFormRepository.createAccountRegisterForm
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.ACCOUNT_LOGOUT.value,
+        nothing()
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.ACCOUNT_REMOVE.value,
+        nothing()
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.PRODUCT_LIST.value,
+        nothing()
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.PRODUCT_REGISTER.value,
+        productFormRepository.createProductRegisterForm
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.PRODUCT_READ.value,
+        productFormRepository.createProductReadForm
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.PRODUCT_MODIFY.value,
+        productFormRepository.createProductModifyForm
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.PRODUCT_PURCHASE.value,
+        nothing()
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.PRODUCT_REMOVE.value,
+        nothing()
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.ORDER_LIST.value,
+        nothing()
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.ORDER_READ.value,
+        productFormRepository.createProductReadForm
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.ORDER_REMOVE.value,
+        nothing()
     )
 
 
