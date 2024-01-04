@@ -40,6 +40,8 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
     def __processResponse(self, response):
 
+        consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
+
         className = response.__class__.__name__
 
         if className == "AccountRegisterResponse":
@@ -51,7 +53,6 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
         if className == "AccountLoginResponse":
             if response.getAccountSessionId() is not None:
-                consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.setSessionIdByUserId(response.getAccountSessionId())
                 print(f'\033[94m로그인이 완료되었습니다. 사용자 아이디:\033[0m {consoleUiRepository.getSessionId()}')
             if response.getAccountSessionId() is None:
@@ -60,7 +61,6 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
         if className == "AccountLogoutResponse":
             if response.getIsSuccess():
                 print('\033[92m로그아웃이 완료되었습니다.\033[0m')
-                consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.resetSessionId()
 
             if not response.getIsSuccess():
@@ -69,7 +69,6 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
         if className == "AccountDeleteResponse":
             if response.getIsSuccess():
                 print('\033[94m계정 삭제가 완료되었습니다.\033[0m')
-                consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.resetSessionId()
 
             if not response.getIsSuccess():
@@ -91,8 +90,8 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
         if className == "ProductReadResponse":
             if response.getId() is not None:
-                consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.setProductNumber(response.getId())
+                print(f"현재 조회하고 있는 상품 번호 저장 : {consoleUiRepository.getProductNumber()}번")
                 print('\033[92m요청하신 상품 정보는 아래와 같습니다.\033[0m')
                 print(f'\033[94m상품 번호 :\033[0m {response.getId()}')
                 print(f'\033[94m상품 제목 :\033[0m {response.getName()}')
@@ -127,7 +126,6 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
         if className == "ProductDeleteResponse":
             if response.getIsSuccess():
                 print('\033[92m상품 삭제가 완료되었습니다.\033[0m')
-                consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.resetProductNumber()
 
             if not response.getIsSuccess():
@@ -153,7 +151,6 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
         if className == "MyOrderReadResponse":
             if response.getId() is not None:
-                consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.setProductNumber(response.getId())
                 print('\033[94m주문된 상품 정보는 아래와 같습니다.\033[0m')
                 print(f'\033[92m상품 번호 :\033[0m {response.getId()}')
@@ -163,7 +160,6 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
         if className == "MyOrderRemoveResponse":
             if response.getIsSuccess():
-                consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.resetProductNumber()
 
                 print('\033[92m주문 삭제가 완료되었습니다.\033[0m')

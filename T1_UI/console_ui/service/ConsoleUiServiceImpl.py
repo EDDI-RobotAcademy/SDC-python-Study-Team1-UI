@@ -27,6 +27,7 @@ class ConsoleUiServiceImpl(ConsoleUiService):
     def processUserInput(self, transmitQueue):
         print("ConsoleUiServiceImpl: processUserInput")
         sessionId = self.__repository.getSessionId()
+        currentReadNumber = self.__repository.getProductNumber()
         userCommandNumber = KeyboardInput.getKeyboardIntegerInput()
         convertedUserCommandNumber = self.__repository.commandConverter(userCommandNumber)
         self.__repository.routingStateConverter(convertedUserCommandNumber)
@@ -37,5 +38,6 @@ class ConsoleUiServiceImpl(ConsoleUiService):
             convertedUserCommandNumber = self.__repository.commandConverter(userCommandNumber)
             self.__repository.routingStateConverter(convertedUserCommandNumber)
 
-        transmitData = {'protocolNumber': convertedUserCommandNumber, 'sessionId': sessionId}
+        transmitData = {'protocolNumber': convertedUserCommandNumber, 'sessionId': sessionId,
+                        'productNumber': currentReadNumber}
         transmitQueue.put(transmitData)
