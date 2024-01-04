@@ -158,13 +158,10 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
         if className == "MyOrderRemoveResponse":
             if response.getIsSuccess():
-
                 consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.resetProductNumber()
-                
 
                 print('\033[92m주문 삭제가 완료되었습니다.\033[0m')
-
 
             if not response.getIsSuccess():
                 print('\033[91m오류 발생: 주문 취소 실패 (잘못된 입력)\033[0m')

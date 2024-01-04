@@ -14,7 +14,6 @@ class ConsoleUiServiceImpl(ConsoleUiService):
     def __init__(self, repository):
         print("ConsoleUiServiceImpl 생성자 호출")
 
-
     @classmethod
     def getInstance(cls, repository=None):
         if cls.__instance is None:
