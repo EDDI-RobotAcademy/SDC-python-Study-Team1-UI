@@ -5,7 +5,6 @@ from console_ui.repository.ConsoleUiRepository import ConsoleUiRepository
 from custom_protocol.entity.CustomProtocol import CustomProtocol
 
 
-
 class ConsoleUiRepositoryImpl(ConsoleUiRepository):
     __instance = None
     __menuTable = {}
