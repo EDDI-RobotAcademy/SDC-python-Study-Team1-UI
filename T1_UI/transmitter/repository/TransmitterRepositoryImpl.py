@@ -33,12 +33,14 @@ class TransmitterRepositoryImpl(TransmitterRepository):
         while True:
             with lock:
                 try:
-                    protocolAndSessionId = transmitQueue.get(block=True)
-                    sendProtocol = protocolAndSessionId['protocolNumber']
-                    sessionId = protocolAndSessionId['sessionId']
+                    protocolAndSessionIdAndProductNumber = transmitQueue.get(block=True)
+                    sendProtocol = protocolAndSessionIdAndProductNumber['protocolNumber']
+                    sessionId = protocolAndSessionIdAndProductNumber['sessionId']
+                    productNumber = protocolAndSessionIdAndProductNumber['productNumber']
                     print(f"Transmitter typeof(sendProtocol) = {type(sendProtocol)}")
                     print(f"Transmitter sendProtocol = {sendProtocol}")
                     print(f"Transmitter sessionId = {sessionId}")
+                    print(f"Transmitter productNumber = {productNumber}")
                     request = customProtocolRepository.execute(sendProtocol)
                     print(f"Transmitter Request from repository: {request}")
 
@@ -61,6 +63,8 @@ class TransmitterRepositoryImpl(TransmitterRepository):
                     #     EXIT = 14
                     if sendProtocol == 3 or sendProtocol == 4 or sendProtocol == 11:
                         sendingRequest = requestGenerator(sessionId)
+                    elif sendProtocol == 9:
+                        sendingRequest = requestGenerator(sessionId, productNumber)
                     else:
                         sendingRequest = requestGenerator(request)
 

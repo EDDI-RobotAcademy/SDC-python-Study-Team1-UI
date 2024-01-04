@@ -40,7 +40,7 @@ class RequestGeneratorService(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def generateProductPurchaseRequest(self, arguments):
+    def generateProductPurchaseRequest(self, arguments1, arguments2):
         pass
 
     @abc.abstractmethod

@@ -137,7 +137,6 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
     def generateProductModifyRequest(self, arguments):
         print("RequestGeneratorService : 상품 수정 dict data 형성")
-
         consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
         currentReadProductNumber = consoleUiRepository.getProductNumber()
         print(f'generateProductModifyRequest: {currentReadProductNumber}번 상품 수정 요청')
@@ -151,18 +150,15 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         return productModifyRequestData
 
-    def generateProductPurchaseRequest(self, arguments):
+    def generateProductPurchaseRequest(self, arguments1, arguments2):
         print("RequestGeneratorService : 상품 구매 dict data 형성")
 
-        consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
-        currentReadProductNumber = consoleUiRepository.getProductNumber()
-        accountSessionId = consoleUiRepository.getSessionId()
         print(f'generateProductPurchaseRequest: '
-              f'{accountSessionId}번 고객님 - {currentReadProductNumber}번 상품 구매 요청')
+              f'{arguments1}번 고객님 - {arguments2}번 상품 구매 요청')
 
         productPurchaseRequestData = {
-            '__accountSessionId': accountSessionId,
-            '__productNumber': currentReadProductNumber
+            '__accountSessionId': arguments1,
+            '__productNumber': arguments2
         }
 
         return productPurchaseRequestData
