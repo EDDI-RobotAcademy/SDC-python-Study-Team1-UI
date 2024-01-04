@@ -1,7 +1,7 @@
 class ProductReadResponse:
     def __init__(self, **kwargs):
-        self.__productId = kwargs["__productId"]
-        self.__name = kwargs["__productName"]
+        self.__productId = kwargs["__productNumber"]
+        self.__name = kwargs["__productTitle"]
         self.__price = kwargs["__productPrice"]
         self.__details = kwargs["__productDetails"]
         self.__accountId = kwargs["__seller"]
