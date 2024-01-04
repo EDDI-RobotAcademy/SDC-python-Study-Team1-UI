@@ -84,22 +84,22 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         return accountLoginRequestData
 
-    def generateAccountLogoutRequest(self, arguments):
+    def generateAccountLogoutRequest(self, accountSessionId):
         print("RequestGeneratorService: 로그아웃 dict data 형성")
-        print(f"generateAccountLogoutRequest: 현재 가지고 있는 session ID = {arguments} 를 삭제합니다.")
+        print(f"generateAccountLogoutRequest: 현재 가지고 있는 session ID = {accountSessionId} 를 삭제합니다.")
 
         accountLogoutRequestData = {
-            '__accountSessionId': arguments
+            '__accountSessionId': accountSessionId
         }
 
         return accountLogoutRequestData
 
-    def generateAccountDeleteRequest(self, arguments):
+    def generateAccountDeleteRequest(self, accountSessionId):
         print("RequestGeneratorService: 회원 탈퇴 dict data 형성")
-        print(f"generateAccountDeleteRequest: 현재 가지고 있는 session ID = {arguments} 로 회원 정보를 삭제합니다.")
+        print(f"generateAccountDeleteRequest: 현재 가지고 있는 session ID = {accountSessionId} 로 회원 정보를 삭제합니다.")
 
         accountDeleteRequestData = {
-            '__accountSessionId': arguments
+            '__accountSessionId': accountSessionId
         }
 
         return accountDeleteRequestData
@@ -135,10 +135,8 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         return productReadRequestData
 
-    def generateProductModifyRequest(self, arguments):
+    def generateProductModifyRequest(self, currentReadProductNumber, arguments):
         print("RequestGeneratorService : 상품 수정 dict data 형성")
-        consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
-        currentReadProductNumber = consoleUiRepository.getProductNumber()
         print(f'generateProductModifyRequest: {currentReadProductNumber}번 상품 수정 요청')
 
         productModifyRequestData = {
@@ -150,24 +148,20 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         return productModifyRequestData
 
-    def generateProductPurchaseRequest(self, arguments1, arguments2):
+    def generateProductPurchaseRequest(self, accountSessionId, currentReadProductNumber):
         print("RequestGeneratorService : 상품 구매 dict data 형성")
-
         print(f'generateProductPurchaseRequest: '
-              f'{arguments1}번 고객님 - {arguments2}번 상품 구매 요청')
+              f'{accountSessionId}번 고객님 - {currentReadProductNumber}번 상품 구매 요청')
 
         productPurchaseRequestData = {
-            '__accountSessionId': arguments1,
-            '__productNumber': arguments2
+            '__accountSessionId': accountSessionId,
+            '__productNumber': currentReadProductNumber
         }
 
         return productPurchaseRequestData
 
-    def generateProductRemoveRequest(self, arguments):
+    def generateProductRemoveRequest(self, currentReadProductNumber):
         print("RequestGeneratorService : 상품 삭제 dict data 형성")
-
-        consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
-        currentReadProductNumber = consoleUiRepository.getProductNumber()
         print(f'generateProductRemoveRequest: {currentReadProductNumber}번 상품 삭제 요청')
 
         productRemoveRequestData = {
@@ -176,21 +170,18 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         return productRemoveRequestData
 
-    def generateMyOrderListRequest(self, arguments):
+    def generateMyOrderListRequest(self, accountSessionId):
         print("RequestGeneratorService: 내 주문 리스트 dict data 형성")
-        print(f"현재 가지고 있는 session ID : {arguments} 에 해당하는 주문 내역을 불러옵니다.")
+        print(f"현재 가지고 있는 session ID : {accountSessionId} 에 해당하는 주문 내역을 불러옵니다.")
 
         myOrderListRequestData = {
-            '__accountSessionId': arguments
+            '__accountSessionId': accountSessionId
         }
 
         return myOrderListRequestData
 
-    def generateMyOrderReadRequest(self, arguments):
+    def generateMyOrderReadRequest(self, accountSessionId, arguments):
         print("RequestGeneratorService: 내 주문 상세 조회 dict data 형성")
-
-        consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
-        accountSessionId = consoleUiRepository.getSessionId()
         print(f"generateMyOrderReadRequest: {accountSessionId}번 고객님이 주문하신 {arguments}번 상품 조회 요청")
 
         if not isinstance(arguments, int):
@@ -203,15 +194,13 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         return myOrderReadRequestData
 
-    def generateMyOrderRemoveRequest(self, arguments):
+    def generateMyOrderRemoveRequest(self, accountSessionId, currentReadProductNumber):
         print("RequestGeneratorService: 내 주문 삭제 dict data 형성")
-
-        consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
-        currentReadProductNumber = consoleUiRepository.getProductNumber()
-        print(f'generateMyOrderRemoveRequest: {arguments}번 고객님이 {currentReadProductNumber}번 상품 주문 취소 요청')
+        print(f'generateMyOrderRemoveRequest: {accountSessionId}번 고객님이 '
+              f'{currentReadProductNumber}번 상품 주문 취소 요청')
 
         myOrderRemoveRequestData = {
-            '__accountSessionId': arguments,
+            '__accountSessionId': accountSessionId,
             '__productOrderNumber': currentReadProductNumber
         }
 

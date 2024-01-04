@@ -31,7 +31,7 @@ class TransmitterRepositoryImpl(TransmitterRepository):
         requestGeneratorService = RequestGeneratorServiceImpl.getInstance()
 
         while True:
-            with lock:
+            with (lock):
                 try:
                     protocolAndSessionIdAndProductNumber = transmitQueue.get(block=True)
                     sendProtocol = protocolAndSessionIdAndProductNumber['protocolNumber']
@@ -61,12 +61,17 @@ class TransmitterRepositoryImpl(TransmitterRepository):
                     #     ORDER_READ = 12
                     #     ORDER_REMOVE = 13
                     #     EXIT = 14
-                    if sendProtocol == 3 or sendProtocol == 4 or sendProtocol == 11:
-                        sendingRequest = requestGenerator(sessionId)
-                    elif sendProtocol == 9:
-                        sendingRequest = requestGenerator(sessionId, productNumber)
-                    else:
+                    if sendProtocol == 1 or sendProtocol == 2 or sendProtocol == 5 or \
+                        sendProtocol == 6 or sendProtocol == 7:
                         sendingRequest = requestGenerator(request)
+                    elif sendProtocol == 3 or sendProtocol == 4 or sendProtocol == 11:
+                        sendingRequest = requestGenerator(sessionId)
+                    elif sendProtocol == 10:
+                        sendingRequest = requestGenerator(productNumber)
+                    elif sendProtocol == 8 or sendProtocol == 12:
+                        sendingRequest = requestGenerator(productNumber, request)
+                    elif sendProtocol == 9 or sendProtocol == 13:
+                        sendingRequest = requestGenerator(sessionId, productNumber)
 
                     print(f"Transmitter finish to generate request: {sendingRequest}")
 
