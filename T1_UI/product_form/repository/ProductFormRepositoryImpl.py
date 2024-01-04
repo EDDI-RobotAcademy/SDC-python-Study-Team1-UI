@@ -42,4 +42,4 @@ class ProductFormRepositoryImpl(ProductFormRepository):
 
     def productNothing(self):
         print(f'productNothing: 암것도 없음')
-        pass
+        return None

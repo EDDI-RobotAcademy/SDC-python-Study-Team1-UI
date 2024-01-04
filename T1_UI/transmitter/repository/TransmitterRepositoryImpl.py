@@ -45,12 +45,24 @@ class TransmitterRepositoryImpl(TransmitterRepository):
                     requestGenerator = requestGeneratorService.findRequestGenerator(sendProtocol)
                     print(f"Transmitter Request Generator: {requestGenerator}")
 
-                    if sendProtocol == 5:
-                        sendingRequest = requestGenerator(None)
-                    elif sessionId is None:
-                        sendingRequest = requestGenerator(request)
-                    else:
+                    #     ACCOUNT_REGISTER = 1
+                    #     ACCOUNT_LOGIN = 2
+                    #     ACCOUNT_LOGOUT = 3
+                    #     ACCOUNT_REMOVE = 4
+                    #     PRODUCT_LIST = 5
+                    #     PRODUCT_REGISTER = 6
+                    #     PRODUCT_READ = 7
+                    #     PRODUCT_MODIFY = 8
+                    #     PRODUCT_PURCHASE = 9
+                    #     PRODUCT_REMOVE = 10
+                    #     ORDER_LIST = 11
+                    #     ORDER_READ = 12
+                    #     ORDER_REMOVE = 13
+                    #     EXIT = 14
+                    if sendProtocol == 3 or sendProtocol == 4 or sendProtocol == 11:
                         sendingRequest = requestGenerator(sessionId)
+                    else:
+                        sendingRequest = requestGenerator(request)
 
                     print(f"Transmitter finish to generate request: {sendingRequest}")
 
@@ -61,7 +73,7 @@ class TransmitterRepositoryImpl(TransmitterRepository):
                     else:
                         combinedRequestData = {
                             'protocol': sendProtocol,
-                            'data': sendingRequest,
+                            'data': sendingRequest
                         }
 
                     combinedRequestDataString = json.dumps(combinedRequestData)

@@ -33,4 +33,4 @@ class AccountFormRepositoryImpl(AccountFormRepository):
 
     def accountNothing(self):
         print(f'accountNothing: 암것도 없음')
-        pass
+        return None

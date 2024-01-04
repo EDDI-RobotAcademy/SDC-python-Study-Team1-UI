@@ -40,7 +40,6 @@ class ReceiverRepositoryImpl(ReceiverRepository):
                     break
 
                 decodedData = data.decode()
-                # decodedData = json.loads(data)
                 print(f'수신된 정보: {decodedData}')
                 evalData = eval(decodedData)
 

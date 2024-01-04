@@ -82,8 +82,8 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print("번호", "       ", "상품명", "       ", "가격(원)")
                 print("============================================")
                 for i in range(productListLength):
-                    print(productList[i]["__productId"], "       ",
-                          productList[i]["__productName"], "       ",
+                    print(productList[i]["__productNumber"], "       ",
+                          productList[i]["__productTitle"], "       ",
                           productList[i]["__productPrice"])
 
             else:
