@@ -26,4 +26,4 @@ class MyOrderFormRepositoryImpl(MyOrderFormRepository):
 
     def myOrderNothing(self):
         print("myOrderNothing: 암것도 없음")
-        pass
+        return None

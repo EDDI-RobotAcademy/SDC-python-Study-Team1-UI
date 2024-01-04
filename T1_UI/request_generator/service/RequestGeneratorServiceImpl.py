@@ -62,7 +62,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         print("RequestGeneratorService: 회원 가입 dict data 형성")
 
         if not isinstance(arguments, tuple) or len(arguments) != 2:
-            raise ValueError("Invalid request format")
+            raise ValueError("generateAccountRegisterRequest: Invalid request format")
 
         accountRegisterRequestData = {
             '__accountId': arguments[0].decode().strip(),
@@ -75,7 +75,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         print("RequestGeneratorService: 로그인 dict data 형성")
 
         if not isinstance(arguments, tuple) or len(arguments) != 2:
-            raise ValueError("Invalid request format")
+            raise ValueError("generateAccountLoginRequest: Invalid request format")
 
         accountLoginRequestData = {
             '__accountId': arguments[0].decode().strip(),
@@ -86,20 +86,22 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
     def generateAccountLogoutRequest(self, arguments):
         print("RequestGeneratorService: 로그아웃 dict data 형성")
-        print(f"현재 가지고 있는 session ID : {arguments} 를 삭제합니다.")
+        print(f"generateAccountLogoutRequest: 현재 가지고 있는 session ID = {arguments} 를 삭제합니다.")
 
         accountLogoutRequestData = {
             '__accountSessionId': arguments,
         }
+
         return accountLogoutRequestData
 
     def generateAccountDeleteRequest(self, arguments):
         print("RequestGeneratorService: 회원 탈퇴 dict data 형성")
-        print(f"현재 가지고 있는 session ID : {arguments} 로 회원 정보를 삭제합니다.")
+        print(f"generateAccountDeleteRequest: 현재 가지고 있는 session ID = {arguments} 로 회원 정보를 삭제합니다.")
 
         accountDeleteRequestData = {
             '__accountSessionId': arguments,
         }
+
         return accountDeleteRequestData
 
     def generateProductListRequest(self, arguments):
@@ -110,7 +112,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         print("RequestGeneratorService: 상품 등록 dict data 형성")
 
         if not isinstance(arguments, tuple) or len(arguments) != 3:
-            raise ValueError("Invalid request format")
+            raise ValueError("generateProductRegisterRequest: Invalid request format")
 
         productRegisterRequestData = {
             '__productTitle': arguments[0].decode().strip(),
@@ -122,9 +124,10 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
     def generateProductReadRequest(self, arguments):
         print("RequestGeneratorService : 상품 조회 dict data 형성")
+        print(f"generateProductReadRequest: {arguments}번 상품 조회 요청")
 
         if not isinstance(arguments, int):
-            raise ValueError("Invalid request format")
+            raise ValueError("generateProductReadRequest: Invalid request format")
 
         productReadRequestData = {
             '__productNumber': arguments
@@ -137,6 +140,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
         currentReadProductNumber = consoleUiRepository.getProductNumber()
+        print(f'generateProductModifyRequest: {currentReadProductNumber}번 상품 수정 요청')
 
         productModifyRequestData = {
             '__productNumber': currentReadProductNumber,
@@ -152,6 +156,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
         currentReadProductNumber = consoleUiRepository.getProductNumber()
+        print(f'generateProductPurchaseRequest: {currentReadProductNumber}번 상품 구매 요청')
 
         productPurchaseRequestData = {
             '__productNumber': currentReadProductNumber,
@@ -164,6 +169,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
         currentReadProductNumber = consoleUiRepository.getProductNumber()
+        print(f'generateProductRemoveRequest: {currentReadProductNumber}번 상품 삭제 요청')
 
         productRemoveRequestData = {
             '__productNumber': currentReadProductNumber,
@@ -172,26 +178,42 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         return productRemoveRequestData
 
     def generateMyOrderListRequest(self, arguments):
-        print("RequestGeneratorService: 내 주문 리스트 (데이터 전송 없음)")
-        pass
+        print("RequestGeneratorService: 내 주문 리스트 dict data 형성")
+        print(f"현재 가지고 있는 session ID : {arguments} 에 해당하는 주문 내역을 불러옵니다.")
+
+        myOrderListRequestData = {
+            '__accountSessionId': arguments,
+        }
+
+        return myOrderListRequestData
 
     def generateMyOrderReadRequest(self, arguments):
         print("RequestGeneratorService: 내 주문 상세 조회 dict data 형성")
 
-        myOrderReadData = {
+        consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
+        accountSessionId = consoleUiRepository.getSessionId()
+        print(f"generateMyOrderReadRequest: {accountSessionId}번 고객님이 주문하신 {arguments}번 상품 조회 요청")
+
+        if not isinstance(arguments, int):
+            raise ValueError("generateMyOrderReadRequest: Invalid request format")
+
+        myOrderReadRequestData = {
+            '__accountSessionId': accountSessionId,
             '__productOrderNumber': arguments
         }
 
-        return myOrderReadData
+        return myOrderReadRequestData
 
     def generateMyOrderRemoveRequest(self, arguments):
         print("RequestGeneratorService: 내 주문 삭제 dict data 형성")
 
         consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
         currentReadProductNumber = consoleUiRepository.getProductNumber()
+        print(f'generateMyOrderRemoveRequest: {arguments}번 고객님이 {currentReadProductNumber}번 상품 주문 취소 요청')
 
-        myOrderRemoveData = {
+        myOrderRemoveRequestData = {
+            '__accountSessionId': arguments,
             '__productOrderNumber': currentReadProductNumber
         }
 
-        return myOrderRemoveData
+        return myOrderRemoveRequestData

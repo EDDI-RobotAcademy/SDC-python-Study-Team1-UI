@@ -32,7 +32,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             cls.__instance.__convertCommandTable[
                 ConsoleUiRoutingState.PRODUCT_DETAILS.value] = cls.__instance.__productReadCommandConverter
             cls.__instance.__convertCommandTable[
-                ConsoleUiRoutingState.ORDER_LIST.value] = cls.__instance.__myOrderCommandConverter
+                ConsoleUiRoutingState.ORDER_LIST.value] = cls.__instance.__myOrderListCommandConverter
             cls.__instance.__convertCommandTable[
                 ConsoleUiRoutingState.ORDER_DETAILS.value] = cls.__instance.__myOrderReadCommandConverter
 
