@@ -126,7 +126,6 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             if userCommand == 1:
                 return CustomProtocol.PRODUCT_READ.value
             if userCommand == 2:
-                self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
                 return CustomProtocol.NOTHING.value
 
         if userCommand == 1:
@@ -134,7 +133,6 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         if userCommand == 2:
             return CustomProtocol.PRODUCT_REGISTER.value
         if userCommand == 3:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
             return CustomProtocol.NOTHING.value
 
         else:
@@ -162,7 +160,6 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         if userCommand == 1:
             return CustomProtocol.ORDER_READ.value
         if userCommand == 2:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
             return CustomProtocol.NOTHING.value
         else:
             print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
@@ -187,7 +184,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
 
     def routingStateConverter(self, convertedUserChoice):
         if convertedUserChoice == CustomProtocol.NOTHING.value:
-            pass
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
 
         elif convertedUserChoice == CustomProtocol.ACCOUNT_REGISTER.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
