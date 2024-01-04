@@ -44,7 +44,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
         if className == "AccountRegisterResponse":
             if response.getIsSuccess():
-                print('\033[92m회원 가입이 완료되었습니다.')
+                print('\033[92m회원 가입이 완료되었습니다.\033[0m')
 
             if not response.getIsSuccess():
                 print('\033[91m오류 발생: 회원 가입 실패 (중복된 아이디)\033[0m')
