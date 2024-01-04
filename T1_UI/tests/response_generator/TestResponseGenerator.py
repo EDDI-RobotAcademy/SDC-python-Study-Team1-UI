@@ -56,10 +56,12 @@ class TestResponseGenerator(unittest.TestCase):
         productList = response.getProductList()
         productListLength = len(productList)
         # print(productListLength)
+        print("번호", "       ", "상품명", "       ", "가격(원)")
+        print("============================================")
         for i in range(productListLength):
             # print(productList[i])
             print(receivedData[i]["__productId"], "      ", receivedData[i]["__productName"], "      ",
-                  receivedData[i]["__productPrice"], "원")
+                  receivedData[i]["__productPrice"])
 
 
 if __name__ == '__main__':

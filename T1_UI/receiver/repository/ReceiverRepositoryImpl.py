@@ -33,7 +33,7 @@ class ReceiverRepositoryImpl(ReceiverRepository):
 
         while True:
             try:
-                data = clientSocket.recv(1024)
+                data = clientSocket.recv(2048)
 
                 if not data:
                     clientSocket.closeSocket()

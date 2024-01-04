@@ -30,8 +30,13 @@ class ConsoleUiServiceImpl(ConsoleUiService):
         sessionId = self.__repository.getSessionId()
         userCommandNumber = KeyboardInput.getKeyboardIntegerInput()
         convertedUserCommandNumber = self.__repository.commandConverter(userCommandNumber)
-        transmitData = {'protocolNumber': convertedUserCommandNumber,
-                        'sessionId': sessionId}
         self.__repository.routingStateConverter(convertedUserCommandNumber)
 
+        while convertedUserCommandNumber == 0:
+            self.printMenu()
+            userCommandNumber = KeyboardInput.getKeyboardIntegerInput()
+            convertedUserCommandNumber = self.__repository.commandConverter(userCommandNumber)
+            self.__repository.routingStateConverter(convertedUserCommandNumber)
+
+        transmitData = {'protocolNumber': convertedUserCommandNumber, 'sessionId': sessionId}
         transmitQueue.put(transmitData)
