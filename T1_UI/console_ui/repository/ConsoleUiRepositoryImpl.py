@@ -126,14 +126,14 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             if userCommand == 1:
                 return CustomProtocol.PRODUCT_READ.value
             if userCommand == 2:
-                return
+                self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
 
         if userCommand == 1:
             return CustomProtocol.PRODUCT_READ.value
         if userCommand == 2:
             return CustomProtocol.PRODUCT_REGISTER.value
         if userCommand == 3:
-            return
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
 
         else:
             print("잘못된 입력입니다! 다시 입력해주세요.")
@@ -142,7 +142,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
 
         if self.getSessionId() is None:
             if userCommand == 1:
-                return
+                return CustomProtocol.PRODUCT_LIST.value
 
         if userCommand == 1:
             return CustomProtocol.PRODUCT_MODIFY.value
@@ -156,11 +156,11 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         else:
             print("잘못된 입력입니다! 다시 입력해주세요.")
 
-    def __myOrderCommandConverter(self, userCommand):
+    def __myOrderListCommandConverter(self, userCommand):
         if userCommand == 1:
             return CustomProtocol.ORDER_READ.value
         if userCommand == 2:
-            return
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
         else:
             print("잘못된 입력입니다! 다시 입력해주세요.")
 
@@ -168,7 +168,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         if userCommand == 1:
             return CustomProtocol.ORDER_REMOVE.value
         if userCommand == 2:
-            return
+            return CustomProtocol.ORDER_LIST.value
         else:
             print("잘못된 입력입니다! 다시 입력해주세요.")
 
