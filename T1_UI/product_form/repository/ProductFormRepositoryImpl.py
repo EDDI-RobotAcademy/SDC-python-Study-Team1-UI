@@ -21,24 +21,24 @@ class ProductFormRepositoryImpl(ProductFormRepository):
 
     def createProductRegisterForm(self):
         print("상품 등록을 위한 정보를 입력하세요.")
-        userInputProductTitle = KeyboardInput.getKeyboardInputWithOutputMessage("상품 제목:")
-        userInputProductContent = KeyboardInput.getKeyboardInputWithOutputMessage("상품 내용 작성:")
-        userInputProductPrice = KeyboardInput.getKeyboardInputWithOutputMessage("상품 가격(원):")
+        userInputProductTitle = KeyboardInput.getKeyboardStringInputWithOutputMessage("신규 상품명:")
+        userInputProductContent = KeyboardInput.getKeyboardStringInputWithOutputMessage("신규 상품 상세 정보:")
+        userInputProductPrice = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("상품 가격(원):")
 
-        return userInputProductTitle, userInputProductContent, int(userInputProductPrice.decode().strip())
+        return userInputProductTitle, userInputProductContent, userInputProductPrice
 
     def createProductReadForm(self):
-        userInputProductNumber = KeyboardInput.getKeyboardIntegerInputToReadProduct()
+        userInputProductNumber = KeyboardInput.getKeyboardStringInputWithOutputMessage("조회하실 상품 번호를 입력하세요:")
 
         return userInputProductNumber
 
     def createProductModifyForm(self):
         print("상품 수정을 위한 정보를 입력하세요.")
-        userInputProductTitle = KeyboardInput.getKeyboardInputWithOutputMessage("상품 제목:")
-        userInputProductContent = KeyboardInput.getKeyboardInputWithOutputMessage("상품 내용 작성:")
-        userInputProductPrice = KeyboardInput.getKeyboardInputWithOutputMessage("상품 가격(원):")
+        userInputProductTitle = KeyboardInput.getKeyboardStringInputWithOutputMessage("상품 제목:")
+        userInputProductContent = KeyboardInput.getKeyboardStringInputWithOutputMessage("상품 내용 작성:")
+        userInputProductPrice = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("상품 가격(원):")
 
-        return userInputProductTitle, userInputProductContent, int(userInputProductPrice.decode().strip())
+        return userInputProductTitle, userInputProductContent, userInputProductPrice
 
     def productNothing(self):
         print(f'productNothing: 암것도 없음')

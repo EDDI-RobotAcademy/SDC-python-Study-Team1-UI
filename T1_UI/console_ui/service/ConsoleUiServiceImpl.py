@@ -28,13 +28,13 @@ class ConsoleUiServiceImpl(ConsoleUiService):
         print("ConsoleUiServiceImpl: processUserInput")
         sessionId = self.__repository.getSessionId()
         currentReadNumber = self.__repository.getProductNumber()
-        userCommandNumber = KeyboardInput.getKeyboardIntegerInput()
+        userCommandNumber = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("원하는 선택지를 입력하세요:")
         convertedUserCommandNumber = self.__repository.commandConverter(userCommandNumber)
         self.__repository.routingStateConverter(convertedUserCommandNumber)
 
         while convertedUserCommandNumber == 0:
             self.printMenu()
-            userCommandNumber = KeyboardInput.getKeyboardIntegerInput()
+            userCommandNumber = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("원하는 선택지를 입력하세요:")
             convertedUserCommandNumber = self.__repository.commandConverter(userCommandNumber)
             self.__repository.routingStateConverter(convertedUserCommandNumber)
 

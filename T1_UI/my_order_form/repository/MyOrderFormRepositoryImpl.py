@@ -20,7 +20,8 @@ class MyOrderFormRepositoryImpl(MyOrderFormRepository):
         return cls.__instance
 
     def createMyOrderReadForm(self):
-        userInputMyOrderProductNumber = KeyboardInput.getKeyboardIntegerInputToReadProduct()
+        userInputMyOrderProductNumber = (
+            KeyboardInput.getKeyboardIntegerInputWithOutputMessage("조회하실 상품 번호를 입력하세요:"))
 
         return userInputMyOrderProductNumber
 

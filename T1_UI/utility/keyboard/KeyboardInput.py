@@ -2,25 +2,11 @@ import os
 
 
 class KeyboardInput:
-    @staticmethod
-    def getKeyboardIntegerInput():
+    @classmethod
+    def getKeyboardIntegerInputWithOutputMessage(cls, outputString):
         while True:
             try:
-                print("원하는 선택지를 입력하세요: ", end="")
-                userInput = os.read(0, 1024)
-                return int(userInput)
-
-            except ValueError:
-                print("숫자값을 입력해야 합니다!")
-
-            except EOFError:
-                pass
-
-    @staticmethod
-    def getKeyboardIntegerInputToReadProduct():
-        while True:
-            try:
-                print("조회할 상품 번호를 입력하세요: ", end="")
+                print(f"{outputString} ", end="")
                 userInput = os.read(0, 1024)
                 return int(userInput)
 
@@ -31,15 +17,15 @@ class KeyboardInput:
                 pass
 
     @classmethod
-    def getKeyboardInputWithOutputMessage(cls, outputString):
+    def getKeyboardStringInputWithOutputMessage(cls, outputString):
         while True:
             try:
                 print(f"{outputString} ", end="")
                 userInput = os.read(0, 1024)
                 return userInput
 
-            except ValueError:
-                print("숫자값을 입력해야 합니다!")
+            except ValueError as e:
+                print(f"입력한 문자열 오류: {e}")
 
             except EOFError:
                 pass
