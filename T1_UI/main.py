@@ -11,6 +11,7 @@ from console_ui.repository.ConsoleUiRepositoryImpl import ConsoleUiRepositoryImp
 from console_ui.service.ConsoleUiServiceImpl import ConsoleUiServiceImpl
 from custom_protocol.entity.CustomProtocol import CustomProtocol
 from custom_protocol.service.CustomProtocolServiceImpl import CustomProtocolServiceImpl
+from my_order_form.repository.MyOrderFormRepositoryImpl import MyOrderFormRepositoryImpl
 from product_form.repository.ProductFormRepositoryImpl import ProductFormRepositoryImpl
 
 from task_manage.repository.TaskManageRepositoryImpl import TaskManageRepositoryImpl
@@ -42,6 +43,7 @@ def registerProtocol():
     customProtocolService = CustomProtocolServiceImpl.getInstance()
     accountFormRepository = AccountFormRepositoryImpl.getInstance()
     productFormRepository = ProductFormRepositoryImpl.getInstance()
+    myOrderFormRepository = MyOrderFormRepositoryImpl.getInstance()
 
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ACCOUNT_LOGIN.value,
@@ -85,15 +87,15 @@ def registerProtocol():
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ORDER_LIST.value,
-        productFormRepository.productNothing
+        myOrderFormRepository.myOrderNothing
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ORDER_READ.value,
-        productFormRepository.productNothing
+        myOrderFormRepository.createMyOrderReadForm
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ORDER_REMOVE.value,
-        productFormRepository.productNothing
+        myOrderFormRepository.myOrderNothing
     )
 
 
