@@ -20,14 +20,14 @@ class AccountFormRepositoryImpl(AccountFormRepository):
         return cls.__instance
 
     def createAccountSigninForm(self):
-        userInputId = KeyboardInput.getKeyboardInputWithOutputMessage("아이디:")
-        userInputPassword = KeyboardInput.getKeyboardInputWithOutputMessage("비밀번호:")
+        userInputId = KeyboardInput.getKeyboardStringInputWithOutputMessage("아이디:")
+        userInputPassword = KeyboardInput.getKeyboardStringInputWithOutputMessage("비밀번호:")
 
         return userInputId, userInputPassword
 
     def createAccountRegisterForm(self):
-        userInputId = KeyboardInput.getKeyboardInputWithOutputMessage("신규 아이디:")
-        userInputPassword = KeyboardInput.getKeyboardInputWithOutputMessage("신규 비밀번호:")
+        userInputId = KeyboardInput.getKeyboardStringInputWithOutputMessage("신규 아이디:")
+        userInputPassword = KeyboardInput.getKeyboardStringInputWithOutputMessage("신규 비밀번호:")
 
         return userInputId, userInputPassword
 
