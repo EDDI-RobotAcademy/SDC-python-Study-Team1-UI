@@ -16,11 +16,11 @@ class RequestGeneratorService(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def generateAccountLogoutRequest(self, arguments):
+    def generateAccountLogoutRequest(self, accountSessionId):
         pass
 
     @abc.abstractmethod
-    def generateAccountDeleteRequest(self, arguments):
+    def generateAccountDeleteRequest(self, accountSessionId):
         pass
 
     @abc.abstractmethod
@@ -36,21 +36,25 @@ class RequestGeneratorService(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def generateProductModifyRequest(self, arguments):
+    def generateProductModifyRequest(self, currentReadProductNumber, arguments):
         pass
 
     @abc.abstractmethod
-    def generateProductPurchaseRequest(self, arguments1, arguments2):
+    def generateProductPurchaseRequest(self, accountSessionId, currentReadProductNumber):
         pass
 
     @abc.abstractmethod
-    def generateProductRemoveRequest(self, arguments):
+    def generateProductRemoveRequest(self, currentReadProductNumber):
         pass
 
     @abc.abstractmethod
-    def generateMyOrderListRequest(self, arguments):
+    def generateMyOrderListRequest(self, accountSessionId):
         pass
 
     @abc.abstractmethod
-    def generateMyOrderRemoveRequest(self, arguments):
+    def generateMyOrderReadRequest(self, accountSessionId, arguments):
+        pass
+
+    @abc.abstractmethod
+    def generateMyOrderRemoveRequest(self, accountSessionId, currentReadProductNumber):
         pass
