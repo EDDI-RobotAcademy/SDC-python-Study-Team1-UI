@@ -137,11 +137,16 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
             if response.getMyOrderList() is not None:
                 myOrderList = response.getMyOrderList()
                 myOrderListLength = len(myOrderList)
+                sum = 0
                 print("\033[91m번호\033[0m", "       ", "\033[91m상품명\033[0m")
-                print("\033[95m=======================\033[0m")
+                print("\033[95m=============================\033[0m")
                 for i in range(myOrderListLength):
-                    print(myOrderList[i]["__productId"], "       ",
-                          myOrderList[i]["__productName"])
+                    print(myOrderList[i]["__productNumber"], "       ",
+                          myOrderList[i]["__productTitle"], "       ",
+                          myOrderList[i]["__productPrice"])
+                    sum += myOrderList[i]["__productPrice"]
+                print("\033[95m=============================\033[0m")
+                print(f"\033[95m주문 총액 : {sum}원\033[0m")
 
             if not response.getIsSuccess():
                 print('\033[91m오류 발생: 주문 내역 불러오기 실패\033[0m')
