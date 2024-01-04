@@ -66,7 +66,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         accountRegisterRequestData = {
             '__accountId': arguments[0].decode().strip(),
-            '__password': arguments[1].decode().strip(),
+            '__password': arguments[1].decode().strip()
         }
 
         return accountRegisterRequestData
@@ -79,7 +79,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         accountLoginRequestData = {
             '__accountId': arguments[0].decode().strip(),
-            '__password': arguments[1].decode().strip(),
+            '__password': arguments[1].decode().strip()
         }
 
         return accountLoginRequestData
@@ -89,7 +89,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         print(f"generateAccountLogoutRequest: 현재 가지고 있는 session ID = {arguments} 를 삭제합니다.")
 
         accountLogoutRequestData = {
-            '__accountSessionId': arguments,
+            '__accountSessionId': arguments
         }
 
         return accountLogoutRequestData
@@ -99,7 +99,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         print(f"generateAccountDeleteRequest: 현재 가지고 있는 session ID = {arguments} 로 회원 정보를 삭제합니다.")
 
         accountDeleteRequestData = {
-            '__accountSessionId': arguments,
+            '__accountSessionId': arguments
         }
 
         return accountDeleteRequestData
@@ -117,7 +117,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         productRegisterRequestData = {
             '__productTitle': arguments[0].decode().strip(),
             '__productDetails': arguments[1].decode().strip(),
-            '__productPrice': arguments[2],
+            '__productPrice': arguments[2]
         }
 
         return productRegisterRequestData
@@ -146,7 +146,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
             '__productNumber': currentReadProductNumber,
             '__productTitle': arguments[0].decode().strip(),
             '__productDetails': arguments[1].decode().strip(),
-            '__productPrice': arguments[2],
+            '__productPrice': arguments[2]
         }
 
         return productModifyRequestData
@@ -156,10 +156,13 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
         currentReadProductNumber = consoleUiRepository.getProductNumber()
-        print(f'generateProductPurchaseRequest: {currentReadProductNumber}번 상품 구매 요청')
+        accountSessionId = consoleUiRepository.getSessionId()
+        print(f'generateProductPurchaseRequest: '
+              f'{accountSessionId}번 고객님 - {currentReadProductNumber}번 상품 구매 요청')
 
         productPurchaseRequestData = {
-            '__productNumber': currentReadProductNumber,
+            '__accountSessionId': accountSessionId,
+            '__productNumber': currentReadProductNumber
         }
 
         return productPurchaseRequestData
@@ -172,7 +175,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         print(f'generateProductRemoveRequest: {currentReadProductNumber}번 상품 삭제 요청')
 
         productRemoveRequestData = {
-            '__productNumber': currentReadProductNumber,
+            '__productNumber': currentReadProductNumber
         }
 
         return productRemoveRequestData
@@ -182,7 +185,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         print(f"현재 가지고 있는 session ID : {arguments} 에 해당하는 주문 내역을 불러옵니다.")
 
         myOrderListRequestData = {
-            '__accountSessionId': arguments,
+            '__accountSessionId': arguments
         }
 
         return myOrderListRequestData
