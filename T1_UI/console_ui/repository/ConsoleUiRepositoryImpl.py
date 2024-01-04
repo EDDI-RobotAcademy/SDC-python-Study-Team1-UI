@@ -5,6 +5,7 @@ from console_ui.repository.ConsoleUiRepository import ConsoleUiRepository
 from custom_protocol.entity.CustomProtocol import CustomProtocol
 
 
+
 class ConsoleUiRepositoryImpl(ConsoleUiRepository):
     __instance = None
     __menuTable = {}
@@ -52,47 +53,47 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
     def __initialMenu(self):
 
         if self.getSessionId() is None:
-            print('1. 회원가입')
-            print('2. 로그인')
-            print('3. 상품 리스트 조회')
-            print('4. 종료')
+            print('\033[92m1. 회원가입\033[0m')
+            print('\033[94m2. 로그인\033[0m')
+            print('\033[92m3. 상품 리스트 조회\033[94m')
+            print('\033[94m4. 종료\033[0m')
             return
 
-        print('1. 로그아웃')
-        print('2. 상품 리스트 조회')
-        print('3. 내 주문 내역 확인')
-        print('4. 회원탈퇴')
-        print('5. 종료')
+        print('\033[92m1. 로그아웃\033[0m')
+        print('\033[94m2. 상품 리스트 조회\033[0m')
+        print('\033[92m3. 내 주문 내역 확인\033[0m')
+        print('\033[94m4. 회원탈퇴\033[0m')
+        print('\033[92m5. 종료\033[0m')
 
     def __productListMenu(self):
 
         if self.getSessionId() is None:
-            print('1. 상품 조회')
-            print('2. 뒤로 가기')
+            print('\033[92m1. 상품 조회\033[0m')
+            print('\033[94m2. 뒤로 가기\033[0m')
             return
 
-        print('1. 상품 조회')
-        print('2. 상품 등록')
-        print('3. 뒤로 가기')
+        print('\033[92m1. 상품 조회\033[0m')
+        print('\033[94m2. 상품 등록\033[0m')
+        print('\033[92m3. 뒤로 가기\033[0m')
 
     def __productReadMenu(self):
 
         if self.getSessionId() is None:
-            print('1. 뒤로 가기')
+            print('\033[94m1. 뒤로 가기\033[0m')
             return
 
-        print('1. 상품 수정')
-        print('2. 상품 삭제')
-        print('3. 상품 주문')
-        print('4. 뒤로 가기')
+        print('\033[92m1. 상품 수정\033[0m')
+        print('\033[94m2. 상품 삭제\033[0m')
+        print('\033[92m3. 상품 주문\033[0m')
+        print('\033[94m4. 뒤로 가기\033[0m')
 
     def __myOrderListMenu(self):
-        print('1. 주문 상세 보기')
-        print('2. 뒤로 가기')
+        print('\033[92m1. 주문 상세 보기\033[0m')
+        print('\033[94m2. 뒤로 가기\033[0m')
 
     def __myOrderReadMenu(self):
-        print('1. 내 주문 삭제')
-        print('2. 뒤로 가기')
+        print('\033[94m1. 내 주문 삭제\033[0m')
+        print('\033[92m2. 뒤로 가기\033[0m')
 
     def __initialStateCommandConverter(self, userCommand):
 
@@ -118,7 +119,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             return CustomProtocol.EXIT.value
 
         else:
-            print("잘못된 입력입니다! 다시 입력해주세요.")
+            print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
 
     def __productListCommandConverter(self, userCommand):
 
@@ -138,7 +139,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             return CustomProtocol.NOTHING.value
 
         else:
-            print("잘못된 입력입니다! 다시 입력해주세요.")
+            print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
 
     def __productReadCommandConverter(self, userCommand):
 
@@ -156,7 +157,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             return CustomProtocol.PRODUCT_LIST.value
 
         else:
-            print("잘못된 입력입니다! 다시 입력해주세요.")
+            print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
 
     def __myOrderListCommandConverter(self, userCommand):
         if userCommand == 1:
@@ -165,7 +166,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
             return CustomProtocol.NOTHING.value
         else:
-            print("잘못된 입력입니다! 다시 입력해주세요.")
+            print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
 
     def __myOrderReadCommandConverter(self, userCommand):
         if userCommand == 1:
@@ -173,7 +174,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         if userCommand == 2:
             return CustomProtocol.ORDER_LIST.value
         else:
-            print("잘못된 입력입니다! 다시 입력해주세요.")
+            print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
 
     def menuPrinter(self):
         currentRoutingState = self.__consoleUiState.getCurrentRoutingState()

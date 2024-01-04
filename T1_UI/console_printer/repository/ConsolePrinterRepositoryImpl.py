@@ -44,123 +44,127 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
         if className == "AccountRegisterResponse":
             if response.getIsSuccess():
-                print('회원 가입이 완료되었습니다.')
+                print('\033[92m회원 가입이 완료되었습니다.\033[0m')
 
             if not response.getIsSuccess():
-                print('오류 발생: 회원 가입 실패 (중복된 아이디)')
+                print('\033[91m오류 발생: 회원 가입 실패 (중복된 아이디)\033[0m')
 
         if className == "AccountLoginResponse":
             if response.getAccountSessionId() is not None:
                 consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.setSessionIdByUserId(response.getAccountSessionId())
-                print(f'로그인이 완료되었습니다. 사용자 아이디: {consoleUiRepository.getSessionId()}')
+                print(f'\033[94m로그인이 완료되었습니다. 사용자 아이디:\033[0m {consoleUiRepository.getSessionId()}')
             if response.getAccountSessionId() is None:
-                print('오류 발생: 로그인 실패 (잘못된 입력)')
+                print('\033[91m오류 발생: 로그인 실패 (잘못된 입력)\033[0m')
 
         if className == "AccountLogoutResponse":
             if response.getIsSuccess():
-                print('로그아웃이 완료되었습니다.')
+                print('\033[92m로그아웃이 완료되었습니다.\033[0m')
                 consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.resetSessionId()
 
             if not response.getIsSuccess():
-                print('오류 발생: 로그아웃 실패')
+                print('\033[91m오류 발생: 로그아웃 실패\033[0m')
 
         if className == "AccountDeleteResponse":
             if response.getIsSuccess():
-                print('계정 삭제가 완료되었습니다.')
+                print('\033[94m계정 삭제가 완료되었습니다.\033[0m')
                 consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.resetSessionId()
 
             if not response.getIsSuccess():
-                print('오류 발생: 계정 삭제 실패')
+                print('\033[91m오류 발생: 계정 삭제 실패\033[0m')
 
         if className == "ProductListResponse":
             if response.getProductList() is not None:
                 productList = response.getProductList()
                 productListLength = len(productList)
-                print("번호", "       ", "상품명", "       ", "가격(원)")
-                print("============================================")
+                print("\033[91m번호\033[0m", "       ", "\033[91m상품명\033[0m", "       ", "\033[91m가격(원)\033[0m")
+                print("\033[95m============================================\033[0m")
                 for i in range(productListLength):
                     print(productList[i]["__productNumber"], "       ",
                           productList[i]["__productTitle"], "       ",
                           productList[i]["__productPrice"])
 
             else:
-                print('오류 발생: 상품 목록 불러오기 실패')
+                print('\033[91m오류 발생: 상품 목록 불러오기 실패\033[0m')
 
         if className == "ProductReadResponse":
             if response.getId() is not None:
                 consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.setProductNumber(response.getId())
-                print('요청하신 상품 정보는 아래와 같습니다.')
-                print(f'상품 번호 : {response.getId()}')
-                print(f'상품 제목 : {response.getName()}')
-                print(f'상품 가격 : {response.getPrice()}')
-                print(f'상품 세부 정보 : {response.getDetails()}')
-                print(f'상품 판매자 : {response.getAccountId()}')
+                print('\033[92m요청하신 상품 정보는 아래와 같습니다.\033[0m')
+                print(f'\033[94m상품 번호 :\033[0m {response.getId()}')
+                print(f'\033[94m상품 제목 :\033[0m {response.getName()}')
+                print(f'\033[92m상품 가격 :\033[0m {response.getPrice()}')
+                print(f'\033[94m상품 세부 정보 :\033[0m {response.getDetails()}')
+                print(f'\033[92m상품 판매자 :\033[0m {response.getAccountId()}')
 
             if response.getId() is None:
-                print('오류 발생: 상품 조회 실패')
+                print('\033[91m오류 발생: 상품 조회 실패\033[0m')
 
         if className == "ProductRegisterResponse":
             if response.getIsSuccess():
-                print('상품 수정이 완료되었습니다.')
+                print('\033[94m상품 수정이 완료되었습니다.\033[0m')
 
             if not response.getIsSuccess():
-                print('오류 발생: 상품 등록 실패')
+                print('\033[91m오류 발생: 상품 등록 실패\033[0m')
 
         if className == "ProductModifyResponse":
             if response.getIsSuccess():
-                print('상품 수정이 완료되었습니다.')
+                print('\033[92m상품 수정이 완료되었습니다.\033[0m')
 
             if not response.getIsSuccess():
-                print('오류 발생: 상품 수정 실패')
+                print('\033[91m오류 발생: 상품 수정 실패\033[0m')
 
         if className == "ProductPurchaseResponse":
             if response.getIsSuccess():
-                print('상품 구매가 완료되었습니다.')
+                print('\033[94m상품 구매가 완료되었습니다.\033[0m')
 
             if not response.getIsSuccess():
-                print('오류 발생: 상품 구매 실패')
+                print('\033[91m오류 발생: 상품 구매 실패\033[0m')
 
         if className == "ProductDeleteResponse":
             if response.getIsSuccess():
-                print('상품 삭제가 완료되었습니다.')
+                print('\033[92m상품 삭제가 완료되었습니다.\033[0m')
                 consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.resetProductNumber()
 
             if not response.getIsSuccess():
-                print('오류 발생: 상품 삭제 실패')
+                print('\033[91m오류 발생: 상품 삭제 실패\033[0m')
 
         if className == "MyOrderListResponse":
             if response.getMyOrderList() is not None:
                 myOrderList = response.getMyOrderList()
                 myOrderListLength = len(myOrderList)
-                print("번호", "       ", "상품명")
-                print("=======================")
+                print("\033[91m번호\033[0m", "       ", "\033[91m상품명\033[0m")
+                print("\033[95m=======================\033[0m")
                 for i in range(myOrderListLength):
                     print(myOrderList[i]["__productId"], "       ",
                           myOrderList[i]["__productName"])
 
             if not response.getIsSuccess():
-                print('오류 발생: 주문 내역 불러오기 실패')
+                print('\033[91m오류 발생: 주문 내역 불러오기 실패\033[0m')
 
         if className == "MyOrderReadResponse":
             if response.getId() is not None:
                 consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.setProductNumber(response.getId())
-                print('주문된 상품 정보는 아래와 같습니다.')
-                print(f'상품 번호 : {response.getId()}')
-                print(f'상품 제목 : {response.getName()}')
-                print(f'상품 가격 : {response.getPrice()}')
-                print(f'상품 세부 정보 : {response.getDetails()}')
+                print('\033[94m주문된 상품 정보는 아래와 같습니다.\033[0m')
+                print(f'\033[92m상품 번호 :\033[0m {response.getId()}')
+                print(f'\033[94m상품 제목 :\033[0m {response.getName()}')
+                print(f'\033[92m상품 가격 :\033[0m {response.getPrice()}')
+                print(f'\033[94m상품 세부 정보 :\033[0m {response.getDetails()}')
 
         if className == "MyOrderRemoveResponse":
             if response.getIsSuccess():
+
                 consoleUiRepository = ConsoleUiRepositoryImpl.getInstance()
                 consoleUiRepository.resetProductNumber()
-                print('주문 삭제가 완료되었습니다.')
+                
+
+                print('\033[92m주문 삭제가 완료되었습니다.\033[0m')
+
 
             if not response.getIsSuccess():
-                print('오류 발생: 주문 취소 실패 (잘못된 입력)')
+                print('\033[91m오류 발생: 주문 취소 실패 (잘못된 입력)\033[0m')
