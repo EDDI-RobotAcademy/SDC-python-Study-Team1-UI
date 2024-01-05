@@ -5,16 +5,12 @@ from utility.keyboard.KeyboardInput import KeyboardInput
 
 class TestKeyboardInput(unittest.TestCase):
     def testKeyboardIntegerInput(self):
-        print("Testing keyboard integer input")
-
-        result = KeyboardInput.getKeyboardIntegerInput()
-        print(f'result: {result}')
+        input = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("숫자: ")
+        print(input)
 
     def testKeyboardStringInput(self):
-        print("Testing keyboard string input")
-
-        result = KeyboardInput.getKeyboardInputWithOutputMessage("수행할 명령은:")
-        print(f'{result}')
+        input = KeyboardInput.getKeyboardStringInputWithOutputMessage("문자열:", 16)
+        print(input)
 
 
 if __name__ == '__main__':
