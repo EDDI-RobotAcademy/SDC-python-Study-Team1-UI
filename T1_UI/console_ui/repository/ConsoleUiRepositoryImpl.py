@@ -54,45 +54,45 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         if self.getSessionId() is None:
             print('\033[92m1. 회원가입\033[0m')
             print('\033[94m2. 로그인\033[0m')
-            print('\033[92m3. 상품 리스트 조회\033[94m')
-            print('\033[94m4. 종료\033[0m')
+            print('\033[92m3. 상품 리스트 조회\033[0m')
+            print('\033[97m4. 종료\033[0m')
             return
 
         print('\033[92m1. 로그아웃\033[0m')
         print('\033[94m2. 상품 리스트 조회\033[0m')
         print('\033[92m3. 내 주문 내역 확인\033[0m')
         print('\033[94m4. 회원탈퇴\033[0m')
-        print('\033[92m5. 종료\033[0m')
+        print('\033[97m5. 종료\033[0m')
 
     def __productListMenu(self):
 
         if self.getSessionId() is None:
             print('\033[92m1. 상품 조회\033[0m')
-            print('\033[94m2. 뒤로 가기\033[0m')
+            print('\033[97m2. 뒤로 가기 (처음 화면)\033[0m')
             return
 
         print('\033[92m1. 상품 조회\033[0m')
         print('\033[94m2. 상품 등록\033[0m')
-        print('\033[92m3. 뒤로 가기\033[0m')
+        print('\033[97m3. 뒤로 가기 (처음 화면)\033[0m')
 
     def __productReadMenu(self):
 
         if self.getSessionId() is None:
-            print('\033[94m1. 뒤로 가기\033[0m')
+            print('\033[97m1. 뒤로 가기 (상품 리스트)\033[0m')
             return
 
         print('\033[92m1. 상품 수정\033[0m')
         print('\033[94m2. 상품 삭제\033[0m')
         print('\033[92m3. 상품 주문\033[0m')
-        print('\033[94m4. 뒤로 가기\033[0m')
+        print('\033[97m4. 뒤로 가기 (상품 리스트)\033[0m')
 
     def __myOrderListMenu(self):
         print('\033[92m1. 주문 상세 보기\033[0m')
-        print('\033[94m2. 뒤로 가기\033[0m')
+        print('\033[97m2. 뒤로 가기 (처음 화면)\033[0m')
 
     def __myOrderReadMenu(self):
         print('\033[94m1. 내 주문 삭제\033[0m')
-        print('\033[92m2. 뒤로 가기\033[0m')
+        print('\033[97m2. 뒤로 가기 (주문 리스트)\033[0m')
 
     def __initialStateCommandConverter(self, userCommand):
 
@@ -214,7 +214,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
 
         elif convertedUserChoice == CustomProtocol.PRODUCT_REMOVE.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST.value)
 
         elif convertedUserChoice == CustomProtocol.ORDER_LIST.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_LIST.value)
@@ -223,7 +223,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_DETAILS.value)
 
         elif convertedUserChoice == CustomProtocol.ORDER_REMOVE.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_DETAILS.value)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_LIST.value)
 
         elif convertedUserChoice == CustomProtocol.EXIT.value:
             pass

@@ -187,7 +187,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         myOrderReadRequestData = {
             '__accountSessionId': accountSessionId,
-            '__productOrderNumber': arguments
+            '__productNumber': arguments
         }
 
         return myOrderReadRequestData
@@ -199,7 +199,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
 
         myOrderRemoveRequestData = {
             '__accountSessionId': accountSessionId,
-            '__productOrderNumber': currentReadProductNumber
+            '__productNumber': currentReadProductNumber
         }
 
         return myOrderRemoveRequestData
