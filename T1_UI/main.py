@@ -121,7 +121,6 @@ def createAllTasks():
     taskManageService.createTransmitTask(lock, transmitQueue)
     taskManageService.createReceiveTask(lock, receiveQueue)
     taskManageService.createPrinterTask(transmitQueue, receiveQueue)
-    taskManageService.terminateTask(lock, transmitQueue)
 
 
 if __name__ == '__main__':
