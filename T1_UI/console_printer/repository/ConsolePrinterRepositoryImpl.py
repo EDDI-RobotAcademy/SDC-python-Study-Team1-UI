@@ -76,6 +76,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
         if className == "ProductListResponse":
             if response.getProductList() is not None:
+                consoleUiRepository.resetProductNumber()
                 productList = response.getProductList()
                 productListLength = len(productList)
                 print("\033[91m번호\033[0m", "       ", "\033[91m상품명\033[0m", "       ", "\033[91m가격(원)\033[0m")
@@ -84,7 +85,6 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                     print(productList[i]["__productNumber"], "       ",
                           productList[i]["__productTitle"], "       ",
                           productList[i]["__productPrice"])
-
             else:
                 print('\033[91m오류 발생: 상품 목록 불러오기 실패\033[0m')
 
@@ -132,6 +132,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
         if className == "MyOrderListResponse":
             if response.getMyOrderList() is not None:
+                consoleUiRepository.resetProductNumber()
                 myOrderList = response.getMyOrderList()
                 myOrderListLength = len(myOrderList)
                 sum = 0
