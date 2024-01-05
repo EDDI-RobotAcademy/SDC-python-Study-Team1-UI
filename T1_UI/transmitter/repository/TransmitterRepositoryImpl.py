@@ -89,8 +89,11 @@ class TransmitterRepositoryImpl(TransmitterRepository):
         elif protocolNumber == 10:
             sendingRequest = requestGenerator(productNumber)
 
-        elif protocolNumber == 8 or protocolNumber == 12:
+        elif protocolNumber == 8:
             sendingRequest = requestGenerator(productNumber, requestData)
+
+        elif protocolNumber == 12:
+            sendingRequest = requestGenerator(sessionId, requestData)
 
         elif protocolNumber == 9 or protocolNumber == 13:
             sendingRequest = requestGenerator(sessionId, productNumber)
