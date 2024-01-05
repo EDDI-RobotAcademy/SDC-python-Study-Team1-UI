@@ -105,6 +105,9 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
                 return CustomProtocol.PRODUCT_LIST.value
             if userCommand == 4:
                 return CustomProtocol.EXIT.value
+            else:
+                print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
+                return -1
 
         if userCommand == 1:
             return CustomProtocol.ACCOUNT_LOGOUT.value
@@ -116,9 +119,9 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             return CustomProtocol.ACCOUNT_REMOVE.value
         if userCommand == 5:
             return CustomProtocol.EXIT.value
-
         else:
             print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
+            return -1
 
     def __productListCommandConverter(self, userCommand):
 
@@ -134,15 +137,18 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             return CustomProtocol.PRODUCT_REGISTER.value
         if userCommand == 3:
             return CustomProtocol.NOTHING.value
-
         else:
             print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
+            return -1
 
     def __productReadCommandConverter(self, userCommand):
 
         if self.getSessionId() is None:
             if userCommand == 1:
                 return CustomProtocol.PRODUCT_LIST.value
+            else:
+                print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
+                return -1
 
         if userCommand == 1:
             return CustomProtocol.PRODUCT_MODIFY.value
@@ -152,25 +158,29 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             return CustomProtocol.PRODUCT_PURCHASE.value
         if userCommand == 4:
             return CustomProtocol.PRODUCT_LIST.value
-
         else:
             print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
+            return -1
 
     def __myOrderListCommandConverter(self, userCommand):
+
         if userCommand == 1:
             return CustomProtocol.ORDER_READ.value
         if userCommand == 2:
             return CustomProtocol.NOTHING.value
         else:
             print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
+            return -1
 
     def __myOrderReadCommandConverter(self, userCommand):
+
         if userCommand == 1:
             return CustomProtocol.ORDER_REMOVE.value
         if userCommand == 2:
             return CustomProtocol.ORDER_LIST.value
         else:
             print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
+            return -1
 
     def menuPrinter(self):
         currentRoutingState = self.__consoleUiState.getCurrentRoutingState()
@@ -226,7 +236,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_LIST.value)
 
         elif convertedUserChoice == CustomProtocol.EXIT.value:
-            pass
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
 
     def saveCurrentRoutingState(self, currentState):
         self.__consoleUiState.setCurrentRoutingState(currentState)

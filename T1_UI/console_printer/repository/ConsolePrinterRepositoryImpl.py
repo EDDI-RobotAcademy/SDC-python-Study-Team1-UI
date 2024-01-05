@@ -1,3 +1,5 @@
+import signal
+import sys
 from time import sleep
 
 from client_socket.repository.ClientSocketRepositoryImpl import ClientSocketRepositoryImpl
@@ -171,7 +173,3 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
         if className == "ProgramExitResponse":
             if response.getIsSuccess():
                 print('밥 아저씨 그림 여기입니다.')
-                # close socket
-                clientSocketRepository= ClientSocketRepositoryImpl.getInstance()
-                clientSocket = clientSocketRepository.getClientSocket()
-                clientSocket.closeSocket()

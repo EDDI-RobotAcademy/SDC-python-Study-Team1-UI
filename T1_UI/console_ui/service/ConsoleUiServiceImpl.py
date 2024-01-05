@@ -32,7 +32,7 @@ class ConsoleUiServiceImpl(ConsoleUiService):
         convertedUserCommandNumber = self.__repository.commandConverter(userCommandNumber)
         self.__repository.routingStateConverter(convertedUserCommandNumber)
 
-        while convertedUserCommandNumber == 0:
+        while convertedUserCommandNumber == -1 or convertedUserCommandNumber == 0:
             self.printMenu()
             userCommandNumber = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("원하는 선택지를 입력하세요:")
             convertedUserCommandNumber = self.__repository.commandConverter(userCommandNumber)
@@ -42,7 +42,7 @@ class ConsoleUiServiceImpl(ConsoleUiService):
             userCertifiedInput= (
                 KeyboardInput.getKeyboardStringInputWithOutputMessage("\033[91m정말 종료하시겠습니까?(y/n):\033[0m", 4))
             if userCertifiedInput.decode().strip() == "y" or userCertifiedInput.decode().strip() == "Y":
-                break
+                transmitQueue.put(-100)
             elif userCertifiedInput.decode().strip() == "n" or userCertifiedInput.decode().strip() == "N":
                 self.printMenu()
                 userCommandNumber = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("원하는 선택지를 입력하세요:")

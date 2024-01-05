@@ -37,6 +37,8 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
                 CustomProtocol.ORDER_READ.value] = cls.__instance.generateMyOrderReadRequest
             cls.__requestFormGenerationTable[
                 CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateMyOrderRemoveRequest
+            cls.__requestFormGenerationTable[
+                CustomProtocol.EXIT.value] = cls.__instance.generateProgramExitRequest
 
         return cls.__instance
 
