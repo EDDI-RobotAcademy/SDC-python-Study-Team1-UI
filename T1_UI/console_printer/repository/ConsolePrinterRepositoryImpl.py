@@ -97,7 +97,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print(f'\033[94m상품 제목 :\033[0m {response.getName()}')
                 print(f'\033[92m상품 가격 :\033[0m {response.getPrice()}')
                 print(f'\033[94m상품 세부 정보 :\033[0m {response.getDetails()}')
-                print(f'\033[92m상품 판매자 :\033[0m {response.getAccountId()}')
+                print(f'\033[92m상품 등록자 :\033[0m {response.getAccountId()}')
             else:
                 print('\033[91m오류 발생: 상품 조회 실패 - 존재하지 않는 상품입니다.\033[0m')
 
@@ -153,6 +153,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print(f'\033[94m상품 제목 :\033[0m {response.getName()}')
                 print(f'\033[92m상품 가격 :\033[0m {response.getPrice()}')
                 print(f'\033[94m상품 세부 정보 :\033[0m {response.getDetails()}')
+                print(f'\033[92m상품 판매자 :\033[0m {response.getSeller()}')
 
         if className == "MyOrderRemoveResponse":
             if response.getIsSuccess():
