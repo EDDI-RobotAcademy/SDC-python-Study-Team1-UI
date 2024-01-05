@@ -135,7 +135,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 myOrderList = response.getMyOrderList()
                 myOrderListLength = len(myOrderList)
                 sum = 0
-                print("\033[91m번호\033[0m", "       ", "\033[91m상품명\033[0m")
+                print("\033[91m번호\033[0m", "       ", "\033[91m상품명\033[0m", "       ", "\033[91m가격(원)\033[0m")
                 print("\033[95m=============================\033[0m")
                 for i in range(myOrderListLength):
                     print(myOrderList[i]["__productNumber"], "       ",
