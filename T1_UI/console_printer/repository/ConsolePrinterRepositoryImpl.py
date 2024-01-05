@@ -1,5 +1,8 @@
 from time import sleep
 
+from client_socket.repository.ClientSocketRepositoryImpl import ClientSocketRepositoryImpl
+from client_socket.service.ClientSocketService import ClientSocketService
+from client_socket.service.ClientSocketServiceImpl import ClientSocketServiceImpl
 from console_printer.repository.ConsolePrinterRepository import ConsolePrinterRepository
 from console_ui.repository.ConsoleUiRepositoryImpl import ConsoleUiRepositoryImpl
 from console_ui.service.ConsoleUiServiceImpl import ConsoleUiServiceImpl
@@ -164,3 +167,11 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
             if not response.getIsSuccess():
                 print('\033[91m오류 발생: 주문 취소 실패 (잘못된 입력)\033[0m')
+
+        if className == "ProgramExitResponse":
+            if response.getIsSuccess():
+                print('밥 아저씨 그림 여기입니다.')
+                # close socket
+                clientSocketRepository= ClientSocketRepositoryImpl.getInstance()
+                clientSocket = clientSocketRepository.getClientSocket()
+                clientSocket.closeSocket()

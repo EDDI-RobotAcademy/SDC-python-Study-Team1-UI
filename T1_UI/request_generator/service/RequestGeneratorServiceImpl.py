@@ -203,3 +203,7 @@ class RequestGeneratorServiceImpl(RequestGeneratorService):
         }
 
         return myOrderRemoveRequestData
+
+    def generateProgramExitRequest(self, arguments):
+        print("RequestGeneratorService: 프로그램 종료 (데이터 전송 없음)")
+        pass

@@ -13,6 +13,7 @@ from my_order.service.response.MyOrderReadResponse import MyOrderReadResponse
 from my_order.service.response.MyOrderRemoveResponse import MyOrderRemoveResponse
 
 from custom_protocol.entity.CustomProtocol import CustomProtocol
+from program.service.response.ProgramExitResponse import ProgramExitResponse
 from response_generator.service.ResponseGeneratorService import ResponseGeneratorService
 
 
@@ -108,5 +109,5 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
     def generateMyOrderRemoveResponse(self, arguments):
         return MyOrderRemoveResponse(arguments)
 
-
-
+    def generateProgramExitResponse(self, arguments):
+        return ProgramExitResponse(arguments)

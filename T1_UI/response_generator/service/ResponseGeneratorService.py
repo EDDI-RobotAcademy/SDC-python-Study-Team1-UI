@@ -62,4 +62,6 @@ class ResponseGeneratorService(abc.ABC):
     def generateMyOrderRemoveResponse(self, arguments):
         pass
 
-
+    @abc.abstractmethod
+    def generateProgramExitResponse(self, arguments):
+        pass

@@ -80,27 +80,27 @@ class TransmitterRepositoryImpl(TransmitterRepository):
         sendingRequest = None
 
         if (protocolNumber == 1 or protocolNumber == 2 or protocolNumber == 5
-                or protocolNumber == 6 or protocolNumber == 7):
+                or protocolNumber == 6 or protocolNumber == 7 or protocolNumber == 14):
             sendingRequest = requestGenerator(requestData)
 
         elif protocolNumber == 3 or protocolNumber == 4 or protocolNumber == 11:
             sendingRequest = requestGenerator(sessionId)
 
-        elif protocolNumber == 10:
-            sendingRequest = requestGenerator(productNumber)
-
         elif protocolNumber == 8:
             sendingRequest = requestGenerator(productNumber, requestData)
-
-        elif protocolNumber == 12:
-            sendingRequest = requestGenerator(sessionId, requestData)
 
         elif protocolNumber == 9 or protocolNumber == 13:
             sendingRequest = requestGenerator(sessionId, productNumber)
 
+        elif protocolNumber == 10:
+            sendingRequest = requestGenerator(productNumber)
+
+        elif protocolNumber == 12:
+            sendingRequest = requestGenerator(sessionId, requestData)
+
         print(f"__combinedRequestGenerator finish to generate request: {sendingRequest}")
 
-        if protocolNumber == 5:
+        if protocolNumber == 5 or protocolNumber == 14:
             combinedRequestData = {
                 'protocol': protocolNumber
             }
