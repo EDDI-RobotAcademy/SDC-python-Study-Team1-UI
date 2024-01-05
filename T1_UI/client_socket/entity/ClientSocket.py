@@ -19,5 +19,5 @@ class ClientSocket(object):
         return self.__socket
 
     def closeSocket(self):
-        print("서버 소켓 종료!")
+        print("클라이언트 소켓 연결을 종료합니다!")
         self.__socket.close()

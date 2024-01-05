@@ -51,6 +51,7 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
                 CustomProtocol.ORDER_READ.value] = cls.__instance.generateMyOrderReadResponse
             cls.__responseFormGenerationTable[
                 CustomProtocol.ORDER_REMOVE.value] = cls.__instance.generateMyOrderRemoveResponse
+            cls.__responseFormGenerationTable[CustomProtocol.EXIT.value] = cls.__instance.generateProgramExitResponse
 
         return cls.__instance
 

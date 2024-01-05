@@ -9,5 +9,6 @@ class TaskEntity:
 
     def getTarget(self):
         return self.__target
+
     def getArgs(self):
         return self.__args
