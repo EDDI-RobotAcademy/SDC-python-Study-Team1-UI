@@ -36,12 +36,12 @@ class TestResponseGenerator(unittest.TestCase):
 
     def testListResponse(self):
         # 5, 11
-        sampleResponse = {"protocolNumber": 5, "data": [{'__productId': 1, '__productName': "Sibal",
+        sampleResponse = {"protocolNumber": 5, "data": [{'__productId': 1, '__productName': "onlyenglishc8c8c8c8c8c8c8c8",
                                                          "__productPrice": 20000},
-                                                        {'__productId': 2, '__productName': "Sib13123421321313423al",
+                                                        {'__productId': 2, '__productName': "fuckfuck",
                                                          "__productPrice": 30000},
-                                                        {'__productId': 3, '__productName': "Sibal",
-                                                         "__productPrice": 1818}]}
+                                                        {'__productId': 3, '__productName': "engversion",
+                                                         "__productPrice": 18180}]}
         receivedProtocolNumber = sampleResponse['protocolNumber']
         receivedData = sampleResponse['data']
         responseGeneratorService = ResponseGeneratorServiceImpl.getInstance()
@@ -55,13 +55,53 @@ class TestResponseGenerator(unittest.TestCase):
 
         productList = response.getProductList()
         productListLength = len(productList)
+
+
         # print(productListLength)
-        print("번호", "       ", "상품명", "       ", "가격(원)")
-        print("============================================")
+        longestProductName = len(receivedData[0]["__productName"])
+
         for i in range(productListLength):
-            # print(productList[i])
-            print(receivedData[i]["__productId"], "      ", receivedData[i]["__productName"], "      ",
-                  receivedData[i]["__productPrice"])
+
+            if longestProductName < len(receivedData[i]["__productName"]):
+                longestProductName = len(receivedData[i]["__productName"])
+        # print("->",longestProductName)
+
+
+        longestProductPrice = int(len(str((receivedData[0]["__productPrice"]))))
+        for i in range(productListLength):
+
+            if longestProductPrice < int(len(str((receivedData[i]["__productPrice"])))):
+                longestProductPrice = int(len(str((receivedData[i]["__productPrice"]))))
+
+        # print("->", longestProductPrice)
+
+
+        print("번호","   ",end="")
+        productNameText="상품명"
+        productPriceText="가격(원)"
+        productNameWidth=longestProductName
+        productPriceWidth=longestProductPrice
+        centered_productNameText=productNameText.center(productNameWidth,' ')
+        centered_productPriceText=productPriceText.center(productPriceWidth,' ')
+        print(centered_productNameText,centered_productPriceText)
+        for i in range(longestProductPrice+longestProductName+12):
+            print("=",end="")
+
+        print('')
+
+        for i in range(productListLength) :
+            print(receivedData[i]["__productId"], "     ",end="")
+            centerprintname = receivedData[i]["__productName"].center(productNameWidth,' ')
+            print(centerprintname,"  ",end="")
+            centerprintprice = str(receivedData[i]["__productPrice"]).center(productPriceWidth, ' ')
+            print(centerprintprice)
+
+        # print("번호", "       ", "상품명", "       ", "가격(원)")
+        # print("============================================")
+        # for i in range(productListLength):
+        #     # print(productList[i])
+        #     print(receivedData[i]["__productId"], "      ", receivedData[i]["__productName"], "      ",
+        #           receivedData[i]["__productPrice"])
 
 
 if __name__ == '__main__':
