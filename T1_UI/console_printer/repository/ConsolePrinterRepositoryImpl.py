@@ -98,9 +98,8 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print(f'\033[92m상품 가격 :\033[0m {response.getPrice()}')
                 print(f'\033[94m상품 세부 정보 :\033[0m {response.getDetails()}')
                 print(f'\033[92m상품 판매자 :\033[0m {response.getAccountId()}')
-
-            if response.getId() is None:
-                print('\033[91m오류 발생: 상품 조회 실패\033[0m')
+            else:
+                print('\033[91m오류 발생: 상품 조회 실패 - 존재하지 않는 상품입니다.\033[0m')
 
         if className == "ProductRegisterResponse":
             if response.getIsSuccess():
@@ -142,12 +141,9 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                     print(myOrderList[i]["__productNumber"], "       ",
                           myOrderList[i]["__productTitle"], "       ",
                           myOrderList[i]["__productPrice"])
-                    sum += myOrderList[i]["__productPrice"]
+                    sum += int(myOrderList[i]["__productPrice"])
                 print("\033[95m=============================\033[0m")
                 print(f"\033[95m주문 총액 : {sum}원\033[0m")
-
-            if not response.getIsSuccess():
-                print('\033[91m오류 발생: 주문 내역 불러오기 실패\033[0m')
 
         if className == "MyOrderReadResponse":
             if response.getId() is not None:
