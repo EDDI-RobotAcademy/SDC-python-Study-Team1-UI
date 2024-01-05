@@ -1,10 +1,6 @@
-import signal
 import sys
 from time import sleep
 
-from client_socket.repository.ClientSocketRepositoryImpl import ClientSocketRepositoryImpl
-from client_socket.service.ClientSocketService import ClientSocketService
-from client_socket.service.ClientSocketServiceImpl import ClientSocketServiceImpl
 from console_printer.repository.ConsolePrinterRepository import ConsolePrinterRepository
 from console_ui.repository.ConsoleUiRepositoryImpl import ConsoleUiRepositoryImpl
 from console_ui.service.ConsoleUiServiceImpl import ConsoleUiServiceImpl
@@ -105,10 +101,11 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print(f'\033[92m상품 등록자 :\033[0m {response.getAccountId()}')
             else:
                 print('\033[91m오류 발생: 상품 조회 실패 - 존재하지 않는 상품입니다.\033[0m')
+                consoleUiRepository.saveCurrentRoutingState(1)
 
         if className == "ProductRegisterResponse":
             if response.getIsSuccess():
-                print('\033[94m상품 수정이 완료되었습니다.\033[0m')
+                print('\033[94m상품 등록이 완료되었습니다.\033[0m')
 
             if not response.getIsSuccess():
                 print('\033[91m오류 발생: 상품 등록 실패\033[0m')
@@ -129,8 +126,8 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
         if className == "ProductDeleteResponse":
             if response.getIsSuccess():
-                print('\033[92m상품 삭제가 완료되었습니다.\033[0m')
                 consoleUiRepository.resetProductNumber()
+                print('\033[92m상품 삭제가 완료되었습니다.\033[0m')
 
             if not response.getIsSuccess():
                 print('\033[91m오류 발생: 상품 삭제 실패\033[0m')
@@ -160,16 +157,22 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print(f'\033[92m상품 가격 :\033[0m {response.getPrice()}')
                 print(f'\033[94m상품 세부 정보 :\033[0m {response.getDetails()}')
                 print(f'\033[92m상품 판매자 :\033[0m {response.getSeller()}')
+            else:
+                print('\033[91m오류 발생: 주문 상세 조회 실패 - 존재하지 않는 상품입니다.\033[0m')
+                consoleUiRepository.saveCurrentRoutingState(3)
 
         if className == "MyOrderRemoveResponse":
             if response.getIsSuccess():
                 consoleUiRepository.resetProductNumber()
-
                 print('\033[92m주문 삭제가 완료되었습니다.\033[0m')
 
             if not response.getIsSuccess():
                 print('\033[91m오류 발생: 주문 취소 실패 (잘못된 입력)\033[0m')
 
         if className == "ProgramExitResponse":
-            if response.getIsSuccess():
-                print('밥 아저씨 그림 여기입니다.')
+            while response.getIsSuccess():
+                try:
+                    print('밥 아저씨 그림 여기입니다.')
+                    sys.exit()
+                except SystemExit:
+                    return
