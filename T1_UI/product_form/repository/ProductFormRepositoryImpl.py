@@ -21,8 +21,8 @@ class ProductFormRepositoryImpl(ProductFormRepository):
 
     def createProductRegisterForm(self):
         print("상품 등록을 위한 정보를 입력하세요.")
-        userInputProductTitle = KeyboardInput.getKeyboardStringInputWithOutputMessage("신규 상품명:")
-        userInputProductContent = KeyboardInput.getKeyboardStringInputWithOutputMessage("신규 상품 상세 정보:")
+        userInputProductTitle = KeyboardInput.getKeyboardStringInputWithOutputMessage("신규 상품명:", 64)
+        userInputProductContent = KeyboardInput.getKeyboardStringInputWithOutputMessage("신규 상품 상세 정보:", 1024)
         userInputProductPrice = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("신규 상품 가격(원):")
 
         return userInputProductTitle, userInputProductContent, userInputProductPrice
@@ -34,8 +34,8 @@ class ProductFormRepositoryImpl(ProductFormRepository):
 
     def createProductModifyForm(self):
         print("상품 수정을 위한 정보를 입력하세요.")
-        userInputProductTitle = KeyboardInput.getKeyboardStringInputWithOutputMessage("수정할 상품 제목:")
-        userInputProductContent = KeyboardInput.getKeyboardStringInputWithOutputMessage("수정할 상품 상세 정보:")
+        userInputProductTitle = KeyboardInput.getKeyboardStringInputWithOutputMessage("수정할 상품 제목:", 64)
+        userInputProductContent = KeyboardInput.getKeyboardStringInputWithOutputMessage("수정할 상품 상세 정보:", 1024)
         userInputProductPrice = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("수정할 상품 가격(원):")
 
         return userInputProductTitle, userInputProductContent, userInputProductPrice
