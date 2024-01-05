@@ -23,20 +23,20 @@ class ProductFormRepositoryImpl(ProductFormRepository):
         print("상품 등록을 위한 정보를 입력하세요.")
         userInputProductTitle = KeyboardInput.getKeyboardStringInputWithOutputMessage("신규 상품명:")
         userInputProductContent = KeyboardInput.getKeyboardStringInputWithOutputMessage("신규 상품 상세 정보:")
-        userInputProductPrice = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("상품 가격(원):")
+        userInputProductPrice = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("신규 상품 가격(원):")
 
         return userInputProductTitle, userInputProductContent, userInputProductPrice
 
     def createProductReadForm(self):
-        userInputProductNumber = KeyboardInput.getKeyboardStringInputWithOutputMessage("조회하실 상품 번호를 입력하세요:")
+        userInputProductNumber = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("조회하실 상품 번호를 입력하세요:")
 
         return userInputProductNumber
 
     def createProductModifyForm(self):
         print("상품 수정을 위한 정보를 입력하세요.")
-        userInputProductTitle = KeyboardInput.getKeyboardStringInputWithOutputMessage("상품 제목:")
-        userInputProductContent = KeyboardInput.getKeyboardStringInputWithOutputMessage("상품 내용 작성:")
-        userInputProductPrice = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("상품 가격(원):")
+        userInputProductTitle = KeyboardInput.getKeyboardStringInputWithOutputMessage("수정할 상품 제목:")
+        userInputProductContent = KeyboardInput.getKeyboardStringInputWithOutputMessage("수정할 상품 상세 정보:")
+        userInputProductPrice = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("수정할 상품 가격(원):")
 
         return userInputProductTitle, userInputProductContent, userInputProductPrice
 
