@@ -41,6 +41,7 @@ class TransmitterRepositoryImpl(TransmitterRepository):
                     print(f"Transmitter sendProtocol = {sendProtocol}")
                     print(f"Transmitter sessionId = {sessionId}")
                     print(f"Transmitter productNumber = {productNumber}")
+
                     request = customProtocolRepository.execute(sendProtocol)
                     print(f"Transmitter Request from repository: {request}")
 
@@ -61,6 +62,8 @@ class TransmitterRepositoryImpl(TransmitterRepository):
                     #     ORDER_READ = 12
                     #     ORDER_REMOVE = 13
                     #     EXIT = 14
+                    # 아래의 코드를 개선할 필요가 있음
+                    # combinedSendingRequest = combinedRequestProcessor(sendProtocol, requestGenerator, request)
                     if sendProtocol == 1 or sendProtocol == 2 or sendProtocol == 5 or \
                         sendProtocol == 6 or sendProtocol == 7:
                         sendingRequest = requestGenerator(request)

@@ -38,7 +38,7 @@ class TestResponseGenerator(unittest.TestCase):
         # 5, 11
         sampleResponse = {"protocolNumber": 5, "data": [{'__productId': 1, '__productName': "Sibal",
                                                          "__productPrice": 20000},
-                                                        {'__productId': 2, '__productName': "Sibal",
+                                                        {'__productId': 2, '__productName': "Sib13123421321313423al",
                                                          "__productPrice": 30000},
                                                         {'__productId': 3, '__productName': "Sibal",
                                                          "__productPrice": 1818}]}
