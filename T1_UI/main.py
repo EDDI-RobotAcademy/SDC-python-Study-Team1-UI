@@ -13,6 +13,7 @@ from custom_protocol.entity.CustomProtocol import CustomProtocol
 from custom_protocol.service.CustomProtocolServiceImpl import CustomProtocolServiceImpl
 from my_order_form.repository.MyOrderFormRepositoryImpl import MyOrderFormRepositoryImpl
 from product_form.repository.ProductFormRepositoryImpl import ProductFormRepositoryImpl
+from program_form.repository.ProgramFormRepositoryImpl import ProgramFormRepositoryImpl
 
 from task_manage.repository.TaskManageRepositoryImpl import TaskManageRepositoryImpl
 from task_manage.service.TaskManageServiceImpl import TaskManageServiceImpl
@@ -44,6 +45,7 @@ def registerProtocol():
     accountFormRepository = AccountFormRepositoryImpl.getInstance()
     productFormRepository = ProductFormRepositoryImpl.getInstance()
     myOrderFormRepository = MyOrderFormRepositoryImpl.getInstance()
+    programFormRepository = ProgramFormRepositoryImpl.getInstance()
 
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ACCOUNT_LOGIN.value,
@@ -96,6 +98,10 @@ def registerProtocol():
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ORDER_REMOVE.value,
         myOrderFormRepository.myOrderNothing
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.EXIT.value,
+        programFormRepository.programExit
     )
 
 

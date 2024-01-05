@@ -58,3 +58,7 @@ class RequestGeneratorService(abc.ABC):
     @abc.abstractmethod
     def generateMyOrderRemoveRequest(self, accountSessionId, currentReadProductNumber):
         pass
+
+    @abc.abstractmethod
+    def generateProgramExitRequest(self, arguments):
+        pass
