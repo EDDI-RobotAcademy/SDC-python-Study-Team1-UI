@@ -33,64 +33,29 @@ class TransmitterRepositoryImpl(TransmitterRepository):
         while True:
             with (lock):
                 try:
-                    protocolAndSessionIdAndProductNumber = transmitQueue.get(block=True)
-                    sendProtocol = protocolAndSessionIdAndProductNumber['protocolNumber']
-                    sessionId = protocolAndSessionIdAndProductNumber['sessionId']
-                    productNumber = protocolAndSessionIdAndProductNumber['productNumber']
-                    print(f"Transmitter typeof(sendProtocol) = {type(sendProtocol)}")
-                    print(f"Transmitter sendProtocol = {sendProtocol}")
-                    print(f"Transmitter sessionId = {sessionId}")
-                    print(f"Transmitter productNumber = {productNumber}")
+                    inMemoryInfo = transmitQueue.get(block=True)
+
+                    sendProtocol = inMemoryInfo['protocolNumber']
+                    print(f"Transmitter: sendProtocol = {sendProtocol}")
+
+                    sessionId = inMemoryInfo['sessionId']
+                    print(f"Transmitter: sessionId = {sessionId}")
+
+                    productNumber = inMemoryInfo['productNumber']
+                    print(f"Transmitter: productNumber = {productNumber}")
 
                     request = customProtocolRepository.execute(sendProtocol)
-                    print(f"Transmitter Request from repository: {request}")
+                    print(f"Transmitter: Request: {request}")
 
                     requestGenerator = requestGeneratorService.findRequestGenerator(sendProtocol)
-                    print(f"Transmitter Request Generator: {requestGenerator}")
+                    print(f"Transmitter: Request Generator: {requestGenerator}")
 
-                    #     ACCOUNT_REGISTER = 1
-                    #     ACCOUNT_LOGIN = 2
-                    #     ACCOUNT_LOGOUT = 3
-                    #     ACCOUNT_REMOVE = 4
-                    #     PRODUCT_LIST = 5
-                    #     PRODUCT_REGISTER = 6
-                    #     PRODUCT_READ = 7
-                    #     PRODUCT_MODIFY = 8
-                    #     PRODUCT_PURCHASE = 9
-                    #     PRODUCT_REMOVE = 10
-                    #     ORDER_LIST = 11
-                    #     ORDER_READ = 12
-                    #     ORDER_REMOVE = 13
-                    #     EXIT = 14
-                    # 아래의 코드를 개선할 필요가 있음
-                    # combinedSendingRequest = combinedRequestProcessor(sendProtocol, requestGenerator, request)
-                    if sendProtocol == 1 or sendProtocol == 2 or sendProtocol == 5 or \
-                        sendProtocol == 6 or sendProtocol == 7:
-                        sendingRequest = requestGenerator(request)
-                    elif sendProtocol == 3 or sendProtocol == 4 or sendProtocol == 11:
-                        sendingRequest = requestGenerator(sessionId)
-                    elif sendProtocol == 10:
-                        sendingRequest = requestGenerator(productNumber)
-                    elif sendProtocol == 8 or sendProtocol == 12:
-                        sendingRequest = requestGenerator(productNumber, request)
-                    elif sendProtocol == 9 or sendProtocol == 13:
-                        sendingRequest = requestGenerator(sessionId, productNumber)
-
-                    print(f"Transmitter finish to generate request: {sendingRequest}")
-
-                    if sendProtocol == 5:
-                        combinedRequestData = {
-                            'protocol': sendProtocol
-                        }
-                    else:
-                        combinedRequestData = {
-                            'protocol': sendProtocol,
-                            'data': sendingRequest
-                        }
+                    combinedRequestData = self.__combinedRequestProcessor(sendProtocol, sessionId,
+                                                                          productNumber, request, requestGenerator)
+                    print(f"Transmitter: Combined Request Data: {combinedRequestData}")
 
                     combinedRequestDataString = json.dumps(combinedRequestData)
-
-                    print(f"transmitter: will be send - {combinedRequestDataString}")
+                    print(f"transmitter: will be send this string - {combinedRequestDataString}")
 
                     clientSocket.sendall(combinedRequestDataString.encode())
 
@@ -109,4 +74,37 @@ class TransmitterRepositoryImpl(TransmitterRepository):
                 finally:
                     sleep(0.5)
 
+    def __combinedRequestProcessor(self, protocolNumber, sessionId,
+                                   productNumber, requestData, requestGenerator):
 
+        sendingRequest = None
+
+        if (protocolNumber == 1 or protocolNumber == 2 or protocolNumber == 5
+                or protocolNumber == 6 or protocolNumber == 7):
+            sendingRequest = requestGenerator(requestData)
+
+        elif protocolNumber == 3 or protocolNumber == 4 or protocolNumber == 11:
+            sendingRequest = requestGenerator(sessionId)
+
+        elif protocolNumber == 10:
+            sendingRequest = requestGenerator(productNumber)
+
+        elif protocolNumber == 8 or protocolNumber == 12:
+            sendingRequest = requestGenerator(productNumber, requestData)
+
+        elif protocolNumber == 9 or protocolNumber == 13:
+            sendingRequest = requestGenerator(sessionId, productNumber)
+
+        print(f"__combinedRequestGenerator finish to generate request: {sendingRequest}")
+
+        if protocolNumber == 5:
+            combinedRequestData = {
+                'protocol': protocolNumber
+            }
+        else:
+            combinedRequestData = {
+                'protocol': protocolNumber,
+                'data': sendingRequest
+            }
+
+        return combinedRequestData
