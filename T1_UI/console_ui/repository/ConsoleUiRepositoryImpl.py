@@ -77,7 +77,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
 
     def __productReadMenu(self):
 
-        if self.getSessionId() is None:
+        if self.getSessionId() is None or self.getProductNumber() is None:
             print('\033[97m1. 뒤로 가기 (상품 리스트)\033[0m')
             return
 
@@ -91,6 +91,10 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
         print('\033[97m2. 뒤로 가기 (처음 화면)\033[0m')
 
     def __myOrderReadMenu(self):
+        if self.getProductNumber() is None:
+            print('\033[97m1. 뒤로 가기 (주문 리스트)\033[0m')
+            return
+
         print('\033[94m1. 내 주문 삭제\033[0m')
         print('\033[97m2. 뒤로 가기 (주문 리스트)\033[0m')
 
@@ -130,6 +134,9 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
                 return CustomProtocol.PRODUCT_READ.value
             if userCommand == 2:
                 return CustomProtocol.NOTHING.value
+            else:
+                print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
+                return -1
 
         if userCommand == 1:
             return CustomProtocol.PRODUCT_READ.value
@@ -143,7 +150,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
 
     def __productReadCommandConverter(self, userCommand):
 
-        if self.getSessionId() is None:
+        if self.getSessionId() is None or self.getProductNumber() is None:
             if userCommand == 1:
                 return CustomProtocol.PRODUCT_LIST.value
             else:
@@ -173,6 +180,13 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             return -1
 
     def __myOrderReadCommandConverter(self, userCommand):
+
+        if self.getProductNumber() is None:
+            if userCommand == 1:
+                return CustomProtocol.ORDER_LIST.value
+            else:
+                print("\033[91m잘못된 입력입니다! 다시 입력해주세요.\033[0m")
+                return -1
 
         if userCommand == 1:
             return CustomProtocol.ORDER_REMOVE.value
@@ -224,7 +238,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
 
         elif convertedUserChoice == CustomProtocol.PRODUCT_REMOVE.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST.value)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
 
         elif convertedUserChoice == CustomProtocol.ORDER_LIST.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_LIST.value)
@@ -233,7 +247,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_DETAILS.value)
 
         elif convertedUserChoice == CustomProtocol.ORDER_REMOVE.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_LIST.value)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_DETAILS.value)
 
         elif convertedUserChoice == CustomProtocol.EXIT.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
