@@ -36,13 +36,13 @@ class TaskManageServiceImpl(TaskManageService):
             args=(clientSocketRepository.getClientSocket(), lock, transmitQueue)
         )
 
-    def createReceiveTask(self, lock, receiveQueue):
+    def createReceiveTask(self, lock, receiveQueue, finishQueue):
         receiverRepository = ReceiverRepositoryImpl.getInstance()
         clientSocketRepository = ClientSocketRepositoryImpl.getInstance()
 
         self.__taskManageRepository.createTask(
             target=receiverRepository.receiveCommand,
-            args=(clientSocketRepository.getClientSocket(), lock, receiveQueue)
+            args=(clientSocketRepository.getClientSocket(), lock, receiveQueue, finishQueue)
         )
 
     def createPrinterTask(self, transmitQueue, receiveQueue):
@@ -50,5 +50,5 @@ class TaskManageServiceImpl(TaskManageService):
 
         self.__taskManageRepository.createTask(
             target=consolePrinterRepository.printConsoleUi,
-            args=(transmitQueue, receiveQueue, )
+            args=(transmitQueue, receiveQueue)
         )

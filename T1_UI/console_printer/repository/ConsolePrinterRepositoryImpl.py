@@ -33,6 +33,12 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
             if not receiveQueue.empty():
                 response = receiveQueue.get()
                 print(f"Received response: {response}")
+
+                className = response.__class__.__name__
+                if className == "ProgramExitResponse":
+                    print('Console Printer Off')
+                    break
+
                 self.__processResponse(response)
                 consoleUiService.printMenu()
                 consoleUiService.processUserInput(transmitQueue)
@@ -168,11 +174,3 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
             if not response.getIsSuccess():
                 print('\033[91m오류 발생: 주문 취소 실패 (잘못된 입력)\033[0m')
-
-        if className == "ProgramExitResponse":
-            while response.getIsSuccess():
-                try:
-                    print('밥 아저씨 그림 여기입니다.')
-                    sys.exit()
-                except SystemExit:
-                    return

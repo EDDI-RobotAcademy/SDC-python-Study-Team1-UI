@@ -3,6 +3,5 @@ import abc
 
 class ReceiverRepository(abc.ABC):
     @abc.abstractmethod
-    def receiveCommand(self, clientSocketObject, lock, receiveQueue):
+    def receiveCommand(self, clientSocketObject, lock, receiveQueue, finishQueue):
         pass
-

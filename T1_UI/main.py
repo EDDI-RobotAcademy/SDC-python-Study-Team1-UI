@@ -18,20 +18,21 @@ from program_form.repository.ProgramFormRepositoryImpl import ProgramFormReposit
 from task_manage.repository.TaskManageRepositoryImpl import TaskManageRepositoryImpl
 from task_manage.service.TaskManageServiceImpl import TaskManageServiceImpl
 
+taskManageService = TaskManageServiceImpl.getInstance()
 
 def initClientSocketDomain():
     clientSocketRepository = ClientSocketRepositoryImpl()
-    clientSocketService = ClientSocketServiceImpl(clientSocketRepository)
+    ClientSocketServiceImpl(clientSocketRepository)
 
 
 def initTaskManageDomain():
     taskManageRepository = TaskManageRepositoryImpl()
-    taskManageService = TaskManageServiceImpl(taskManageRepository)
+    TaskManageServiceImpl(taskManageRepository)
 
 
 def initConsoleUiDomain():
     consoleUiRepository = ConsoleUiRepositoryImpl()
-    consoleUiService = ConsoleUiServiceImpl(consoleUiRepository)
+    ConsoleUiServiceImpl(consoleUiRepository)
 
 
 def initEachDomain():
@@ -48,12 +49,12 @@ def registerProtocol():
     programFormRepository = ProgramFormRepositoryImpl.getInstance()
 
     customProtocolService.registerCustomProtocol(
-        CustomProtocol.ACCOUNT_LOGIN.value,
-        accountFormRepository.createAccountSigninForm
-    )
-    customProtocolService.registerCustomProtocol(
         CustomProtocol.ACCOUNT_REGISTER.value,
         accountFormRepository.createAccountRegisterForm
+    )
+    customProtocolService.registerCustomProtocol(
+        CustomProtocol.ACCOUNT_LOGIN.value,
+        accountFormRepository.createAccountSigninForm
     )
     customProtocolService.registerCustomProtocol(
         CustomProtocol.ACCOUNT_LOGOUT.value,
@@ -111,27 +112,26 @@ def initConnection():
     clientSocketService.connectToTargetHost()
 
 
-def createAllTasks():
-    taskManageService = TaskManageServiceImpl.getInstance()
-
-    lock = multiprocessing.Lock()
-    transmitQueue = multiprocessing.Queue()
-    receiveQueue = multiprocessing.Queue()
-
-    taskManageService.createTransmitTask(lock, transmitQueue)
-    taskManageService.createReceiveTask(lock, receiveQueue)
-    taskManageService.createPrinterTask(transmitQueue, receiveQueue)
-
-
 if __name__ == '__main__':
     initEachDomain()
     registerProtocol()
     initConnection()
-    createAllTasks()
+
+    lock = multiprocessing.Lock()
+    transmitQueue = multiprocessing.Queue()
+    receiveQueue = multiprocessing.Queue()
+    finishQueue = multiprocessing.Queue()
+
+    taskManageService.createTransmitTask(lock, transmitQueue)
+    taskManageService.createReceiveTask(lock, receiveQueue, finishQueue)
+    taskManageService.createPrinterTask(transmitQueue, receiveQueue)
 
     while True:
         try:
             sleep(5.0)
+            status = finishQueue.get()
+            if status is True:
+                break
 
         except socket.error:
             sleep(0.5)
