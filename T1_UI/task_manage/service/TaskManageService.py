@@ -6,7 +6,7 @@ class TaskManageService(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def createReceiveTask(self, lock, receiveQueue):
+    def createReceiveTask(self, lock, receiveQueue, finishQueue):
         pass
 
     @abc.abstractmethod

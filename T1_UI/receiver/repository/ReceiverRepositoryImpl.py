@@ -1,11 +1,8 @@
 import errno
-import json
 import socket
 from time import sleep
 
 from receiver.repository.ReceiverRepository import ReceiverRepository
-from account.service.response.AccountRegisterResponse import AccountRegisterResponse
-from account.service.response.AccountLoginResponse import AccountLoginResponse
 from response_generator.service.ResponseGeneratorServiceImpl import ResponseGeneratorServiceImpl
 
 
@@ -26,7 +23,7 @@ class ReceiverRepositoryImpl(ReceiverRepository):
             cls.__instance = cls()
         return cls.__instance
 
-    def receiveCommand(self, clientSocketObject, lock, receiveQueue):
+    def receiveCommand(self, clientSocketObject, lock, receiveQueue, finishQueue):
         clientSocket = clientSocketObject.getSocket()
         print(f"receiver: is it exist -> {clientSocket}")
         responseGeneratorService = ResponseGeneratorServiceImpl.getInstance()
@@ -36,7 +33,7 @@ class ReceiverRepositoryImpl(ReceiverRepository):
                 data = clientSocket.recv(2048)
 
                 if not data:
-                    clientSocket.closeSocket()
+                    clientSocketObject.closeSocket()
                     break
 
                 decodedData = data.decode()
@@ -56,6 +53,11 @@ class ReceiverRepositoryImpl(ReceiverRepository):
 
                 receiveQueue.put(responseObject)
 
+                className = responseObject.__class__.__name__
+
+                if className == "ProgramExitResponse":
+                    break
+
             except socket.error as exception:
                 if exception.errno == errno.EWOULDBLOCK:
                     pass
@@ -63,3 +65,5 @@ class ReceiverRepositoryImpl(ReceiverRepository):
             finally:
                 sleep(0.5)
 
+        print('Receiver Off')
+        finishQueue.put(True)

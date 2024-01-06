@@ -61,6 +61,9 @@ class TransmitterRepositoryImpl(TransmitterRepository):
 
                     print('{} command 전송 [{}]'.format(datetime.now(), sendProtocol))
 
+                    if sendProtocol == 14:
+                        break
+
                 except (socket.error, BrokenPipeError) as exception:
                     print(f"사용자 연결 종료")
                     return None
@@ -73,6 +76,8 @@ class TransmitterRepositoryImpl(TransmitterRepository):
 
                 finally:
                     sleep(0.5)
+
+        print('Transmitter Off')
 
     def __combinedRequestProcessor(self, protocolNumber, sessionId,
                                    productNumber, requestData, requestGenerator):

@@ -44,10 +44,7 @@ class ConsoleUiServiceImpl(ConsoleUiService):
             if userCertifiedInput.decode().strip() == "y" or userCertifiedInput.decode().strip() == "Y":
                 break
             elif userCertifiedInput.decode().strip() == "n" or userCertifiedInput.decode().strip() == "N":
-                self.printMenu()
-                userCommandNumber = KeyboardInput.getKeyboardIntegerInputWithOutputMessage("원하는 선택지를 입력하세요:")
-                convertedUserCommandNumber = self.__repository.commandConverter(userCommandNumber)
-                self.__repository.routingStateConverter(convertedUserCommandNumber)
+                convertedUserCommandNumber = -1
             else:
                 print('유효하지 않은 입력입니다. y(Y) 혹은 n(N) 을 입력하세요!')
 
