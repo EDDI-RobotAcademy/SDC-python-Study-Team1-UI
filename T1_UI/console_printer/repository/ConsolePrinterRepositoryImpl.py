@@ -1,7 +1,7 @@
-import sys
 from time import sleep
 
 from console_printer.repository.ConsolePrinterRepository import ConsolePrinterRepository
+from console_ui.entity.ConsoleUiRoutingState import ConsoleUiRoutingState
 from console_ui.repository.ConsoleUiRepositoryImpl import ConsoleUiRepositoryImpl
 from console_ui.service.ConsoleUiServiceImpl import ConsoleUiServiceImpl
 
@@ -83,7 +83,6 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
         if className == "ProductListResponse":
             if response.getProductList() is not None:
-                consoleUiRepository.resetProductNumber()
                 productList = response.getProductList()
                 productListLength = len(productList)
                 print("\033[91m번호\033[0m", "       ", "\033[91m상품명\033[0m", "       ", "\033[91m가격(원)\033[0m")
@@ -107,25 +106,31 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print(f'\033[92m상품 등록자 :\033[0m {response.getAccountId()}')
             else:
                 print('\033[91m오류 발생: 상품 조회 실패 - 존재하지 않는 상품입니다.\033[0m')
-                consoleUiRepository.saveCurrentRoutingState(1)
+                consoleUiRepository.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST.value)
 
         if className == "ProductRegisterResponse":
             if response.getIsSuccess():
                 print('\033[94m상품 등록이 완료되었습니다.\033[0m')
+                # 이후 갱신된 리스트를 받으면 좋겠다는 생각
 
             if not response.getIsSuccess():
                 print('\033[91m오류 발생: 상품 등록 실패\033[0m')
 
         if className == "ProductModifyResponse":
             if response.getIsSuccess():
+                consoleUiRepository.resetProductNumber()
                 print('\033[92m상품 수정이 완료되었습니다.\033[0m')
+                # 현재 뒤로 돌아가기로 리스트 갱신을 강제하고 있으나
+                # 그냥 수정된 것 한 번 보여주는게 더 좋은 사용자 경험이 이루어 질 것
 
             if not response.getIsSuccess():
                 print('\033[91m오류 발생: 상품 수정 실패\033[0m')
 
         if className == "ProductPurchaseResponse":
             if response.getIsSuccess():
+                consoleUiRepository.resetProductNumber()
                 print('\033[94m상품 구매가 완료되었습니다.\033[0m')
+                # 여기도 수정과 마찬가지로 상품 보여주는게 더 좋은 방향
 
             if not response.getIsSuccess():
                 print('\033[91m오류 발생: 상품 구매 실패\033[0m')
@@ -133,14 +138,15 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
         if className == "ProductDeleteResponse":
             if response.getIsSuccess():
                 consoleUiRepository.resetProductNumber()
+                print(f'번호 삭제 됐니 - {consoleUiRepository.getProductNumber()}')
                 print('\033[92m상품 삭제가 완료되었습니다.\033[0m')
+                # 여기는 이 방식이 맞을 듯
 
             if not response.getIsSuccess():
                 print('\033[91m오류 발생: 상품 삭제 실패\033[0m')
 
         if className == "MyOrderListResponse":
             if response.getMyOrderList() is not None:
-                consoleUiRepository.resetProductNumber()
                 myOrderList = response.getMyOrderList()
                 myOrderListLength = len(myOrderList)
                 sum = 0
@@ -165,12 +171,13 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print(f'\033[92m상품 판매자 :\033[0m {response.getSeller()}')
             else:
                 print('\033[91m오류 발생: 주문 상세 조회 실패 - 존재하지 않는 상품입니다.\033[0m')
-                consoleUiRepository.saveCurrentRoutingState(3)
+                consoleUiRepository.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_LIST.value)
 
         if className == "MyOrderRemoveResponse":
             if response.getIsSuccess():
                 consoleUiRepository.resetProductNumber()
+                print(f'번호 삭제 됐니 - {consoleUiRepository.getProductNumber()}')
                 print('\033[92m주문 삭제가 완료되었습니다.\033[0m')
 
             if not response.getIsSuccess():
-                print('\033[91m오류 발생: 주문 취소 실패 (잘못된 입력)\033[0m')
+                print('\033[91m오류 발생: 주문 삭제 실패\033[0m')
