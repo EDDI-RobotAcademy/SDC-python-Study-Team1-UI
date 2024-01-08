@@ -84,7 +84,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 productList = response.getProductList()
                 productListLength = len(productList)
                 if productListLength == 0:
-                    print('No products found')
+                    print('등록된 상품이 없습니다.')
                     return
                 longestProductTitle = len(productList[0]["__productTitle"])
                 for i in range(productListLength):
@@ -195,7 +195,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print(f'\033[92m상품 등록자 :\033[0m {response.getAccountId()}')
 
             else:
-                print('\033[91m오류 발생: 상품 수정 실패\033[0m')
+                print('\033[91m오류 발생: 상품 구매 실패\033[0m')
 
         if className == "ProductDeleteResponse":
             if response.getUpdatedProductList() is not None:
@@ -235,12 +235,15 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                     centerprintprice = str(productList[i]["__productPrice"]).center(productPriceWidth, ' ')
                     print(centerprintprice)
 
+            if response.getUpdatedProductList() is None:
+                print('\033[91m오류 발생: 상품 삭제 실패 - 직접 등록하시지 않은 상품입니다.\033[0m')
+
         if className == "MyOrderListResponse":
             if response.getMyOrderList() is not None:
                 myOrderList = response.getMyOrderList()
                 myOrderListLength = len(myOrderList)
                 if myOrderListLength == 0:
-                    print("No orders found")
+                    print("주문 내역이 없습니다.")
                     return
                 sum = 0
 
@@ -302,6 +305,9 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
             if response.getMyOrderUpdatedList() is not None:
                 myOrderList = response.getMyOrderUpdatedList()
                 myOrderListLength = len(myOrderList)
+                if myOrderListLength == 0:
+                    print('주문 내역이 없습니다.')
+                    return
                 sum = 0
 
                 longestProductName = len(myOrderList[0]["__productTitle"])
