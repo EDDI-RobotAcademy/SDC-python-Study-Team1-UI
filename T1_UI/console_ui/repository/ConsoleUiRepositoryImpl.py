@@ -52,12 +52,14 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
     def __initialMenu(self):
 
         if self.getSessionId() is None:
+            self.logo()
             print('\033[92m1. 회원가입\033[0m')
             print('\033[94m2. 로그인\033[0m')
             print('\033[92m3. 상품 리스트 조회\033[0m')
             print('\033[97m4. 종료\033[0m')
             return
 
+        self.logo()
         print('\033[92m1. 로그아웃\033[0m')
         print('\033[94m2. 상품 리스트 조회\033[0m')
         print('\033[92m3. 내 주문 내역 확인\033[0m')
@@ -238,7 +240,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
 
         elif convertedUserChoice == CustomProtocol.PRODUCT_REMOVE.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_DETAILS.value)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST.value)
 
         elif convertedUserChoice == CustomProtocol.ORDER_LIST.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_LIST.value)
@@ -247,7 +249,7 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
             self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_DETAILS.value)
 
         elif convertedUserChoice == CustomProtocol.ORDER_REMOVE.value:
-            self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_DETAILS.value)
+            self.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_LIST.value)
 
         elif convertedUserChoice == CustomProtocol.EXIT.value:
             self.saveCurrentRoutingState(ConsoleUiRoutingState.INITIALIZED.value)
@@ -275,3 +277,31 @@ class ConsoleUiRepositoryImpl(ConsoleUiRepository):
 
     def resetProductNumber(self):
         self.__consoleUiState.setCurrentReadNumber(None)
+
+    def logo(self):
+        print('''\033[91m     
+                                                IBBBBBBQBBBQBQBQBBBQBQBQBQBQBQBQBQBBBBBQBQBQBQBQBQBBBQBQBBBQBQBQBQBQBQBQBQBQBQBBBQBQBQBBBBd      BBQBQBQBBBB
+                                                 .BBBBMRMRgRgMMRgRgMgRgRgMgMgRMMgMgRgMgRgRgRgRgRgMgRgMgRgRgMgRgRgMgMgRgMMRgRgRgMgRgRRQQBBY      MBQRMRgRQBB 
+                                                   UBBBQBBBQBQBQBQBQQQBQBQBQBQBQBQBQBQBQBQBQBQBQBQBQBQBQQQBQBQBQBQQQBQBQBQBQBQBQBBBBBBBZ      ZBBQBQBQBQBB. 
+                                                     IBBBBBBBBBBBBQBBBQBQBQBBBBBQBQBQBQBBBQBBBBBQBQBQBQBQBQBQBQBQBQBQBQBQBQBQBBBQBBBBE     .PBBBBBQQQBBBQ   
+                                                       :DBBQBQBBBBBBBBBBBBBBBBBBBBBBBBBBBQBQBBBBBBBBBBBQBBBBBBBBBBQQQQQQBQBBBQBQBQQi    .uBBBBBBQQQQBBBg    
+                                                          .7KBBBBBQBBBBBQBBBBBQBBBBBBBQBBBBBBBQBQBBBBBBBBBBBBBQQEBQQQBQBQBBBBBbY:   .JDBBBBBBBQQQBQBBBI     
+                                                                                                                sBBQBQBQBBBq        ..    ZBBQQQBQBBB7      
+                                                                .BBBggZDZDEgZDEDZgZgEDZDEDEDZDZDZDZDZgZDZMQB:  EBBQQQQQBBBs              BQBQBQQBBBB:       
+                                                                 .MBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBv  BBBQBQBQBBBi             .BBBQBQBBBBB         
+                                                                    idBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB.  BBBBBQBQBBB.             7BQBQBQBBBBB          
+                                                                                                           :BBBQQQBQBBB              5BBBQBQBBBBD           
+                                                                         7QBMMDDZDZDdDEDEZdZEDZDZZEDZQBK  YBBBQQQBBBBQ              gBQBQBQBQBBU            
+                                                                          rBBBBBBBBBBBBBBBBQBBBBBBBQBBQ  PBBBQBQBBBBP              BBBBQBQBBBBr             
+                                                                             sQBBBQBBBBBBBBBBBBBBBBBBJ  QBBBQQQBBBBY             .BBBBQBQBBBB.              
+                                                                                                       BBBBQBQBBBB:             iBBBBQQQBBBB                
+                                                                                  PBQDddqPPPqbPbdBM  .BBBBQBQBBBB.             sBBBBQBQBBBQ                 
+                                                                                   2BBBBBBBBBBBBBQ  rBBBBQQQBBBB              PBBQBQBQBBBP                  
+                                                                                     :qBQBBBBBBBR  1BBBBQQQBQBD              QBBBBQBQBBBY                   
+                                                                                                  EBBBBQBQBBB2              BBBQBQBQBBBi                    
+                                                                                                 BBBBBQBQBBB7             .BQBQBQBBBBB.                     
+                                                                                                BQBQQQBBBBB:             :BQBQQQBQBBB                       
+                                                                                               vBBQBQBBBBB               gBBBBQBQBBQ                        
+                                                                                                BBBBBBBBB                .BBBBBBBBq                         
+                                                                                                 QQBBBBZ                  .BBBBBBv                          
+                                                                                                   JBB:                     .XBQ '\033[0m''')
