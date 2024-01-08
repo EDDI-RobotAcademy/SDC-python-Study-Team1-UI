@@ -1,6 +1,8 @@
 class ProductRegisterResponse:
-    def __init__(self, __isSuccess):
-        self.__isSuccess = __isSuccess
+    __productList = []
 
-    def getIsSuccess(self):
-        return self.__isSuccess
+    def __init__(self, productUpdatedList):
+        self.__productList = productUpdatedList
+
+    def getUpdatedProductList(self):
+        return self.__productList

@@ -93,10 +93,10 @@ class ResponseGeneratorServiceImpl(ResponseGeneratorService):
         return ProductReadResponse(**arguments)
 
     def generateProductModifyResponse(self, arguments):
-        return ProductModifyResponse(arguments)
+        return ProductModifyResponse(**arguments)
 
     def generateProductPurchaseResponse(self, arguments):
-        return ProductPurchaseResponse(arguments)
+        return ProductPurchaseResponse(**arguments)
 
     def generateProductRemoveResponse(self, arguments):
         return ProductDeleteResponse(arguments)
