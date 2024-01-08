@@ -97,7 +97,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
 
                     if longestProductPrice < int(len(str((productList[i]["__productPrice"])))):
                         longestProductPrice = int(len(str((productList[i]["__productPrice"]))))
-                print("\033[91m번호\033[0m", "   ", end="")
+                print("\033[91m번호", "   ", end="")
                 productTitleText = "상품명"
                 productPriceText = "가격(원)"
                 productTitleWidth = longestProductTitle
@@ -181,7 +181,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 myOrderList = response.getMyOrderList()
                 myOrderListLength = len(myOrderList)
                 sum = 0
-                print("\033[91m번호\033[0m", "   ", end="")
+
                 longestProductName = len(myOrderList[0]["__productTitle"])
 
                 for i in range(myOrderListLength):
@@ -196,7 +196,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                     if longestProductPrice < int(len(str((myOrderList[i]["__productPrice"])))):
                         longestProductPrice = int(len(str((myOrderList[i]["__productPrice"]))))
 
-
+                print("\033[91m번호", "   ", end="")
                 myOrderProductName="상품명"
                 myOrderProductPrice="가격(원)"
                 myOrderProductNameWidth = longestProductName
@@ -221,7 +221,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                     print("\033[95m=\033[0m", end="")
 
                 print('')
-                print(f"\033[95m주문 총액 : {sum}원\033[0m")
+                print(f"\033[94m주문 총액 : {sum}원\033[0m")
                 # print("\033[91m번호\033[0m", "       ", "\033[91m상품명\033[0m", "       ", "\033[91m가격(원)\033[0m")
                 # print("\033[95m=============================\033[0m")
                 # for i in range(myOrderListLength):
