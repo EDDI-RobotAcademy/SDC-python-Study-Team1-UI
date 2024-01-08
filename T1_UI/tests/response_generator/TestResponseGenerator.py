@@ -47,17 +47,12 @@ class TestResponseGenerator(unittest.TestCase):
         responseGeneratorService = ResponseGeneratorServiceImpl.getInstance()
         responseGenerator = responseGeneratorService.findResponseGenerator(receivedProtocolNumber)
         response = responseGenerator(receivedData)
-        # myOrderList = response.getMyOrderList()
-        # myOrderListLength = len(myOrderList)
-        # print(myOrderListLength)
-        # for i in range(myOrderListLength):
-        #     print(myOrderList[i])
 
         productList = response.getProductList()
         productListLength = len(productList)
 
 
-        # print(productListLength)
+
         longestProductName = len(receivedData[0]["__productName"])
 
         for i in range(productListLength):
