@@ -1,6 +1,8 @@
 class MyOrderRemoveResponse:
-    def __init__(self, __isSuccess):
-        self.__isSuccess = __isSuccess
+    __myOrderList = []
 
-    def getIsSuccess(self):
-        return self.__isSuccess
+    def __init__(self, __myOrderUpdatedList):
+        self.__myOrderList = __myOrderUpdatedList
+
+    def getMyOrderUpdatedList(self):
+        return self.__myOrderList
