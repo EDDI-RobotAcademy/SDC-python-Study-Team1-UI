@@ -80,45 +80,41 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print('\033[91m오류 발생: 계정 삭제 실패\033[0m')
 
         if className == "ProductListResponse":
-            if response.getProductList() is not None:
-                productList = response.getProductList()
-                productListLength = len(productList)
-                if productListLength == 0:
-                    print('등록된 상품이 없습니다.')
-                    return
-                longestProductTitle = len(productList[0]["__productTitle"])
-                for i in range(productListLength):
+            productList = response.getProductList()
+            productListLength = len(productList)
+            if productListLength == 0:
+                print('등록된 상품이 없습니다.')
+                return
+            longestProductTitle = len(productList[0]["__productTitle"])
+            for i in range(productListLength):
 
-                    if longestProductTitle < len(productList[i]["__productTitle"]):
-                        longestProductTitle = len(productList[i]["__productTitle"])
+                if longestProductTitle < len(productList[i]["__productTitle"]):
+                    longestProductTitle = len(productList[i]["__productTitle"])
 
-                longestProductPrice = int(len(str((productList[0]["__productPrice"]))))
-                for i in range(productListLength):
+            longestProductPrice = int(len(str((productList[0]["__productPrice"]))))
+            for i in range(productListLength):
 
-                    if longestProductPrice < int(len(str((productList[i]["__productPrice"])))):
-                        longestProductPrice = int(len(str((productList[i]["__productPrice"]))))
-                print("\033[91m번호", "   ", end="")
-                productTitleText = "상품명"
-                productPriceText = "가격(원)"
-                productTitleWidth = longestProductTitle
-                productPriceWidth = longestProductPrice
-                centered_productTitleText = productTitleText.center(productTitleWidth, ' ')
-                centered_productPriceText = productPriceText.center(productPriceWidth, ' ')
-                print(centered_productTitleText, centered_productPriceText)
-                for i in range(longestProductPrice + longestProductTitle + 12):
-                    print("\033[95m=\033[0m", end="")
+                if longestProductPrice < int(len(str((productList[i]["__productPrice"])))):
+                    longestProductPrice = int(len(str((productList[i]["__productPrice"]))))
+            print("\033[91m번호", "   ", end="")
+            productTitleText = "상품명"
+            productPriceText = "가격(원)"
+            productTitleWidth = longestProductTitle
+            productPriceWidth = longestProductPrice
+            centered_productTitleText = productTitleText.center(productTitleWidth, ' ')
+            centered_productPriceText = productPriceText.center(productPriceWidth, ' ')
+            print(centered_productTitleText, centered_productPriceText)
+            for i in range(longestProductPrice + longestProductTitle + 12):
+                print("\033[95m=\033[0m", end="")
 
-                print('')
+            print('')
 
-                for i in range(productListLength):
-                    print(productList[i]["__productNumber"], "     ", end="")
-                    centerprintname = productList[i]["__productTitle"].center(productTitleWidth, ' ')
-                    print(centerprintname, "  ", end="")
-                    centerprintprice = str(productList[i]["__productPrice"]).center(productPriceWidth, ' ')
-                    print(centerprintprice)
-
-            else:
-                print('\033[91m오류 발생: 상품 목록 불러오기 실패\033[0m')
+            for i in range(productListLength):
+                print(productList[i]["__productNumber"], "     ", end="")
+                centerprintname = productList[i]["__productTitle"].center(productTitleWidth, ' ')
+                print(centerprintname, "  ", end="")
+                centerprintprice = str(productList[i]["__productPrice"]).center(productPriceWidth, ' ')
+                print(centerprintprice)
 
         if className == "ProductReadResponse":
             if response.getId() is not None:
@@ -135,46 +131,44 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 consoleUiRepository.saveCurrentRoutingState(ConsoleUiRoutingState.PRODUCT_LIST.value)
 
         if className == "ProductRegisterResponse":
-            if response.getUpdatedProductList() is not None:
-                productList = response.getUpdatedProductList()
-                productListLength = len(productList)
-                print(productListLength, "---")
-                longestProductTitle = len(productList[0]["__productTitle"])
-                for i in range(productListLength):
+            productList = response.getUpdatedProductList()
+            productListLength = len(productList)
+            longestProductTitle = len(productList[0]["__productTitle"])
+            for i in range(productListLength):
 
-                    if longestProductTitle < len(productList[i]["__productTitle"]):
-                        longestProductTitle = len(productList[i]["__productTitle"])
+                if longestProductTitle < len(productList[i]["__productTitle"]):
+                    longestProductTitle = len(productList[i]["__productTitle"])
 
-                longestProductPrice = int(len(str((productList[0]["__productPrice"]))))
-                for i in range(productListLength):
+            longestProductPrice = int(len(str((productList[0]["__productPrice"]))))
+            for i in range(productListLength):
 
-                    if longestProductPrice < int(len(str((productList[i]["__productPrice"])))):
-                        longestProductPrice = int(len(str((productList[i]["__productPrice"]))))
-                print("\033[91m번호", "   ", end="")
-                productTitleText = "상품명"
-                productPriceText = "가격(원)"
-                productTitleWidth = longestProductTitle
-                productPriceWidth = longestProductPrice
-                centered_productTitleText = productTitleText.center(productTitleWidth, ' ')
-                centered_productPriceText = productPriceText.center(productPriceWidth, ' ')
-                print(centered_productTitleText, centered_productPriceText)
-                for i in range(longestProductPrice + longestProductTitle + 12):
-                    print("\033[95m=\033[0m", end="")
+                if longestProductPrice < int(len(str((productList[i]["__productPrice"])))):
+                    longestProductPrice = int(len(str((productList[i]["__productPrice"]))))
+            print("\033[91m번호", "   ", end="")
+            productTitleText = "상품명"
+            productPriceText = "가격(원)"
+            productTitleWidth = longestProductTitle
+            productPriceWidth = longestProductPrice
+            centered_productTitleText = productTitleText.center(productTitleWidth, ' ')
+            centered_productPriceText = productPriceText.center(productPriceWidth, ' ')
+            print(centered_productTitleText, centered_productPriceText)
+            for i in range(longestProductPrice + longestProductTitle + 12):
+                print("\033[95m=\033[0m", end="")
 
-                print('')
+            print('')
 
-                for i in range(productListLength):
-                    print(productList[i]["__productNumber"], "     ", end="")
-                    centerprintname = productList[i]["__productTitle"].center(productTitleWidth, ' ')
-                    print(centerprintname, "  ", end="")
-                    centerprintprice = str(productList[i]["__productPrice"]).center(productPriceWidth, ' ')
-                    print(centerprintprice)
+            for i in range(productListLength):
+                print(productList[i]["__productNumber"], "     ", end="")
+                centerprintname = productList[i]["__productTitle"].center(productTitleWidth, ' ')
+                print(centerprintname, "  ", end="")
+                centerprintprice = str(productList[i]["__productPrice"]).center(productPriceWidth, ' ')
+                print(centerprintprice)
 
         if className == "ProductModifyResponse":
             if response.getId() is not None:
                 consoleUiRepository.setProductNumber(response.getId())
                 print(f"{consoleUiRepository.getProductNumber()}번 상품 수정이 완료되었습니다.")
-                print('\033[92m수정하신 상품 정보는 아래와 같습니다.\033[0m')
+                print('\033[92m수정된 상품 정보는 아래와 같습니다.\033[0m')
                 print(f'\033[94m상품 번호 :\033[0m {response.getId()}')
                 print(f'\033[94m상품 제목 :\033[0m {response.getName()}')
                 print(f'\033[92m상품 가격 :\033[0m {response.getPrice()}')
@@ -182,7 +176,7 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print(f'\033[92m상품 등록자 :\033[0m {response.getAccountId()}')
 
             else:
-                print('\033[91m오류 발생: 상품 수정 실패\033[0m')
+                print('\033[91m오류 발생: 상품 수정 실패 - 권한이 없습니다.\033[0m')
 
         if className == "ProductPurchaseResponse":
             if response.getId() is not None:
@@ -239,48 +233,47 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 print('\033[91m오류 발생: 상품 삭제 실패 - 직접 등록하시지 않은 상품입니다.\033[0m')
 
         if className == "MyOrderListResponse":
-            if response.getMyOrderList() is not None:
-                myOrderList = response.getMyOrderList()
-                myOrderListLength = len(myOrderList)
-                if myOrderListLength == 0:
-                    print("주문 내역이 없습니다.")
-                    return
-                sum = 0
+            myOrderList = response.getMyOrderList()
+            myOrderListLength = len(myOrderList)
+            if myOrderListLength == 0:
+                print("주문 내역이 없습니다.")
+                return
+            sum = 0
 
-                longestProductName = len(myOrderList[0]["__productTitle"])
+            longestProductName = len(myOrderList[0]["__productTitle"])
 
-                for i in range(myOrderListLength):
+            for i in range(myOrderListLength):
 
-                    if longestProductName < len(myOrderList[i]["__productTitle"]):
-                        longestProductName = len(myOrderList[i]["__productTitle"])
+                if longestProductName < len(myOrderList[i]["__productTitle"]):
+                    longestProductName = len(myOrderList[i]["__productTitle"])
 
 
-                longestProductPrice = int(len(str((myOrderList[0]["__productPrice"]))))
-                for i in range(myOrderListLength):
+            longestProductPrice = int(len(str((myOrderList[0]["__productPrice"]))))
+            for i in range(myOrderListLength):
 
-                    if longestProductPrice < int(len(str((myOrderList[i]["__productPrice"])))):
-                        longestProductPrice = int(len(str((myOrderList[i]["__productPrice"]))))
+                if longestProductPrice < int(len(str((myOrderList[i]["__productPrice"])))):
+                    longestProductPrice = int(len(str((myOrderList[i]["__productPrice"]))))
 
-                print("\033[91m번호", "   ", end="")
-                myOrderProductName="상품명"
-                myOrderProductPrice="가격(원)"
-                myOrderProductNameWidth = longestProductName
-                myOrderProductPriceWidth = longestProductPrice
-                centered_myOrderProductNameText = myOrderProductName.center(myOrderProductNameWidth, ' ')
-                centered_myOrderProductPriceText = myOrderProductPrice.center(myOrderProductPriceWidth, ' ')
-                print(centered_myOrderProductNameText, centered_myOrderProductPriceText)
-                for i in range(longestProductPrice + longestProductName + 12):
-                    print("\033[95m=\033[0m", end="")
+            print("\033[91m번호", "   ", end="")
+            myOrderProductName="상품명"
+            myOrderProductPrice="가격(원)"
+            myOrderProductNameWidth = longestProductName
+            myOrderProductPriceWidth = longestProductPrice
+            centered_myOrderProductNameText = myOrderProductName.center(myOrderProductNameWidth, ' ')
+            centered_myOrderProductPriceText = myOrderProductPrice.center(myOrderProductPriceWidth, ' ')
+            print(centered_myOrderProductNameText, centered_myOrderProductPriceText)
+            for i in range(longestProductPrice + longestProductName + 12):
+                print("\033[95m=\033[0m", end="")
 
-                print('')
+            print('')
 
-                for i in range(myOrderListLength):
-                    print(myOrderList[i]["__productNumber"], "     ", end="")
-                    centerprintname = myOrderList[i]["__productTitle"].center(myOrderProductNameWidth, ' ')
-                    print(centerprintname, "  ", end="")
-                    centerprintprice = str(myOrderList[i]["__productPrice"]).center(myOrderProductPriceWidth, ' ')
-                    print(centerprintprice)
-                    sum += int(myOrderList[i]["__productPrice"])
+            for i in range(myOrderListLength):
+                print(myOrderList[i]["__productNumber"], "     ", end="")
+                centerprintname = myOrderList[i]["__productTitle"].center(myOrderProductNameWidth, ' ')
+                print(centerprintname, "  ", end="")
+                centerprintprice = str(myOrderList[i]["__productPrice"]).center(myOrderProductPriceWidth, ' ')
+                print(centerprintprice)
+                sum += int(myOrderList[i]["__productPrice"])
 
                 for i in range(longestProductPrice + longestProductName + 12):
                     print("\033[95m=\033[0m", end="")
@@ -302,53 +295,52 @@ class ConsolePrinterRepositoryImpl(ConsolePrinterRepository):
                 consoleUiRepository.saveCurrentRoutingState(ConsoleUiRoutingState.ORDER_LIST.value)
 
         if className == "MyOrderRemoveResponse":
-            if response.getMyOrderUpdatedList() is not None:
-                myOrderList = response.getMyOrderUpdatedList()
-                myOrderListLength = len(myOrderList)
-                if myOrderListLength == 0:
-                    print('주문 내역이 없습니다.')
-                    return
-                sum = 0
+            myOrderList = response.getMyOrderUpdatedList()
+            myOrderListLength = len(myOrderList)
+            if myOrderListLength == 0:
+                print('주문 내역이 없습니다.')
+                return
+            sum = 0
 
-                longestProductName = len(myOrderList[0]["__productTitle"])
+            longestProductName = len(myOrderList[0]["__productTitle"])
 
-                for i in range(myOrderListLength):
+            for i in range(myOrderListLength):
 
-                    if longestProductName < len(myOrderList[i]["__productTitle"]):
-                        longestProductName = len(myOrderList[i]["__productTitle"])
+                if longestProductName < len(myOrderList[i]["__productTitle"]):
+                    longestProductName = len(myOrderList[i]["__productTitle"])
 
-                longestProductPrice = int(len(str((myOrderList[0]["__productPrice"]))))
-                for i in range(myOrderListLength):
+            longestProductPrice = int(len(str((myOrderList[0]["__productPrice"]))))
+            for i in range(myOrderListLength):
 
-                    if longestProductPrice < int(len(str((myOrderList[i]["__productPrice"])))):
-                        longestProductPrice = int(len(str((myOrderList[i]["__productPrice"]))))
+                if longestProductPrice < int(len(str((myOrderList[i]["__productPrice"])))):
+                    longestProductPrice = int(len(str((myOrderList[i]["__productPrice"]))))
 
-                print("\033[91m번호", "   ", end="")
-                myOrderProductName = "상품명"
-                myOrderProductPrice = "가격(원)"
-                myOrderProductNameWidth = longestProductName
-                myOrderProductPriceWidth = longestProductPrice
-                centered_myOrderProductNameText = myOrderProductName.center(myOrderProductNameWidth, ' ')
-                centered_myOrderProductPriceText = myOrderProductPrice.center(myOrderProductPriceWidth, ' ')
-                print(centered_myOrderProductNameText, centered_myOrderProductPriceText)
-                for i in range(longestProductPrice + longestProductName + 12):
-                    print("\033[95m=\033[0m", end="")
+            print("\033[91m번호", "   ", end="")
+            myOrderProductName = "상품명"
+            myOrderProductPrice = "가격(원)"
+            myOrderProductNameWidth = longestProductName
+            myOrderProductPriceWidth = longestProductPrice
+            centered_myOrderProductNameText = myOrderProductName.center(myOrderProductNameWidth, ' ')
+            centered_myOrderProductPriceText = myOrderProductPrice.center(myOrderProductPriceWidth, ' ')
+            print(centered_myOrderProductNameText, centered_myOrderProductPriceText)
+            for i in range(longestProductPrice + longestProductName + 12):
+                print("\033[95m=\033[0m", end="")
 
-                print('')
+            print('')
 
-                for i in range(myOrderListLength):
-                    print(myOrderList[i]["__productNumber"], "     ", end="")
-                    centerprintname = myOrderList[i]["__productTitle"].center(myOrderProductNameWidth, ' ')
-                    print(centerprintname, "  ", end="")
-                    centerprintprice = str(myOrderList[i]["__productPrice"]).center(myOrderProductPriceWidth, ' ')
-                    print(centerprintprice)
-                    sum += int(myOrderList[i]["__productPrice"])
+            for i in range(myOrderListLength):
+                print(myOrderList[i]["__productNumber"], "     ", end="")
+                centerprintname = myOrderList[i]["__productTitle"].center(myOrderProductNameWidth, ' ')
+                print(centerprintname, "  ", end="")
+                centerprintprice = str(myOrderList[i]["__productPrice"]).center(myOrderProductPriceWidth, ' ')
+                print(centerprintprice)
+                sum += int(myOrderList[i]["__productPrice"])
 
-                for i in range(longestProductPrice + longestProductName + 12):
-                    print("\033[95m=\033[0m", end="")
+            for i in range(longestProductPrice + longestProductName + 12):
+                print("\033[95m=\033[0m", end="")
 
-                print('')
-                print(f"\033[94m주문 총액 : {sum}원\033[0m")
+            print('')
+            print(f"\033[94m주문 총액 : {sum}원\033[0m")
 
         if className == "ProgramExitResponse":
             if response.getIsSuccess():
